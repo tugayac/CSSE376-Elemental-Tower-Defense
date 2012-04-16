@@ -22,7 +22,7 @@ public class FrameTest {
 	}
 	
 	@Test
-	public void testThatFrameHoldsStableAround60FPS (){
+	public void testThatFrameHoldsStableAround60FPS{
 		Frame f = new Frame(60);
 		try{Thread.sleep(10);}
 		catch(InterruptedException ie){
@@ -39,7 +39,7 @@ public class FrameTest {
 	}
 	
 	@Test
-	public void testThatSleepSkipsIsMinimallized (){
+	public void testThatSleepSkipsIsMinimallized{
 		Frame f = new Frame(1000000);
 		try{Thread.sleep(10);}
 		catch(InterruptedException ie){
@@ -49,7 +49,7 @@ public class FrameTest {
 	}
 	
 	@Test
-	public void testThatFramesAreSkipedToDecreaseLagIsMinimalized (){
+	public void testThatFramesAreSkipedToDecreaseLagIsMinimalized{
 		Frame f = new Frame(1000000);
 		try{Thread.sleep(10);}
 		catch(InterruptedException ie){
