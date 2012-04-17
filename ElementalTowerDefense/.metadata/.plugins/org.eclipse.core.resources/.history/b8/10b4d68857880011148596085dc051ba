@@ -1,0 +1,14 @@
+
+public class Tower {
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 * @return
+	 */
+	public Object getElement() {
+		// TODO Auto-generated method stub.
+		return null;
+	}
+
+}
