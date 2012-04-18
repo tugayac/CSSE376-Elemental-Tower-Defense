@@ -1,0 +1,17 @@
+
+public class Tower {
+
+	Object element;
+	
+	
+	public Object getElement() {
+		// TODO Auto-generated method stub
+		return element;
+	}
+
+	public Object getLocation() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+}

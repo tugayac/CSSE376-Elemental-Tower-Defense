@@ -1,0 +1,19 @@
+import java.awt.geom.Point2D;
+
+
+public class Tower {
+
+	Object element;
+	Point2D location;
+	
+	public Object getElement() {
+		// TODO Auto-generated method stub
+		return element;
+	}
+
+	public Point2D getLocation() {
+		// TODO Auto-generated method stub
+		return location;
+	}
+
+}

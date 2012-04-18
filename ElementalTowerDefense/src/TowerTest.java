@@ -11,11 +11,11 @@ public class TowerTest {
 	
 	@Before
 	public void setUp(){
-		FireTower = Tower.createTower(Frame.FIRE, new Point2D.Double(1, 1));
-		WaterTower = Tower.createTower(Frame.WATER, new Point2D.Double(2, 2));
-		LightTower = Tower.createTower(Frame.LIGHT, new Point2D.Double(3, 3));
-		EarthTower = Tower.createTower(Frame.EARTH, new Point2D.Double(4, 4));
-		AirTower = Tower.createTower(Frame.AIR, new Point2D.Double(5, 5));
+		FireTower = Tower.createTower(Frame.element.FIRE, new Point2D.Double(1, 1));
+		WaterTower = Tower.createTower(Frame.element.WATER, new Point2D.Double(2, 2));
+		LightTower = Tower.createTower(Frame.element.LIGHT, new Point2D.Double(3, 3));
+		EarthTower = Tower.createTower(Frame.element.EARTH, new Point2D.Double(4, 4));
+		AirTower = Tower.createTower(Frame.element.AIR, new Point2D.Double(5, 5));
 	}
 	
 	@After
@@ -29,11 +29,11 @@ public class TowerTest {
 	
 	@Test
 	public void testCanGetElement(){
-		assertEquals(Frame.FIRE, FireTower.getElement());
-		assertEquals(Frame.WATER, WaterTower.getElement());
-		assertEquals(Frame.LIGHT, LightTower.getElement());
-		assertEquals(Frame.EARTH, EarthTower.getElement());
-		assertEquals(Frame.AIR, AirTower.getElement());
+		assertEquals(Frame.element.FIRE, FireTower.getElement());
+		assertEquals(Frame.element.WATER, WaterTower.getElement());
+		assertEquals(Frame.element.LIGHT, LightTower.getElement());
+		assertEquals(Frame.element.EARTH, EarthTower.getElement());
+		assertEquals(Frame.element.AIR, AirTower.getElement());
 	}
 	
 	@Test
@@ -67,10 +67,10 @@ public class TowerTest {
 	@Test
 	public void testTowersAreAvailable(){
 		assertTrue(FireTower.isAvailable());
-		assertTrue(FireTower.isAvailable());
-		assertTrue(FireTower.isAvailable());
-		assertTrue(FireTower.isAvailable());
-		assertTrue(FireTower.isAvailable());
+		assertTrue(WaterTower.isAvailable());
+		assertTrue(LightTower.isAvailable());
+		assertTrue(EarthTower.isAvailable());
+		assertTrue(AirTower.isAvailable());
 	}
 	
 	@Test
