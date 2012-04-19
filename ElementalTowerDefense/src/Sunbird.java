@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 public class Sunbird extends Enemy {
 
 	public Sunbird(int id, Point2D.Double location) {
-		super(id, "Sunbird", 1.5f, 2, 100, location, element.LIGHT);
+		super(id, "Sunbird", 1.5f, 2, 100, location, Frame.element.LIGHT);
 	}
 
 	@Override

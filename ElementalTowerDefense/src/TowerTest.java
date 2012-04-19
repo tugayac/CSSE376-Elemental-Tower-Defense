@@ -11,11 +11,12 @@ public class TowerTest {
 	
 	@Before
 	public void setUp(){
-		FireTower = Tower.createTower(Frame.element.FIRE, new Point2D.Double(1, 1));
-		WaterTower = Tower.createTower(Frame.element.WATER, new Point2D.Double(2, 2));
-		LightTower = Tower.createTower(Frame.element.LIGHT, new Point2D.Double(3, 3));
-		EarthTower = Tower.createTower(Frame.element.EARTH, new Point2D.Double(4, 4));
-		AirTower = Tower.createTower(Frame.element.AIR, new Point2D.Double(5, 5));
+		int id = 0;
+		FireTower = new Tower_Fire(id++, new Point2D.Double(1, 1));
+		WaterTower = new Tower_Water(id++, new Point2D.Double(2, 2));
+		LightTower = new Tower_Light(id++, new Point2D.Double(3, 3));
+		EarthTower = new Tower_Earth(id++, new Point2D.Double(4, 4));
+		AirTower = new Tower_Air(id++, new Point2D.Double(5, 5));
 	}
 	
 	@After
@@ -75,11 +76,12 @@ public class TowerTest {
 	
 	@Test
 	public void testSpeedIsCorrect(){
-		assertEquals(1, FireTower.getSpeed());
-		assertEquals(1, WaterTower.getSpeed());
-		assertEquals(1, LightTower.getSpeed());
-		assertEquals(1, EarthTower.getSpeed());
-		assertEquals(1, AirTower.getSpeed());
+		float delta = 0.01f;
+		assertEquals(1.2f, FireTower.getSpeed(), delta);
+		assertEquals(1.2f, WaterTower.getSpeed(), delta);
+		assertEquals(1.2f, LightTower.getSpeed(), delta);
+		assertEquals(1.2f, EarthTower.getSpeed(), delta);
+		assertEquals(1.2f, AirTower.getSpeed(), delta);
 	}
 	
 	@Test

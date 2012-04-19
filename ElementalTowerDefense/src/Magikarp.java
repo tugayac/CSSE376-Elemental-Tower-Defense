@@ -9,7 +9,7 @@ import java.util.Random;
 public class Magikarp extends Enemy {
 
 	public Magikarp(int id, Point2D.Double location) {
-		super(id, "Magikarp", 2.0f, 1, 100, location, element.WATER);
+		super(id, "Magikarp", 2.0f, 1, 100, location, Frame.element.WATER);
 	}
 
 	@Override

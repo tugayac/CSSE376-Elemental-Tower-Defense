@@ -3,9 +3,9 @@ import java.lang.management.GarbageCollectorMXBean;
 
 public abstract class Enemy {
 
-	public enum element {
-		FIRE, WATER, LIGHT, EARTH, AIR
-	}
+//	public enum element {
+//		FIRE, WATER, LIGHT, EARTH, AIR
+//	}
 
 	protected int id;
 	protected String name;
@@ -13,10 +13,10 @@ public abstract class Enemy {
 	protected int armor;
 	protected int hp;
 	protected Point2D.Double location;
-	protected element elem;
+	protected Frame.element elem;
 
 	public Enemy(int id, String name, float speed, int armor, int hp,
-			Point2D.Double location, element elem) {
+			Point2D.Double location, Frame.element elem) {
 		this.id = id;
 		this.name = name;
 		this.speed = speed;
@@ -49,7 +49,7 @@ public abstract class Enemy {
 	 * 
 	 * @return
 	 */
-	public element getElement() {
+	public Frame.element getElement() {
 		return this.elem;
 	}
 

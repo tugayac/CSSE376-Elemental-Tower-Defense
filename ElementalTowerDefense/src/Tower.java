@@ -2,16 +2,31 @@ import java.awt.geom.Point2D;
 import java.awt.geom.Point2D.Double;
 
 
-public class Tower {
+abstract class Tower {
 
 	int id;
 	Object element;
 	Point2D location;
 	String name;
 	boolean available;
-	int speed;
+	float speed;
 	int cost;
 	int level;
+	
+	public Tower(int id, String name, float speed,
+			Point2D.Double loc, Frame.element el,
+			boolean avail, int cost, int level){
+
+		this.id = id;
+		this.element = el;
+		this.location = loc;
+		this.name = name;
+		this.available = avail;
+		this.speed = speed;
+		this.cost = cost;
+		this.level = level;
+		
+	}
 	
 	
 	public Object getElement() {
@@ -39,7 +54,7 @@ public class Tower {
 		return available;
 	}
 
-	public int getSpeed() {
+	public float getSpeed() {
 		// TODO Auto-generated method stub
 		return speed;
 	}
@@ -60,27 +75,15 @@ public class Tower {
 		
 	}
 
-	public static Tower createTower(Frame.element el, Double loc) {
-		// TODO Auto-generated method stub
-
-		return new Tower(el, loc);
-//		return new Tower(){
-//			
-//		};
-	}
+//	public static Tower createTower(Frame.element el, Double loc) {
+//		// TODO Auto-generated method stub
+//
+//		return new Tower(el, loc);
+////		return new Tower(){
+////			
+////		};
+//	}
 	
-	public Tower(Frame.element el, Double loc){
 
-		id = 0;
-		element = el;
-		location = loc;
-		name = "Test";
-		available = true;
-		speed = 1;
-		cost = 1000;
-		level = 1;
-		
-	}
-	
 
 }

@@ -76,7 +76,7 @@ public class MapTest {
 	
 	@Test
 	public void testThatMapCanAcceptNewTower(){
-		Tower fire = new Tower(Frame.element.FIRE, new Point2D.Double(1,1));
+		Tower fire = new Tower_Fire(0, new Point2D.Double(1,1));
 		
 		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);
@@ -86,8 +86,8 @@ public class MapTest {
 	
 	@Test
 	public void testThatMapWontAcceptTwoTowersAtTheSameSpot(){
-		Tower fire = new Tower(Frame.element.FIRE, new Point2D.Double(1,1));
-		Tower water = new Tower(Frame.element.WATER, new Point2D.Double(1,1));
+		Tower fire = new Tower_Fire(0, new Point2D.Double(1,1));
+		Tower water = new Tower_Water(0, new Point2D.Double(1,1));
 		
 		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);

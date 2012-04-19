@@ -1,0 +1,27 @@
+import java.awt.geom.Point2D;
+import java.awt.geom.Point2D.Double;
+
+
+public class Tower_Earth extends Tower {
+	public Tower_Earth (int id, Point2D.Double loc){
+		
+		super(id, "FIRE TOWER", 1.2f, loc, Frame.element.FIRE, true, 1000, 1);
+	}
+}
+
+
+
+//public class Firebat extends Enemy {
+//
+//	public Firebat(int id, Point2D.Double location) {
+//		super(id, "Firebat", 1.2f, 2, 300, location, element.FIRE);
+//	}
+//
+//	@Override
+//	public void damage(int i) {
+//		this.hp -= i - (2 * this.armor) - ((int) this.speed);
+//		if (this.hp < 0) {
+//			this.hp = 0;
+//		}
+//	}
+//}

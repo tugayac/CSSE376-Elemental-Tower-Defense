@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 public class Firebat extends Enemy {
 
 	public Firebat(int id, Point2D.Double location) {
-		super(id, "Firebat", 1.2f, 2, 300, location, element.FIRE);
+		super(id, "Firebat", 1.2f, 2, 300, location, Frame.element.FIRE);
 	}
 
 	@Override
