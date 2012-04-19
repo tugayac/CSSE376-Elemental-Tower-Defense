@@ -100,7 +100,7 @@ public class MapTest {
 	@Test
 	public void testThatMapCanGenerateEnemies(){
 		assertEquals(0, map.getEnemies().size());
-		map.generateEnemy(1);
+		map.generateEnemy(1, Frame.element.FIRE);
 		assertEquals(1, map.getEnemies().size());
 	}
 	

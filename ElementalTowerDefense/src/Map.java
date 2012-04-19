@@ -13,7 +13,7 @@ import java.util.Random;
 public class Map {
 	private ArrayList<Point2D.Double> path;
 	private ArrayList<Tower> towers;
-	private ArrayList<Enemy> enemies;
+	private ArrayList<Enemy> activeEnemies;
 	
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
@@ -22,7 +22,7 @@ public class Map {
 	public Map(){
 		this.path = new ArrayList<Point2D.Double>();
 		this.towers = new ArrayList<Tower>();
-		this.enemies = new ArrayList<Enemy>();
+		this.activeEnemies = new ArrayList<Enemy>();
 	}
 	
 	/**
@@ -74,26 +74,38 @@ public class Map {
 		return 0;
 	}
 	
+
 	/**
-	 * Generates a random enemy, scaling with the wave level
+	 * Generates an enemy
 	 * 
-	 * TODO Implement and use plopper
-	 * TODO scale with wave
-	 *
-	 * @param wave The wave number
+	 * @param i wave number
+	 * @param elem element
 	 */
-	public void generateEnemy(int wave){
-		Random r = new Random();
-		Frame.element e = null;
-		switch(r.nextInt(5)){
-			case 0: e = Frame.element.AIR; break;
-			case 1: e = Frame.element.EARTH; break;
-			case 2: e = Frame.element.FIRE; break;
-			case 3: e = Frame.element.LIGHT; break;
-			case 4: e = Frame.element.WATER; break;
+	public void generateEnemy(int i, Frame.element elem) {
+		switch (elem) {
+		case FIRE:
+			this.activeEnemies.add(new Firebat(this.activeEnemies.size() + 1,
+					new Point2D.Double(0, 0)));
+			break;
+		case WATER:
+			this.activeEnemies.add(new Magikarp(this.activeEnemies.size() + 1,
+					new Point2D.Double(0, 0)));
+			break;
+		case LIGHT:
+			this.activeEnemies.add(new Sunbird(this.activeEnemies.size() + 1,
+					new Point2D.Double(0, 0)));
+			break;
+		case EARTH:
+			this.activeEnemies.add(new Geodude(this.activeEnemies.size(),
+					new Point2D.Double(0, 0)));
+			break;
+		case AIR:
+			this.activeEnemies.add(new Tornadus(this.activeEnemies.size(),
+					new Point2D.Double(0, 0)));
+			break;
+		default:
+			break;
 		}
-		
-		this.enemies.add(new Enemy(e));
 	}
 	
 	/**
@@ -109,7 +121,7 @@ public class Map {
 	 * @return Returns the enemies.
 	 */
 	public ArrayList<Enemy> getEnemies() {
-		return this.enemies;
+		return this.activeEnemies;
 	}
 	
 	

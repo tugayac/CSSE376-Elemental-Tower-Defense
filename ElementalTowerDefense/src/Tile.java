@@ -1,18 +1,17 @@
 
 public class Tile {
-
+	private boolean move;
+	
 	public Tile(boolean b) {
-		// TODO Auto-generated constructor stub
+		this.move = b;
 	}
 
 	public boolean getMove() {
-		// TODO Auto-generated method stub
-		return false;
+		return move;
 	}
 
 	public boolean getPlace() {
-		// TODO Auto-generated method stub
-		return false;
+		return !move;
 	}
 
 }
