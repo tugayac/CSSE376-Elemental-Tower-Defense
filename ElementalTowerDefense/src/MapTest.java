@@ -39,7 +39,8 @@ public class MapTest {
 			pastLocations.clear();
 			pastLocations.add(new Point2D.Double(0,0));
 			for(Point2D.Double dir : path){
-				Point2D.Double nextLocation = pastLocations.get(pastLocations.size()-1);
+				Point2D.Double prevLoc = pastLocations.get(pastLocations.size()-1);
+				Point2D.Double nextLocation = new Point2D.Double(prevLoc.x, prevLoc.y);
 				nextLocation.x += dir.x;
 				nextLocation.y += dir.y;
 				
@@ -61,13 +62,13 @@ public class MapTest {
 				currentLocation.x += dir.x;
 				currentLocation.y += dir.y;
 				
-				if(currentLocation.x < -25)
+				if(currentLocation.x < 0)
 					fail();
-				if(currentLocation.x > 25)
+				if(currentLocation.x > 50)
 					fail();
 				if(currentLocation.y < -25)
 					fail();
-				if(currentLocation.y > 25)
+				if(currentLocation.y > 50)
 					fail();
 			}
 		}
@@ -75,32 +76,32 @@ public class MapTest {
 	
 	@Test
 	public void testThatMapCanAcceptNewTower(){
-		Tower fire = new Tower(Frame.FIRE);
+		Tower fire = new Tower(Frame.element.FIRE, new Point2D.Double(1,1));
 		
-		assertEqual(0, map.getTowers().length());
+		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);
-		assertEqual(1, map.getTowers().length());
+		assertEquals(1, map.getTowers().size());
 		assertSame(fire, map.getTowers().get(0));
 	}
 	
 	@Test
 	public void testThatMapWontAcceptTwoTowersAtTheSameSpot(){
-		Tower fire = new Tower(Frame.FIRE);
-		Tower water = new Tower(Frame.WATER);
+		Tower fire = new Tower(Frame.element.FIRE, new Point2D.Double(1,1));
+		Tower water = new Tower(Frame.element.WATER, new Point2D.Double(1,1));
 		
-		assertEqual(0, map.getTowers().length());
+		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);
-		assertEqual(1, map.getTowers().length());
-		int returnVal = map.addTower(water)
-		assertEqual(1, map.getTowers().length());
-		assertEqual(-1, returnVal);
+		assertEquals(1, map.getTowers().size());
+		int returnVal = map.addTower(water);
+		assertEquals(1, map.getTowers().size());
+		assertEquals(-1, returnVal);
 	}
 	
 	@Test
 	public void testThatMapCanGenerateEnemies(){
-		assertEqual(0, map.getEnemies().length());
+		assertEquals(0, map.getEnemies().size());
 		map.generateEnemy(1);
-		assertEqual(1, map.getEnemies().length());
+		assertEquals(1, map.getEnemies().size());
 	}
 	
 }

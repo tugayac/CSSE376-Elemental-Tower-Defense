@@ -1,11 +1,8 @@
 import static org.junit.Assert.*;
 
-import java.awt.Frame;
 import java.awt.geom.Point2D;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.*;
 
 
 public class FrameTest {
@@ -17,44 +14,48 @@ public class FrameTest {
 	
 	@Test
 	public void testThatFrameCanBeInstantiated(){
-		Frame f = new Frame(0);
+		Frame f = new Frame(60);
 		assertNotNull(f);
 	}
 	
 	@Test
 	public void testThatFrameHoldsStableAround60FPS (){
 		Frame f = new Frame(60);
-		try{Thread.sleep(10);}
+		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted
 		}
-		assertThat(50, lessThan(f.getFPS()));
-		assertThat(70, greatherThan(f.getFPS()));
-		assertThat(50, lessThan(f.getFPS()));
-		assertThat(70, greatherThan(f.getFPS()));
-		assertThat(50, lessThan(f.getFPS()));
-		assertThat(70, greatherThan(f.getFPS()));
-		assertThat(50, lessThan(f.getFPS()));
-		assertThat(70, greatherThan(f.getFPS()));
+		assertTrue(50 < f.getFPS());
+		assertTrue(70 > f.getFPS());
+		assertTrue(50 < f.getFPS());
+		assertTrue(70 > f.getFPS());
+		assertTrue(50 < f.getFPS());
+		assertTrue(70 > f.getFPS());
+		assertTrue(50 < f.getFPS());
+		assertTrue(70 > f.getFPS());
+		
+		f.setVisible(false);
+		f = null;
 	}
 	
 	@Test
 	public void testThatSleepSkipsIsMinimallized (){
-		Frame f = new Frame(1000000);
-		try{Thread.sleep(10);}
+		Frame f = new Frame(10000);
+		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted
 		}
-		assertThat(10, greaterThan(f.getSleepSkips()));
+		assertTrue(10 > f.getSleepSkips());
 	}
 	
 	@Test
-	public void testThatFramesAreSkipedToDecreaseLagIsMinimalized (){
-		Frame f = new Frame(1000000);
-		try{Thread.sleep(10);}
+	public void testThatFramesAreSkipedToDecreaseLag(){
+		Frame f = new Frame(10000);
+		System.out.println(f.getRequestedFPS());
+		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted
 		}
-		assertThat(0, lessThan(f.getFrameSkips()));
+		assertTrue(0 < f.getFrameSkips());
 	}
 }
