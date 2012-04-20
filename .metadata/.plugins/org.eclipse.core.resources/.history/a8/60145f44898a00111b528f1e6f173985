@@ -18,7 +18,7 @@ public class Frame extends JFrame implements Runnable{
 	/**
 	 *  The elements for use throughout the game
 	 */
-	static enum element { 	/**  The elemnt Fire  */ FIRE, 
+	enum element { 	/**  The elemnt Fire  */ FIRE, 
 					/**  The elemnt Water  */ WATER, 
 					/**  The elemnt Light  */ LIGHT, 
 					/**  The elemnt Earth  */ EARTH, 

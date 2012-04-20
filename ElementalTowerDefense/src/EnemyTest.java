@@ -1,6 +1,5 @@
 import static org.junit.Assert.*;
 
-import java.awt.Frame;
 import java.awt.geom.Point2D;
 
 import org.junit.After;
@@ -42,11 +41,11 @@ public class EnemyTest {
 
 	@Test
 	public void testCanGetElement() {
-		assertEquals(Enemy.element.FIRE, this.FireEnemy.getElement());
-		assertEquals(Enemy.element.WATER, this.WaterEnemy.getElement());
-		assertEquals(Enemy.element.LIGHT, this.LightEnemy.getElement());
-		assertEquals(Enemy.element.EARTH, this.EarthEnemy.getElement());
-		assertEquals(Enemy.element.AIR, this.AirEnemy.getElement());
+		assertEquals(Frame.element.FIRE, this.FireEnemy.getElement());
+		assertEquals(Frame.element.WATER, this.WaterEnemy.getElement());
+		assertEquals(Frame.element.LIGHT, this.LightEnemy.getElement());
+		assertEquals(Frame.element.EARTH, this.EarthEnemy.getElement());
+		assertEquals(Frame.element.AIR, this.AirEnemy.getElement());
 	}
 
 	@Test
