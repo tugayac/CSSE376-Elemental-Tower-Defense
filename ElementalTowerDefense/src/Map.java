@@ -84,23 +84,23 @@ public class Map {
 	public void generateEnemy(int i, Frame.element elem) {
 		switch (elem) {
 		case FIRE:
-			this.activeEnemies.add(new Firebat(this.activeEnemies.size() + 1,
+			this.activeEnemies.add(new Enemy_Fire(this.activeEnemies.size() + 1,
 					new Point2D.Double(0, 0)));
 			break;
 		case WATER:
-			this.activeEnemies.add(new Magikarp(this.activeEnemies.size() + 1,
+			this.activeEnemies.add(new Enemy_Water(this.activeEnemies.size() + 1,
 					new Point2D.Double(0, 0)));
 			break;
 		case LIGHT:
-			this.activeEnemies.add(new Sunbird(this.activeEnemies.size() + 1,
+			this.activeEnemies.add(new Enemy_Light(this.activeEnemies.size() + 1,
 					new Point2D.Double(0, 0)));
 			break;
 		case EARTH:
-			this.activeEnemies.add(new Geodude(this.activeEnemies.size(),
+			this.activeEnemies.add(new Enemy_Earth(this.activeEnemies.size(),
 					new Point2D.Double(0, 0)));
 			break;
 		case AIR:
-			this.activeEnemies.add(new Tornadus(this.activeEnemies.size(),
+			this.activeEnemies.add(new Enemy_Air(this.activeEnemies.size(),
 					new Point2D.Double(0, 0)));
 			break;
 		default:
