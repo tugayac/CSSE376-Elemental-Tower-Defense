@@ -1,0 +1,38 @@
+import static org.junit.Assert.*;
+
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created Apr 22, 2012.
+ */
+public class PlayerTest {
+
+	private Player player;
+
+	@Test
+	public void testIsInstantiated() {
+		this.player = new Player();
+		assertNotNull(this.player);
+	}
+
+	@Test
+	public void testCanSetAndGetScore() {
+		this.player.setScore(100);
+		this.player.setScore(-100);
+		assertEquals(100, this.player.getScore());
+	}
+
+	@Test
+	public void testCanGetMana() {
+
+	}
+
+	@Test
+	public void testCanGetHealth() {
+
+	}
+}

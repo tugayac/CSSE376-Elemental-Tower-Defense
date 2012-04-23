@@ -1,0 +1,139 @@
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created Apr 22, 2012.
+ */
+public class Player {
+
+	private int score;
+	private int mana;
+	private int health;
+
+	public Player() {
+		this.score = 0;
+		this.mana = 0;
+		this.health = 0;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
+	public int getScore() {
+		return this.score;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void decScore(int score) {
+		int temp = this.score - score;
+		if (temp < 0) {
+			this.score = 0;
+		}
+		this.score -= score;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void incScore(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void setMana(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
+	public Object getMana() {
+		// TODO Auto-generated method stub.
+		return null;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void decMana(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void incMana(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void setHealth(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
+	public Object getHealth() {
+		// TODO Auto-generated method stub.
+		return null;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void decHealth(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param i
+	 */
+	public void incHealth(int i) {
+		// TODO Auto-generated method stub.
+
+	}
+
+}

@@ -1,0 +1,11 @@
+1335158570514	Extract method 'initPanelOne'
+1335158591128	Extract method 'initPanelTwo'
+1335158609801	Extract method 'initPanelThree'
+1335158631017	Extract method 'initPanelFour'
+1335158655619	Extract method 'initPanelFive'
+1335159782214	Extract method 'panelOneLayout'
+1335159812759	Extract method 'panelTwoLayout'
+1335159837536	Extract method 'panelThreeLayout'
+1335159873641	Extract method 'panelFourLayout'
+1335159930207	Extract method 'panelFiveLayout'
+1335160272657	Delete element
