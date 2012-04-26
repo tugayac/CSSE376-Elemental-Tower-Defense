@@ -5,9 +5,6 @@ import java.awt.Image;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -16,6 +13,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.WindowConstants;
 
 /**
  * 
@@ -29,13 +27,9 @@ public class ControlPanel extends JFrame {
 	private ArrayList<Enemy> activeEnemies;
 
 	public ControlPanel(Map map, Player player){
-		this(map, player, map.getEnemies(), map.getTowers());
+		this(player, map, map.getTowers(), map.getEnemies());
 	}
 	
-	public ControlPanel(Map map, Player player, ArrayList<Enemy> enemies,
-			ArrayList<Tower> towers) {
-		this.map = map;
-
 	/**
 	 * Creates new form ControlPanel
 	 */
