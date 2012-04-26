@@ -8,8 +8,8 @@ import java.util.Random;
  */
 public class Enemy_Water extends Enemy {
 
-	public Enemy_Water(int id, Point2D.Double location) {
-		super(id, "Magikarp", 2.0f, 1, 100, location, Frame.element.WATER);
+	public Enemy_Water(Point2D.Double location) {
+		super(Enemy.enemy_ids++, "Magikarp", 2.0f, 1, 100, location, Frame.element.WATER);
 	}
 
 	@Override

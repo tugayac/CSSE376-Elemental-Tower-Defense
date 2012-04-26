@@ -4,9 +4,10 @@ import java.awt.geom.Point2D.Double;
 
 abstract class Tower {
 
+	static int tower_ids = 0;
 	int id;
 	Object element;
-	Point2D location;
+	Point2D.Double location;
 	String name;
 	boolean available;
 	float speed;
@@ -26,6 +27,10 @@ abstract class Tower {
 		this.cost = cost;
 		this.level = level;
 		
+	}
+	
+	public Bullet fireBulletTowards(Enemy e){
+		return new Bullet(this.location, e);
 	}
 	
 	

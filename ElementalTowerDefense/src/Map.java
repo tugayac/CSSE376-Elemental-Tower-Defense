@@ -1,3 +1,4 @@
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 import java.util.Random;
@@ -14,13 +15,16 @@ public class Map {
 	private ArrayList<Point2D.Double> path;
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> activeEnemies;
+	private ArrayList<Bullet> bullets;
 	
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
 	 *
 	 */
 	public Map(){
+		this.bullets = new ArrayList<Bullet>();
 		this.path = new ArrayList<Point2D.Double>();
+		generatePath();
 		this.towers = new ArrayList<Tower>();
 		this.activeEnemies = new ArrayList<Enemy>();
 	}
@@ -33,24 +37,27 @@ public class Map {
 	 */
 	public ArrayList<Point2D.Double> generatePath(){
 		Random r = new Random();
-		Point2D.Double loc = new Point2D.Double(0,0);
+		Point2D.Double loc = new Point2D.Double(1,0);
 		this.path.clear();
 		this.path.add(new Point2D.Double(1, 0));
-		while(loc.x != 50){
+		while(loc.x < 20){
 			switch(r.nextInt(3)){
 				case 0: this.path.add(new Point2D.Double(1,0));
+						loc.x+=1;
 						break;
-				case 1: if(this.path.get(this.path.size()-1).x != -1)
-							if(loc.y != 25)
+				case 1: if(this.path.get(this.path.size()-1).y != -1)
+							if(loc.y < 7){
 								this.path.add(new Point2D.Double(0,1));
+								loc.y+=1;
+							}
 						break;
-				case 2: if(this.path.get(this.path.size()-1).x != 1)
-							if(loc.y != -25)
+				case 2: if(this.path.get(this.path.size()-1).y != 1)
+							if(loc.y > -7){
 								this.path.add(new Point2D.Double(0,-1));
+								loc.y-=1;
+							}
 						break;
 			}
-			loc.x+=this.path.get(this.path.size()-1).x;
-			loc.y+=this.path.get(this.path.size()-1).y;
 		}
 		
 		
@@ -59,6 +66,18 @@ public class Map {
 		return new ArrayList<Point2D.Double>(this.path);
 	}
 
+	
+	/**
+	 * Returns the value of the field called 'path'.
+	 * @return Returns the path.
+	 */
+	public ArrayList<Point2D.Double> getPath() {
+		return this.path;
+	}
+
+	public void addBullet(Bullet b){
+		this.bullets.add(b);
+	}
 
 	/**
 	 * Adds a tower to the field if another tower does not occupy that locaiton
@@ -84,24 +103,19 @@ public class Map {
 	public void generateEnemy(int i, Frame.element elem) {
 		switch (elem) {
 		case FIRE:
-			this.activeEnemies.add(new Enemy_Fire(this.activeEnemies.size() + 1,
-					new Point2D.Double(0, 0)));
+			this.activeEnemies.add(new Enemy_Fire(new Point2D.Double(-1,7)));
 			break;
 		case WATER:
-			this.activeEnemies.add(new Enemy_Water(this.activeEnemies.size() + 1,
-					new Point2D.Double(0, 0)));
+			this.activeEnemies.add(new Enemy_Water(new Point2D.Double(-1,7)));
 			break;
 		case LIGHT:
-			this.activeEnemies.add(new Enemy_Light(this.activeEnemies.size() + 1,
-					new Point2D.Double(0, 0)));
+			this.activeEnemies.add(new Enemy_Light(new Point2D.Double(-1,7)));
 			break;
 		case EARTH:
-			this.activeEnemies.add(new Enemy_Earth(this.activeEnemies.size(),
-					new Point2D.Double(0, 0)));
+			this.activeEnemies.add(new Enemy_Earth(new Point2D.Double(-1,7)));
 			break;
 		case AIR:
-			this.activeEnemies.add(new Enemy_Air(this.activeEnemies.size(),
-					new Point2D.Double(0, 0)));
+			this.activeEnemies.add(new Enemy_Air(new Point2D.Double(-1,7)));
 			break;
 		default:
 			break;
@@ -124,5 +138,34 @@ public class Map {
 		return this.activeEnemies;
 	}
 	
+	public void update(){
+		for(Bullet b : this.bullets){
+			b.move();
+		}
+		ArrayList<Enemy> remove = new ArrayList<Enemy>();
+		for(Enemy e : this.activeEnemies){
+			e.move(this.path);
+			if(e.getName().equals("FINISHED"))
+				remove.add(e);
+		}
+		this.activeEnemies.removeAll(remove);
+		
+		remove = null;
+		for(Tower t : this.towers){
+			
+		}
+	}
+	
+	public void draw(Graphics2D g, int width){
+		for(Bullet b : this.bullets){
+			b.move();
+		}
+		for(Enemy e : this.activeEnemies){
+			e.draw(g, width);
+		}
+		for(Tower t : this.towers){
+			
+		}
+	}
 	
 }

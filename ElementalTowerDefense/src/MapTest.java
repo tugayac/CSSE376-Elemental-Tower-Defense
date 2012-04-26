@@ -62,13 +62,15 @@ public class MapTest {
 				currentLocation.x += dir.x;
 				currentLocation.y += dir.y;
 				
+				System.out.printf("%f, %f\n", currentLocation.x, currentLocation.y);
+				
 				if(currentLocation.x < 0)
 					fail();
-				if(currentLocation.x > 50)
+				if(currentLocation.x > 20)
 					fail();
-				if(currentLocation.y < -25)
+				if(currentLocation.y < -7)
 					fail();
-				if(currentLocation.y > 50)
+				if(currentLocation.y > 7)
 					fail();
 			}
 		}
@@ -76,7 +78,7 @@ public class MapTest {
 	
 	@Test
 	public void testThatMapCanAcceptNewTower(){
-		Tower fire = new Tower_Fire(0, new Point2D.Double(1,1));
+		Tower fire = new Tower_Fire(new Point2D.Double(1,1));
 		
 		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);
@@ -86,8 +88,8 @@ public class MapTest {
 	
 	@Test
 	public void testThatMapWontAcceptTwoTowersAtTheSameSpot(){
-		Tower fire = new Tower_Fire(0, new Point2D.Double(1,1));
-		Tower water = new Tower_Water(0, new Point2D.Double(1,1));
+		Tower fire = new Tower_Fire(new Point2D.Double(1,1));
+		Tower water = new Tower_Water(new Point2D.Double(1,1));
 		
 		assertEquals(0, map.getTowers().size());
 		map.addTower(fire);

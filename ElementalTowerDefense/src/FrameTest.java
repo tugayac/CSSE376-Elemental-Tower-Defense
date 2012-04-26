@@ -15,12 +15,16 @@ public class FrameTest {
 	@Test
 	public void testThatFrameCanBeInstantiated(){
 		Frame f = new Frame(60);
+		f.toBack(); 
+		f.getControlPanel().toBack();
 		assertNotNull(f);
 	}
 	
 	@Test
 	public void testThatFrameHoldsStableAround60FPS (){
 		Frame f = new Frame(60);
+		f.toBack();
+		f.getControlPanel().toBack();
 		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted
@@ -41,6 +45,8 @@ public class FrameTest {
 	@Test
 	public void testThatSleepSkipsIsMinimallized (){
 		Frame f = new Frame(10000);
+		f.toBack();
+		f.getControlPanel().toBack();
 		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted
@@ -51,7 +57,8 @@ public class FrameTest {
 	@Test
 	public void testThatFramesAreSkipedToDecreaseLag(){
 		Frame f = new Frame(10000);
-		System.out.println(f.getRequestedFPS());
+		f.toBack();
+		f.getControlPanel().toBack();
 		try{Thread.sleep(1000);}
 		catch(InterruptedException ie){
 			// Sleep Interrupted

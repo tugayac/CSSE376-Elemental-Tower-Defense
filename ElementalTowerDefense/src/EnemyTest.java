@@ -13,12 +13,11 @@ public class EnemyTest {
 
 	@Before
 	public void setUp() {
-		int id = 0;
-		this.FireEnemy = new Enemy_Fire(id++, new Point2D.Double(0, 0));
-		this.WaterEnemy = new Enemy_Water(id++, new Point2D.Double(0, 0));
-		this.LightEnemy = new Enemy_Light(id++, new Point2D.Double(0, 0));
-		this.EarthEnemy = new Enemy_Earth(id++, new Point2D.Double(0, 0));
-		this.AirEnemy = new Enemy_Air(id++, new Point2D.Double(0, 0));
+		this.FireEnemy = new Enemy_Fire(new Point2D.Double(0, 0));
+		this.WaterEnemy = new Enemy_Water(new Point2D.Double(0, 0));
+		this.LightEnemy = new Enemy_Light(new Point2D.Double(0, 0));
+		this.EarthEnemy = new Enemy_Earth(new Point2D.Double(0, 0));
+		this.AirEnemy = new Enemy_Air(new Point2D.Double(0, 0));
 	}
 
 	@After

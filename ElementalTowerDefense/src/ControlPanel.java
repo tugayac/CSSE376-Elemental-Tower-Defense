@@ -30,6 +30,10 @@ public class ControlPanel extends JFrame {
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Tower> towers;
 
+	public ControlPanel(Map map, Player player){
+		this(map, player, map.getEnemies(), map.getTowers());
+	}
+	
 	public ControlPanel(Map map, Player player, ArrayList<Enemy> enemies,
 			ArrayList<Tower> towers) {
 		this.map = map;
@@ -38,6 +42,8 @@ public class ControlPanel extends JFrame {
 		this.towers = towers;
 
 		initComponents();
+		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+		this.setVisible(true);
 	}
 
 	@SuppressWarnings("unchecked")

@@ -7,8 +7,8 @@ import java.awt.geom.Point2D;
  */
 public class Enemy_Fire extends Enemy {
 
-	public Enemy_Fire(int id, Point2D.Double location) {
-		super(id, "Firebat", 1.2f, 2, 300, location, Frame.element.FIRE);
+	public Enemy_Fire(Point2D.Double location) {
+		super(Enemy.enemy_ids++, "Firebat", 1.2f, 2, 300, location, Frame.element.FIRE);
 	}
 
 	@Override
