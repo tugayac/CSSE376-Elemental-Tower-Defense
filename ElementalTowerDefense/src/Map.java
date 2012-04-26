@@ -1,41 +1,43 @@
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Random;
-
 
 /**
  * A class designed to hold the map, it holds and generates the path as well as
  * holding the towers and enemies
- *
- * @author matthewmercer.
- *         Created Apr 18, 2012.
+ * 
+ * @author matthewmercer. Created Apr 18, 2012.
  */
 public class Map {
+	private int waveNumber;
 	private ArrayList<Point2D.Double> path;
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> activeEnemies;
 	private ArrayList<Bullet> bullets;
-	
+
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
-	 *
+	 * 
 	 */
+
 	public Map(){
 		this.bullets = new ArrayList<Bullet>();
+		this.waveNumber = 0;
 		this.path = new ArrayList<Point2D.Double>();
 		generatePath();
 		this.towers = new ArrayList<Tower>();
 		this.activeEnemies = new ArrayList<Enemy>();
 	}
-	
+
 	/**
 	 * generates a random path which the enemies will walk on, it will not cross
 	 * itself or leave the boundaries of the field
-	 *
+	 * 
 	 * @return The path that is generated
 	 */
-	public ArrayList<Point2D.Double> generatePath(){
+	public ArrayList<Point2D.Double> generatePath() {
 		Random r = new Random();
 		Point2D.Double loc = new Point2D.Double(1,0);
 		this.path.clear();
@@ -58,13 +60,12 @@ public class Map {
 							}
 						break;
 			}
+
 		}
-		
-		
-		
-		
+
 		return new ArrayList<Point2D.Double>(this.path);
 	}
+
 
 	
 	/**
@@ -79,26 +80,28 @@ public class Map {
 		this.bullets.add(b);
 	}
 
-	/**
+/**
 	 * Adds a tower to the field if another tower does not occupy that locaiton
-	 *
-	 * @param t The tower to be added
+	 * 
+	 * @param t
+	 *            The tower to be added
 	 * @return 0 on success, 1 if a tower occupies that spot
 	 */
-	public int addTower(Tower t){
-		for(Tower tow : this.towers)
-			if(tow.getLocation().equals(t.getLocation()))
+	public int addTower(Tower t) {
+		for (Tower tow : this.towers)
+			if (tow.getLocation().equals(t.getLocation()))
 				return -1;
 		this.towers.add(t);
 		return 0;
 	}
-	
 
 	/**
 	 * Generates an enemy
 	 * 
-	 * @param i wave number
-	 * @param elem element
+	 * @param i
+	 *            wave number
+	 * @param elem
+	 *            element
 	 */
 	public void generateEnemy(int i, Frame.element elem) {
 		switch (elem) {
@@ -121,9 +124,10 @@ public class Map {
 			break;
 		}
 	}
-	
+
 	/**
 	 * Returns the value of the field called 'towers'.
+	 * 
 	 * @return Returns the towers.
 	 */
 	public ArrayList<Tower> getTowers() {
@@ -132,6 +136,7 @@ public class Map {
 
 	/**
 	 * Returns the value of the field called 'enemies'.
+	 * 
 	 * @return Returns the enemies.
 	 */
 	public ArrayList<Enemy> getEnemies() {
@@ -168,4 +173,8 @@ public class Map {
 		}
 	}
 	
+	public int getWaveNumber() {
+		return this.waveNumber;
+	}
+
 }
