@@ -1,12 +1,13 @@
 import java.awt.Color;
 import java.awt.Cursor;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -15,139 +16,295 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle;
-import javax.swing.WindowConstants;
 
 /**
- * TODO Put here a description of what this class does.
  * 
- * @author tugayac. Created Apr 23, 2012.
+ * @author tugayac
  */
 public class ControlPanel extends JFrame {
 
-	private Map map;
 	private Player player;
-	private ArrayList<Enemy> enemies;
-	private ArrayList<Tower> towers;
+	private Map map;
+	private ArrayList<Tower> activeTowers;
+	private ArrayList<Enemy> activeEnemies;
 
-	public ControlPanel(Map map, Player player, ArrayList<Enemy> enemies,
-			ArrayList<Tower> towers) {
-		this.map = map;
+	/**
+	 * Creates new form ControlPanel
+	 */
+	public ControlPanel(Player player, Map map, ArrayList<Tower> activeTowers,
+			ArrayList<Enemy> activeEnemies) {
 		this.player = player;
-		this.enemies = enemies;
-		this.towers = towers;
-
+		this.map = map;
 		initComponents();
+		initLabelInfo();
 	}
 
-	@SuppressWarnings("unchecked")
 	private void initComponents() {
 
-		this.jPanel1 = new JPanel();
-		this.jLabel1 = new JLabel();
-		this.jLabel2 = new JLabel();
-		this.jLabel3 = new JLabel();
-		this.jLabel4 = new JLabel();
-		this.jLabel5 = new JLabel();
-		this.jLabel6 = new JLabel();
-		this.jLabel7 = new JLabel();
-		this.jLabel8 = new JLabel();
-		this.jLabel9 = new JLabel();
-		this.jLabel10 = new JLabel();
-		this.jLabel11 = new JLabel();
-		this.jPanel2 = new JPanel();
-		this.jLabel34 = new JLabel();
-		this.jLabel13 = new JLabel();
-		this.jLabel14 = new JLabel();
-		this.jLabel15 = new JLabel();
-		this.jLabel16 = new JLabel();
-		this.jLabel17 = new JLabel();
-		this.jLabel18 = new JLabel();
-		this.jLabel19 = new JLabel();
-		this.jLabel20 = new JLabel();
-		this.jLabel21 = new JLabel();
-		this.jLabel22 = new JLabel();
-		this.jPanel3 = new JPanel();
-		this.jLabel12 = new JLabel();
-		this.jLabel23 = new JLabel();
-		this.jLabel24 = new JLabel();
-		this.jLabel25 = new JLabel();
-		this.jLabel26 = new JLabel();
-		this.jLabel27 = new JLabel();
-		this.jLabel28 = new JLabel();
-		this.jPanel4 = new JPanel();
-		this.jLabel29 = new JLabel();
-		this.jButton1 = new JButton();
-		this.jButton2 = new JButton();
-		this.jButton3 = new JButton();
-		this.jButton4 = new JButton();
-		this.jButton5 = new JButton();
-		this.jLabel30 = new JLabel();
-		this.jLabel31 = new JLabel();
-		this.jLabel32 = new JLabel();
-		this.jLabel33 = new JLabel();
-		this.jLabel35 = new JLabel();
-		this.jLabel36 = new JLabel();
-		this.jLabel37 = new JLabel();
-		this.jLabel38 = new JLabel();
-		this.jLabel39 = new JLabel();
-		this.jLabel40 = new JLabel();
-		this.jPanel5 = new JPanel();
-		this.jButton6 = new JButton();
-		this.jButton7 = new JButton();
-		this.jLabel41 = new JLabel();
-		this.jLabel42 = new JLabel();
-		this.jLabel43 = new JLabel();
-		this.jLabel44 = new JLabel();
-		this.jLabel45 = new JLabel();
-		this.jLabel46 = new JLabel();
-		this.jLabel47 = new JLabel();
+		this.topLeftPanel = new JPanel();
+		this.playerInfoLabel = new JLabel();
+		this.playerScoreLabel = new JLabel();
+		this.playerManaLabel = new JLabel();
+		this.playerWaveLabel = new JLabel();
+		this.playerHealthLabel = new JLabel();
+		this.playerTimeLabel = new JLabel();
+		this.playerScoreValueLabel = new JLabel();
+		this.playerManaValueLabel = new JLabel();
+		this.playerWaveValueLabel = new JLabel();
+		this.playerHealthValueLabel = new JLabel();
+		this.playerTimeValueLabel = new JLabel();
+		this.topCenterPanel = new JPanel();
+		this.waveInfoLabel = new JLabel();
+		this.waveLevelLabel = new JLabel();
+		this.waveNameLabel = new JLabel();
+		this.waveHealthLabel = new JLabel();
+		this.waveArmorLabel = new JLabel();
+		this.waveSpeedLabel = new JLabel();
+		this.waveLevelValueLabel = new JLabel();
+		this.waveNameValueLabel = new JLabel();
+		this.waveHealthValueLabel = new JLabel();
+		this.waveArmorValueLabel = new JLabel();
+		this.waveSpeedValueLabel = new JLabel();
+		this.topRightPanel = new JPanel();
+		this.selectedEnemyLabel = new JLabel();
+		this.selectedHealthLabel = new JLabel();
+		this.selectedArmorLabel = new JLabel();
+		this.selectedSpeedLabel = new JLabel();
+		this.selectedHealthValueLabel = new JLabel();
+		this.selectedArmorValueLabel = new JLabel();
+		this.selectedSpeedValueLabel = new JLabel();
+		this.bottomLeftPanel = new JPanel();
+		this.availableTowersLabel = new JLabel();
+		this.fireCostLabel = new JLabel();
+		this.fireCostValueLabel = new JLabel();
+		this.waterCostLabel = new JLabel();
+		this.waterCostValueLabel = new JLabel();
+		this.airCostLabel = new JLabel();
+		this.airCostValueLabel = new JLabel();
+		this.lightCostLabel = new JLabel();
+		this.lightCostValueLabel = new JLabel();
+		this.earthCostLabel = new JLabel();
+		this.earthCostValueLabel = new JLabel();
+		this.fireButtonLabel = new JButton();
+		this.waterButtonLabel = new JButton();
+		this.airButtonLabel = new JButton();
+		this.lightButtonLabel = new JButton();
+		this.earthButtonLabel = new JButton();
+		this.bottomRightPanel = new JPanel();
+		this.towerUpgradeButton = new JButton();
+		this.towerSellButton = new JButton();
+		this.towerInfoLabel = new JLabel();
+		this.towerLevelLabel = new JLabel();
+		this.towerDamageLabel = new JLabel();
+		this.towerSpeedLabel = new JLabel();
+		this.towerLevelValueLabel = new JLabel();
+		this.towerDamageValueLabel = new JLabel();
+		this.towerSpeedValueLabel = new JLabel();
 
-		setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-		initPanelOne();
-		initPanelTwo();
-		initPanelThree();
-		initPanelFour();
-		initPanelFive();
+		initTopLeftPanel();
+		topLeftPanelLayout();
+
+		initTopCenterPanel();
+		topCenterPanelLayout();
+
+		initTopRightPanel();
+		topRightPanelLayout();
+
+		initBottomLeftPanel();
+		bottomLeftPanelLayout();
+
+		initBottomRightPanel();
+		bottomRightPanelLayout();
 
 		pack();
 	}
 
-	private void initPanelOne() {
-		this.jPanel1.setBorder(BorderFactory
-				.createLineBorder(new Color(0, 0, 0)));
-		this.jPanel1.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+	private void initLabelInfo() {
+		/*
+		 * Player Information
+		 */
+		this.playerScoreValueLabel.setText(Integer.toString(this.player
+				.getScore()));
+		this.playerManaValueLabel.setText(Integer.toString(this.player
+				.getMana()));
+		this.playerWaveValueLabel.setText(Integer.toString(this.map
+				.getWaveNumber()));
+		this.playerHealthValueLabel.setText(Integer.toString(this.player
+				.getHealth()));
 
-		this.jLabel1.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-		this.jLabel1.setText("Player Information");
+		/*
+		 * Wave Information
+		 */
 
-		this.jLabel2.setText("Score:");
+		/*
+		 * Selected Enemy Information
+		 */
 
-		this.jLabel3.setText("Mana:");
-
-		this.jLabel4.setText("Wave:");
-
-		this.jLabel5.setText("Health:");
-
-		this.jLabel6.setText("Time:");
-
-		this.jLabel7.setText("jLabel7");
-
-		this.jLabel8.setText("jLabel8");
-
-		this.jLabel9.setText("jLabel9");
-
-		this.jLabel10.setText("jLabel10");
-
-		this.jLabel11.setText("jLabel11");
-
-		panelOneLayout();
 	}
 
-	private void panelOneLayout() {
-		GroupLayout jPanel1Layout = new GroupLayout(this.jPanel1);
-		this.jPanel1.setLayout(jPanel1Layout);
+	private void initImageIcons() {
+		/*
+		 * Fire button image initialization
+		 */
+		ImageIcon tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/fire_clicked.png"));
+		Image tempImage = tempIcon.getImage();
+		this.fireClicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/fire_unclicked.png"));
+		tempImage = tempIcon.getImage();
+		this.fireUnclicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/fire_grey1.png"));
+		tempImage = tempIcon.getImage();
+		this.fireInsuffMana = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/fire_grey.png"));
+		tempImage = tempIcon.getImage();
+		this.fireNotAvailable = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		/*
+		 * Water button image initialization
+		 */
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/water_clicked.png"));
+		tempImage = tempIcon.getImage();
+		this.waterClicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/water_unclicked.png"));
+		tempImage = tempIcon.getImage();
+		this.waterUnclicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/water_grey1.png"));
+		tempImage = tempIcon.getImage();
+		this.waterInsuffMana = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/water_grey.png"));
+		tempImage = tempIcon.getImage();
+		this.waterNotAvailable = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		/*
+		 * Air button image initialization
+		 */
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/air_clicked.png"));
+		tempImage = tempIcon.getImage();
+		this.airClicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/air_unclicked.png"));
+		tempImage = tempIcon.getImage();
+		this.airUnclicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/air_grey1.png"));
+		tempImage = tempIcon.getImage();
+		this.airInsuffMana = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/air_grey.png"));
+		tempImage = tempIcon.getImage();
+		this.airNotAvailable = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		/*
+		 * Light button image initialization
+		 */
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/light_clicked.png"));
+		tempImage = tempIcon.getImage();
+		this.lightClicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/light_unclicked.png"));
+		tempImage = tempIcon.getImage();
+		this.lightUnclicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/light_grey1.png"));
+		tempImage = tempIcon.getImage();
+		this.lightInsuffMana = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/light_grey.png"));
+		tempImage = tempIcon.getImage();
+		this.lightNotAvailable = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		/*
+		 * Earth button image initialization
+		 */
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/earth_clicked.png"));
+		tempImage = tempIcon.getImage();
+		this.earthClicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/earth_unclicked.png"));
+		tempImage = tempIcon.getImage();
+		this.earthUnclicked = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/earth_grey1.png"));
+		tempImage = tempIcon.getImage();
+		this.earthInsuffMana = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/towers/earth_grey.png"));
+		tempImage = tempIcon.getImage();
+		this.earthNotAvailable = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+	}
+
+	private void initTopLeftPanel() {
+		this.topLeftPanel.setBorder(BorderFactory.createLineBorder(new Color(0,
+				0, 0)));
+		this.topLeftPanel.setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
+
+		this.playerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.playerInfoLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.playerInfoLabel.setText("Player Information");
+
+		this.playerScoreLabel.setText("Score:");
+
+		this.playerManaLabel.setText("Mana:");
+
+		this.playerWaveLabel.setText("Wave:");
+
+		this.playerHealthLabel.setText("Health:");
+
+		this.playerTimeLabel.setText("Time:");
+	}
+
+	private void topLeftPanelLayout() {
+		GroupLayout jPanel1Layout = new GroupLayout(this.topLeftPanel);
+		this.topLeftPanel.setLayout(jPanel1Layout);
 		jPanel1Layout
 				.setHorizontalGroup(jPanel1Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -159,127 +316,171 @@ public class ControlPanel extends JFrame {
 												jPanel1Layout
 														.createParallelGroup(
 																GroupLayout.Alignment.LEADING)
-														.addComponent(
-																this.jLabel1)
+														.addGroup(
+																jPanel1Layout
+																		.createSequentialGroup()
+																		.addComponent(
+																				this.playerInfoLabel,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addContainerGap())
+														.addGroup(
+																jPanel1Layout
+																		.createSequentialGroup()
+																		.addGap(10,
+																				10,
+																				10)
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.TRAILING)
+																						.addComponent(
+																								this.playerWaveLabel)
+																						.addComponent(
+																								this.playerScoreLabel)
+																						.addComponent(
+																								this.playerTimeLabel))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								this.playerTimeValueLabel)
+																						.addComponent(
+																								this.playerScoreValueLabel)
+																						.addComponent(
+																								this.playerWaveValueLabel))
+																		.addPreferredGap(
+																				javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																				39,
+																				Short.MAX_VALUE)
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								jPanel1Layout
+																										.createSequentialGroup()
+																										.addGap(5,
+																												5,
+																												5)
+																										.addComponent(
+																												this.playerManaLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.playerManaValueLabel))
+																						.addGroup(
+																								jPanel1Layout
+																										.createSequentialGroup()
+																										.addComponent(
+																												this.playerHealthLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.playerHealthValueLabel)))
+																		.addContainerGap(
+																				30,
+																				GroupLayout.PREFERRED_SIZE)))));
+
+		jPanel1Layout
+				.setVerticalGroup(jPanel1Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanel1Layout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(this.playerInfoLabel)
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel1Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
 														.addGroup(
 																jPanel1Layout
 																		.createSequentialGroup()
 																		.addGroup(
 																				jPanel1Layout
 																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING)
+																								GroupLayout.Alignment.BASELINE)
 																						.addComponent(
-																								this.jLabel5)
+																								this.playerManaLabel)
 																						.addComponent(
-																								this.jLabel6,
-																								GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								this.jLabel4,
-																								GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								this.jLabel3,
-																								GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								this.jLabel2,
-																								GroupLayout.Alignment.TRAILING))
+																								this.playerManaValueLabel))
 																		.addGap(18,
 																				18,
 																				18)
 																		.addGroup(
 																				jPanel1Layout
 																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING)
+																								GroupLayout.Alignment.BASELINE)
 																						.addComponent(
-																								this.jLabel7)
+																								this.playerHealthLabel)
 																						.addComponent(
-																								this.jLabel8)
+																								this.playerHealthValueLabel)))
+														.addGroup(
+																jPanel1Layout
+																		.createSequentialGroup()
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
 																						.addComponent(
-																								this.jLabel10)
+																								this.playerScoreValueLabel)
 																						.addComponent(
-																								this.jLabel9)
+																								this.playerScoreLabel))
+																		.addGap(18,
+																				18,
+																				18)
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
 																						.addComponent(
-																								this.jLabel11))))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel1Layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(this.jLabel1)
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel1Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel2)
-										.addComponent(this.jLabel7))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel1Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel3)
-										.addComponent(this.jLabel8))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel1Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel4)
-										.addComponent(this.jLabel9))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel1Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel5)
-										.addComponent(this.jLabel10))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel1Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel6)
-										.addComponent(this.jLabel11))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
+																								this.playerWaveValueLabel)
+																						.addComponent(
+																								this.playerWaveLabel))
+																		.addGap(18,
+																				18,
+																				18)
+																		.addGroup(
+																				jPanel1Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.BASELINE)
+																						.addComponent(
+																								this.playerTimeValueLabel)
+																						.addComponent(
+																								this.playerTimeLabel))))
+										.addContainerGap(26, Short.MAX_VALUE)));
 	}
 
-	private void initPanelTwo() {
-		this.jPanel2.setBorder(BorderFactory
-				.createLineBorder(new Color(0, 0, 0)));
+	private void initTopCenterPanel() {
+		this.topCenterPanel.setBorder(BorderFactory.createLineBorder(new Color(
+				0, 0, 0)));
 
-		this.jLabel34.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-		this.jLabel34.setText("Wave Information");
+		this.waveInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.waveInfoLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.waveInfoLabel.setText("Wave Information");
 
-		this.jLabel13.setText("Level:");
+		this.waveLevelLabel.setText("Level:");
 
-		this.jLabel14.setText("Name:");
+		this.waveNameLabel.setText("Name:");
 
-		this.jLabel15.setText("Health:");
+		this.waveHealthLabel.setText("Health:");
 
-		this.jLabel16.setText("Armor:");
+		this.waveArmorLabel.setText("Armor:");
 
-		this.jLabel17.setText("Speed:");
-
-		this.jLabel18.setText("jLabel18");
-
-		this.jLabel19.setText("jLabel19");
-
-		this.jLabel20.setText("jLabel20");
-
-		this.jLabel21.setText("jLabel21");
-
-		this.jLabel22.setText("jLabel22");
-
-		panelTwoLayout();
+		this.waveSpeedLabel.setText("Speed:");
 	}
 
-	private void panelTwoLayout() {
-		GroupLayout jPanel2Layout = new GroupLayout(this.jPanel2);
-		this.jPanel2.setLayout(jPanel2Layout);
+	private void topCenterPanelLayout() {
+
+		GroupLayout jPanel2Layout = new GroupLayout(this.topCenterPanel);
+		this.topCenterPanel.setLayout(jPanel2Layout);
 		jPanel2Layout
 				.setHorizontalGroup(jPanel2Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -291,264 +492,424 @@ public class ControlPanel extends JFrame {
 												jPanel2Layout
 														.createParallelGroup(
 																GroupLayout.Alignment.LEADING)
-														.addComponent(
-																this.jLabel34)
 														.addGroup(
 																jPanel2Layout
 																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel15)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				this.jLabel20))
-														.addGroup(
-																jPanel2Layout
-																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel16)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				this.jLabel21))
-														.addGroup(
-																jPanel2Layout
-																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel17)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				this.jLabel22))
-														.addGroup(
-																jPanel2Layout
-																		.createSequentialGroup()
-																		.addGap(4,
-																				4,
-																				4)
-																		.addGroup(
-																				jPanel2Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.TRAILING)
-																						.addComponent(
-																								this.jLabel14)
-																						.addComponent(
-																								this.jLabel13))
-																		.addGap(18,
-																				18,
-																				18)
+																		.addGap(8,
+																				8,
+																				8)
 																		.addGroup(
 																				jPanel2Layout
 																						.createParallelGroup(
 																								GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								this.jLabel18)
-																						.addComponent(
-																								this.jLabel19))))
+																						.addGroup(
+																								jPanel2Layout
+																										.createSequentialGroup()
+																										.addComponent(
+																												this.waveSpeedLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.waveSpeedValueLabel)
+																										.addContainerGap())
+																						.addGroup(
+																								jPanel2Layout
+																										.createSequentialGroup()
+																										.addGap(4,
+																												4,
+																												4)
+																										.addGroup(
+																												jPanel2Layout
+																														.createParallelGroup(
+																																GroupLayout.Alignment.TRAILING)
+																														.addComponent(
+																																this.waveNameLabel)
+																														.addComponent(
+																																this.waveLevelLabel))
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addGroup(
+																												jPanel2Layout
+																														.createParallelGroup(
+																																GroupLayout.Alignment.LEADING)
+																														.addComponent(
+																																this.waveLevelValueLabel)
+																														.addComponent(
+																																this.waveNameValueLabel))
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+																												GroupLayout.DEFAULT_SIZE,
+																												Short.MAX_VALUE)
+																										.addGroup(
+																												jPanel2Layout
+																														.createParallelGroup(
+																																GroupLayout.Alignment.LEADING,
+																																false)
+																														.addComponent(
+																																this.waveHealthLabel)
+																														.addComponent(
+																																this.waveArmorLabel))
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addGroup(
+																												jPanel2Layout
+																														.createParallelGroup(
+																																GroupLayout.Alignment.LEADING)
+																														.addComponent(
+																																this.waveHealthValueLabel)
+																														.addComponent(
+																																this.waveArmorValueLabel))
+																										.addGap(22,
+																												22,
+																												22))))
+														.addGroup(
+																jPanel2Layout
+																		.createSequentialGroup()
+																		.addComponent(
+																				this.waveInfoLabel,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE)
+																		.addContainerGap()))));
+		jPanel2Layout
+				.setVerticalGroup(jPanel2Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
+						.addGroup(
+								jPanel2Layout
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(this.waveInfoLabel)
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel2Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																this.waveLevelLabel)
+														.addComponent(
+																this.waveLevelValueLabel)
+														.addComponent(
+																this.waveHealthLabel)
+														.addComponent(
+																this.waveHealthValueLabel))
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel2Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																this.waveNameLabel)
+														.addComponent(
+																this.waveNameValueLabel)
+														.addComponent(
+																this.waveArmorLabel)
+														.addComponent(
+																this.waveArmorValueLabel))
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel2Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																this.waveSpeedLabel)
+														.addComponent(
+																this.waveSpeedValueLabel))
 										.addContainerGap(
 												GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)));
-		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel2Layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(this.jLabel34)
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel13)
-										.addComponent(this.jLabel18))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel14)
-										.addComponent(this.jLabel19))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel15)
-										.addComponent(this.jLabel20))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel16)
-										.addComponent(this.jLabel21))
-						.addGap(18, 18, 18)
-						.addGroup(
-								jPanel2Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel17)
-										.addComponent(this.jLabel22))
-						.addContainerGap(GroupLayout.DEFAULT_SIZE,
-								Short.MAX_VALUE)));
 	}
 
-	private void initPanelThree() {
-		this.jPanel3.setBorder(BorderFactory
-				.createLineBorder(new Color(0, 0, 0)));
+	private void initTopRightPanel() {
+		this.topRightPanel.setBorder(BorderFactory.createLineBorder(new Color(
+				0, 0, 0)));
 
-		this.jLabel12.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-		this.jLabel12.setText("Selected Enemy");
+		this.selectedEnemyLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.selectedEnemyLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.selectedEnemyLabel.setText("Selected Enemy");
 
-		this.jLabel23.setText("Health:");
+		this.selectedHealthLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+		this.selectedHealthLabel.setText("Health:");
 
-		this.jLabel24.setText("Armor:");
+		this.selectedArmorLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+		this.selectedArmorLabel.setText("Armor:");
 
-		this.jLabel25.setText("Speed:");
+		this.selectedSpeedLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+		this.selectedSpeedLabel.setText("Speed:");
 
-		this.jLabel26.setText("jLabel26");
+		this.selectedHealthValueLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
-		this.jLabel27.setText("jLabel27");
+		this.selectedArmorValueLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 
-		this.jLabel28.setText("jLabel28");
-
-		panelThreeLayout();
+		this.selectedSpeedValueLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
 	}
 
-	private void panelThreeLayout() {
-		GroupLayout jPanel3Layout = new GroupLayout(this.jPanel3);
-		this.jPanel3.setLayout(jPanel3Layout);
+	private void topRightPanelLayout() {
+		GroupLayout jPanel3Layout = new GroupLayout(this.topRightPanel);
+		this.topRightPanel.setLayout(jPanel3Layout);
 		jPanel3Layout
 				.setHorizontalGroup(jPanel3Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanel3Layout
 										.createSequentialGroup()
-										.addContainerGap()
 										.addGroup(
 												jPanel3Layout
 														.createParallelGroup(
 																GroupLayout.Alignment.LEADING)
-														.addComponent(
-																this.jLabel12)
 														.addGroup(
 																jPanel3Layout
 																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addComponent(
-																				this.jLabel23)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				this.jLabel26))
+																				this.selectedEnemyLabel,
+																				GroupLayout.DEFAULT_SIZE,
+																				GroupLayout.DEFAULT_SIZE,
+																				Short.MAX_VALUE))
 														.addGroup(
 																jPanel3Layout
 																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel24)
+																		.addGap(38,
+																				38,
+																				38)
+																		.addGroup(
+																				jPanel3Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.TRAILING,
+																								false)
+																						.addComponent(
+																								this.selectedSpeedLabel)
+																						.addGroup(
+																								GroupLayout.Alignment.LEADING,
+																								jPanel3Layout
+																										.createParallelGroup(
+																												GroupLayout.Alignment.TRAILING)
+																										.addComponent(
+																												this.selectedArmorLabel)
+																										.addComponent(
+																												this.selectedHealthLabel)))
 																		.addGap(18,
 																				18,
 																				18)
-																		.addComponent(
-																				this.jLabel27))
-														.addGroup(
-																jPanel3Layout
-																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel25)
-																		.addGap(18,
-																				18,
-																				18)
-																		.addComponent(
-																				this.jLabel28)))
-										.addContainerGap(
-												GroupLayout.DEFAULT_SIZE,
-												Short.MAX_VALUE)));
+																		.addGroup(
+																				jPanel3Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addComponent(
+																								this.selectedHealthValueLabel)
+																						.addComponent(
+																								this.selectedArmorValueLabel)
+																						.addComponent(
+																								this.selectedSpeedValueLabel))
+																		.addGap(0,
+																				0,
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
 		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(
 				GroupLayout.Alignment.LEADING).addGroup(
 				jPanel3Layout
 						.createSequentialGroup()
 						.addContainerGap()
-						.addComponent(this.jLabel12)
+						.addComponent(this.selectedEnemyLabel)
 						.addGap(18, 18, 18)
 						.addGroup(
 								jPanel3Layout
 										.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel23)
-										.addComponent(this.jLabel26))
+										.addComponent(this.selectedHealthLabel)
+										.addComponent(
+												this.selectedHealthValueLabel))
 						.addGap(18, 18, 18)
 						.addGroup(
 								jPanel3Layout
 										.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel24)
-										.addComponent(this.jLabel27))
+										.addComponent(this.selectedArmorLabel)
+										.addComponent(
+												this.selectedArmorValueLabel))
 						.addGap(18, 18, 18)
 						.addGroup(
 								jPanel3Layout
 										.createParallelGroup(
 												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel25)
-										.addComponent(this.jLabel28))
+										.addComponent(this.selectedSpeedLabel)
+										.addComponent(
+												this.selectedSpeedValueLabel))
 						.addContainerGap(GroupLayout.DEFAULT_SIZE,
 								Short.MAX_VALUE)));
 	}
 
-	private void initPanelFour() {
-		this.jPanel4.setBorder(BorderFactory
+	private void initBottomLeftPanel() {
+		this.bottomLeftPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		this.jLabel29.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-		this.jLabel29.setText("Available Towers");
+		this.availableTowersLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.availableTowersLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.availableTowersLabel.setText("Available Towers");
 
-		ImageIcon fire = new ImageIcon("src/resources/images/fire_tower2.png");
-		Image temp = fire.getImage();
-		Image newTemp = temp.getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-		this.jButton1.setIcon(new ImageIcon(newTemp));
-		this.jButton1.setFocusable(false);
+		this.fireCostLabel.setText("Cost:");
 
-		this.jButton2.setIcon(new ImageIcon(newTemp));
-		this.jButton2.setFocusable(false);
+		this.waterCostLabel.setText("Cost:");
 
-		this.jButton3.setIcon(new ImageIcon(newTemp));
-		this.jButton3.setFocusable(false);
+		this.airCostLabel.setText("Cost:");
 
-		this.jButton4.setIcon(new ImageIcon(newTemp));
-		this.jButton4.setFocusable(false);
+		this.lightCostLabel.setText("Cost:");
 
-		this.jButton5.setIcon(new ImageIcon(newTemp));
-		this.jButton5.setFocusable(false);
+		this.earthCostLabel.setText("Cost:");
 
-		this.jLabel30.setText("Cost:");
+		initImageIcons();
 
-		this.jLabel31.setText("jLabel31");
+		this.fireButtonLabel.setBorderPainted(false);
+		this.fireButtonLabel.setContentAreaFilled(false);
+		this.fireButtonLabel.setIcon(new ImageIcon(this.fireUnclicked));
+		this.fireButtonLabel.addMouseListener(new MouseListener() {
 
-		this.jLabel32.setText("Cost:");
+			public void mouseReleased(MouseEvent e) {
+				ControlPanel.this.fireButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.fireUnclicked));
+			}
 
-		this.jLabel33.setText("jLabel33");
+			public void mousePressed(MouseEvent e) {
+				ControlPanel.this.fireButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.fireClicked));
+			}
 
-		this.jLabel35.setText("Cost:");
+			public void mouseExited(MouseEvent e) {
+				// Nothing to do
+			}
 
-		this.jLabel36.setText("jLabel36");
+			public void mouseEntered(MouseEvent e) {
+				// Nothing to do
+			}
 
-		this.jLabel37.setText("Cost:");
+			public void mouseClicked(MouseEvent e) {
+				// Nothing to do
+			}
+		});
 
-		this.jLabel38.setText("jLabel38");
+		this.waterButtonLabel.setBorderPainted(false);
+		this.waterButtonLabel.setContentAreaFilled(false);
+		this.waterButtonLabel.setIcon(new ImageIcon(this.waterUnclicked));
+		this.waterButtonLabel.addMouseListener(new MouseListener() {
 
-		this.jLabel39.setText("Cost:");
+			public void mouseReleased(MouseEvent e) {
+				ControlPanel.this.waterButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.waterUnclicked));
+			}
 
-		this.jLabel40.setText("jLabel40");
+			public void mousePressed(MouseEvent e) {
+				ControlPanel.this.waterButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.waterClicked));
+			}
 
-		panelFourLayout();
+			public void mouseExited(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseClicked(MouseEvent e) {
+				// Nothing to do
+			}
+		});
+
+		this.airButtonLabel.setBorderPainted(false);
+		this.airButtonLabel.setContentAreaFilled(false);
+		this.airButtonLabel.setIcon(new ImageIcon(this.airUnclicked));
+		this.airButtonLabel.addMouseListener(new MouseListener() {
+
+			public void mouseReleased(MouseEvent e) {
+				ControlPanel.this.airButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.airUnclicked));
+			}
+
+			public void mousePressed(MouseEvent e) {
+				ControlPanel.this.airButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.airClicked));
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseClicked(MouseEvent e) {
+				// Nothing to do
+			}
+		});
+
+		this.lightButtonLabel.setBorderPainted(false);
+		this.lightButtonLabel.setContentAreaFilled(false);
+		this.lightButtonLabel.setIcon(new ImageIcon(this.lightUnclicked));
+		this.lightButtonLabel.addMouseListener(new MouseListener() {
+
+			public void mouseReleased(MouseEvent e) {
+				ControlPanel.this.lightButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.lightUnclicked));
+			}
+
+			public void mousePressed(MouseEvent e) {
+				ControlPanel.this.lightButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.lightClicked));
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseClicked(MouseEvent e) {
+				// Nothing to do
+			}
+		});
+
+		this.earthButtonLabel.setBorderPainted(false);
+		this.earthButtonLabel.setContentAreaFilled(false);
+		this.earthButtonLabel.setIcon(new ImageIcon(this.earthUnclicked));
+		this.earthButtonLabel.addMouseListener(new MouseListener() {
+
+			public void mouseReleased(MouseEvent e) {
+				ControlPanel.this.earthButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.earthUnclicked));
+			}
+
+			public void mousePressed(MouseEvent e) {
+				ControlPanel.this.earthButtonLabel.setIcon(new ImageIcon(
+						ControlPanel.this.earthClicked));
+			}
+
+			public void mouseExited(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseEntered(MouseEvent e) {
+				// Nothing to do
+			}
+
+			public void mouseClicked(MouseEvent e) {
+				// Nothing to do
+			}
+		});
 	}
 
-	private void panelFourLayout() {
-		GroupLayout jPanel4Layout = new GroupLayout(this.jPanel4);
-		this.jPanel4.setLayout(jPanel4Layout);
+	private void bottomLeftPanelLayout() {
+		GroupLayout jPanel4Layout = new GroupLayout(this.bottomLeftPanel);
+		this.bottomLeftPanel.setLayout(jPanel4Layout);
 		jPanel4Layout
 				.setHorizontalGroup(jPanel4Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -559,198 +920,239 @@ public class ControlPanel extends JFrame {
 										.addGroup(
 												jPanel4Layout
 														.createParallelGroup(
-																GroupLayout.Alignment.LEADING)
+																GroupLayout.Alignment.LEADING,
+																false)
 														.addGroup(
 																jPanel4Layout
 																		.createSequentialGroup()
-																		.addComponent(
-																				this.jLabel29)
-																		.addContainerGap())
-														.addGroup(
-																jPanel4Layout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanel4Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.TRAILING,
-																								false)
-																						.addGroup(
-																								jPanel4Layout
-																										.createSequentialGroup()
-																										.addComponent(
-																												this.jLabel30)
-																										.addPreferredGap(
-																												LayoutStyle.ComponentPlacement.RELATED,
-																												GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)
-																										.addComponent(
-																												this.jLabel31))
-																						.addComponent(
-																								this.jButton1))
-																		.addGap(47,
-																				47,
-																				47)
-																		.addGroup(
-																				jPanel4Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.TRAILING)
-																						.addGroup(
-																								jPanel4Layout
-																										.createSequentialGroup()
-																										.addComponent(
-																												this.jLabel32)
-																										.addPreferredGap(
-																												LayoutStyle.ComponentPlacement.RELATED)
-																										.addComponent(
-																												this.jLabel33))
-																						.addComponent(
-																								this.jButton2))
-																		.addPreferredGap(
-																				LayoutStyle.ComponentPlacement.RELATED,
-																				56,
-																				Short.MAX_VALUE)
 																		.addGroup(
 																				jPanel4Layout
 																						.createParallelGroup(
 																								GroupLayout.Alignment.LEADING)
-																						.addComponent(
-																								this.jButton3,
-																								GroupLayout.Alignment.TRAILING)
 																						.addGroup(
 																								GroupLayout.Alignment.TRAILING,
 																								jPanel4Layout
 																										.createSequentialGroup()
 																										.addComponent(
-																												this.jLabel35)
+																												this.fireCostLabel)
 																										.addPreferredGap(
-																												LayoutStyle.ComponentPlacement.RELATED)
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																										.addComponent(
-																												this.jLabel36)))
-																		.addGap(59,
-																				59,
-																				59)
-																		.addGroup(
-																				jPanel4Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING,
-																								false)
+																												this.fireCostValueLabel)
+																										.addGap(23,
+																												23,
+																												23))
 																						.addGroup(
 																								jPanel4Layout
 																										.createSequentialGroup()
 																										.addComponent(
-																												this.jLabel37)
-																										.addPreferredGap(
-																												LayoutStyle.ComponentPlacement.RELATED,
-																												GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)
-																										.addComponent(
-																												this.jLabel38))
-																						.addComponent(
-																								this.jButton4))
-																		.addGap(49,
-																				49,
-																				49)
+																												this.fireButtonLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												100,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(18,
+																												18,
+																												18)))
 																		.addGroup(
 																				jPanel4Layout
 																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING,
-																								false)
-																						.addComponent(
-																								this.jButton5)
+																								GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								GroupLayout.Alignment.TRAILING,
+																								jPanel4Layout
+																										.createSequentialGroup()
+																										.addComponent(
+																												this.waterCostLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.waterCostValueLabel)
+																										.addGap(23,
+																												23,
+																												23))
 																						.addGroup(
 																								jPanel4Layout
 																										.createSequentialGroup()
 																										.addComponent(
-																												this.jLabel39)
-																										.addPreferredGap(
-																												LayoutStyle.ComponentPlacement.RELATED,
-																												GroupLayout.DEFAULT_SIZE,
-																												Short.MAX_VALUE)
+																												this.waterButtonLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												100,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addGap(18,
+																												18,
+																												18)))
+																		.addGroup(
+																				jPanel4Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								jPanel4Layout
+																										.createSequentialGroup()
 																										.addComponent(
-																												this.jLabel40)))
-																		.addGap(26,
-																				26,
-																				26)))));
-		jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel4Layout
-						.createSequentialGroup()
-						.addContainerGap()
-						.addComponent(this.jLabel29)
-						.addGap(75, 75, 75)
+																												this.airCostLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.airCostValueLabel)
+																										.addGap(33,
+																												33,
+																												33)
+																										.addComponent(
+																												this.lightCostLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.lightCostValueLabel))
+																						.addGroup(
+																								jPanel4Layout
+																										.createSequentialGroup()
+																										.addComponent(
+																												this.airButtonLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												100,
+																												GroupLayout.PREFERRED_SIZE)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+																										.addComponent(
+																												this.lightButtonLabel,
+																												GroupLayout.PREFERRED_SIZE,
+																												100,
+																												GroupLayout.PREFERRED_SIZE)))
+																		.addGap(23,
+																				23,
+																				23)
+																		.addGroup(
+																				jPanel4Layout
+																						.createParallelGroup(
+																								GroupLayout.Alignment.LEADING)
+																						.addGroup(
+																								GroupLayout.Alignment.TRAILING,
+																								jPanel4Layout
+																										.createSequentialGroup()
+																										.addComponent(
+																												this.earthCostLabel)
+																										.addPreferredGap(
+																												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+																										.addComponent(
+																												this.earthCostValueLabel)
+																										.addGap(5,
+																												5,
+																												5))
+																						.addComponent(
+																								this.earthButtonLabel,
+																								GroupLayout.PREFERRED_SIZE,
+																								100,
+																								GroupLayout.PREFERRED_SIZE)))
+														.addComponent(
+																this.availableTowersLabel,
+																GroupLayout.DEFAULT_SIZE,
+																GroupLayout.DEFAULT_SIZE,
+																Short.MAX_VALUE))
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
+		jPanel4Layout
+				.setVerticalGroup(jPanel4Layout
+						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
+								GroupLayout.Alignment.TRAILING,
 								jPanel4Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jButton1)
-										.addComponent(this.jButton2)
-										.addComponent(this.jButton3)
-										.addComponent(this.jButton4)
-										.addComponent(this.jButton5))
-						.addPreferredGap(
-								LayoutStyle.ComponentPlacement.RELATED,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(
-								jPanel4Layout
-										.createParallelGroup(
-												GroupLayout.Alignment.BASELINE)
-										.addComponent(this.jLabel30)
-										.addComponent(this.jLabel31)
-										.addComponent(this.jLabel32)
-										.addComponent(this.jLabel33)
-										.addComponent(this.jLabel35)
-										.addComponent(this.jLabel36)
-										.addComponent(this.jLabel37)
-										.addComponent(this.jLabel38)
-										.addComponent(this.jLabel39)
-										.addComponent(this.jLabel40))
-						.addContainerGap()));
+										.createSequentialGroup()
+										.addContainerGap()
+										.addComponent(this.availableTowersLabel)
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel4Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																this.fireButtonLabel,
+																GroupLayout.PREFERRED_SIZE,
+																100,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																this.waterButtonLabel,
+																GroupLayout.PREFERRED_SIZE,
+																100,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																this.airButtonLabel,
+																GroupLayout.PREFERRED_SIZE,
+																100,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																this.lightButtonLabel,
+																GroupLayout.PREFERRED_SIZE,
+																100,
+																GroupLayout.PREFERRED_SIZE)
+														.addComponent(
+																this.earthButtonLabel,
+																GroupLayout.PREFERRED_SIZE,
+																100,
+																GroupLayout.PREFERRED_SIZE))
+										.addGap(18, 18, 18)
+										.addGroup(
+												jPanel4Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.BASELINE)
+														.addComponent(
+																this.waterCostLabel)
+														.addComponent(
+																this.waterCostValueLabel)
+														.addComponent(
+																this.fireCostValueLabel)
+														.addComponent(
+																this.airCostLabel)
+														.addComponent(
+																this.airCostValueLabel)
+														.addComponent(
+																this.lightCostLabel)
+														.addComponent(
+																this.lightCostValueLabel)
+														.addComponent(
+																this.earthCostLabel)
+														.addComponent(
+																this.earthCostValueLabel)
+														.addComponent(
+																this.fireCostLabel))
+										.addContainerGap(
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)));
 	}
 
-	private void initPanelFive() {
-		this.jPanel5.setBorder(BorderFactory
+	private void initBottomRightPanel() {
+		this.bottomRightPanel.setBorder(BorderFactory
 				.createLineBorder(new Color(0, 0, 0)));
 
-		this.jButton6.setText("Upgrade");
-		this.jButton6
+		this.towerUpgradeButton.setText("Upgrade");
+		this.towerUpgradeButton
 				.setToolTipText("Upgrade the selected tower to the next level.");
-		this.jButton6.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent evt) {
-				jButton6ActionPerformed(evt);
-			}
-		});
 
-		this.jButton7.setText("Sell");
-		this.jButton7.setToolTipText("Sell this tower for 100% of its value.");
+		this.towerSellButton.setText("Sell");
+		this.towerSellButton
+				.setToolTipText("Sell this tower for 100% of its value.");
 
-		this.jLabel41.setFont(new Font("Tahoma", 0, 18)); // NOI18N
-		this.jLabel41.setText("Tower Information");
+		this.towerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.towerInfoLabel
+				.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+		this.towerInfoLabel.setText("Tower Information");
 
-		this.jLabel42.setText("Level:");
+		this.towerLevelLabel.setText("Level:");
 
-		this.jLabel43.setText("Damage:");
+		this.towerDamageLabel.setText("Damage:");
 
-		this.jLabel44.setText("Speed:");
-
-		this.jLabel45.setText("jLabel45");
-
-		this.jLabel46.setText("jLabel46");
-
-		this.jLabel47.setText("jLabel47");
-
-		panelFiveLayout();
+		this.towerSpeedLabel.setText("Speed:");
 	}
 
-	private void panelFiveLayout() {
-		GroupLayout jPanel5Layout = new GroupLayout(this.jPanel5);
-		this.jPanel5.setLayout(jPanel5Layout);
+	private void bottomRightPanelLayout() {
+		GroupLayout jPanel5Layout = new GroupLayout(this.bottomRightPanel);
+		this.bottomRightPanel.setLayout(jPanel5Layout);
 		jPanel5Layout
 				.setHorizontalGroup(jPanel5Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
 						.addGroup(
 								jPanel5Layout
 										.createSequentialGroup()
-										.addContainerGap()
 										.addGroup(
 												jPanel5Layout
 														.createParallelGroup(
@@ -758,74 +1160,72 @@ public class ControlPanel extends JFrame {
 														.addGroup(
 																jPanel5Layout
 																		.createSequentialGroup()
+																		.addContainerGap()
 																		.addGroup(
 																				jPanel5Layout
 																						.createParallelGroup(
 																								GroupLayout.Alignment.LEADING)
 																						.addComponent(
-																								this.jLabel41)
+																								this.towerInfoLabel,
+																								GroupLayout.DEFAULT_SIZE,
+																								160,
+																								Short.MAX_VALUE)
 																						.addGroup(
 																								jPanel5Layout
 																										.createSequentialGroup()
-																										.addGap(41,
-																												41,
-																												41)
+																										.addGap(10,
+																												10,
+																												10)
 																										.addGroup(
 																												jPanel5Layout
 																														.createParallelGroup(
 																																GroupLayout.Alignment.LEADING)
-																														.addGroup(
-																																jPanel5Layout
-																																		.createSequentialGroup()
-																																		.addGap(10,
-																																				10,
-																																				10)
-																																		.addComponent(
-																																				this.jButton7,
-																																				GroupLayout.PREFERRED_SIZE,
-																																				61,
-																																				GroupLayout.PREFERRED_SIZE))
 																														.addComponent(
-																																this.jButton6))))
-																		.addContainerGap(
-																				46,
-																				Short.MAX_VALUE))
-														.addGroup(
-																jPanel5Layout
-																		.createSequentialGroup()
-																		.addGroup(
-																				jPanel5Layout
-																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING)
-																						.addGroup(
-																								jPanel5Layout
-																										.createSequentialGroup()
+																																this.towerDamageLabel)
+																														.addComponent(
+																																this.towerSpeedLabel,
+																																GroupLayout.Alignment.TRAILING)
+																														.addComponent(
+																																this.towerLevelLabel,
+																																GroupLayout.Alignment.TRAILING))
 																										.addGap(18,
 																												18,
 																												18)
-																										.addComponent(
-																												this.jLabel42))
-																						.addComponent(
-																								this.jLabel43)
-																						.addComponent(
-																								this.jLabel44,
-																								GroupLayout.Alignment.TRAILING))
-																		.addGap(18,
-																				18,
-																				18)
+																										.addGroup(
+																												jPanel5Layout
+																														.createParallelGroup(
+																																GroupLayout.Alignment.LEADING)
+																														.addComponent(
+																																this.towerLevelValueLabel)
+																														.addComponent(
+																																this.towerDamageValueLabel)
+																														.addComponent(
+																																this.towerSpeedValueLabel))
+																										.addGap(0,
+																												0,
+																												Short.MAX_VALUE))))
+														.addGroup(
+																jPanel5Layout
+																		.createSequentialGroup()
+																		.addGap(51,
+																				51,
+																				51)
 																		.addGroup(
 																				jPanel5Layout
 																						.createParallelGroup(
-																								GroupLayout.Alignment.LEADING)
+																								GroupLayout.Alignment.TRAILING)
 																						.addComponent(
-																								this.jLabel45)
+																								this.towerSellButton,
+																								GroupLayout.PREFERRED_SIZE,
+																								81,
+																								GroupLayout.PREFERRED_SIZE)
 																						.addComponent(
-																								this.jLabel46)
-																						.addComponent(
-																								this.jLabel47))
+																								this.towerUpgradeButton))
 																		.addGap(0,
 																				0,
-																				Short.MAX_VALUE)))));
+																				Short.MAX_VALUE)))
+										.addContainerGap()));
+
 		jPanel5Layout
 				.setVerticalGroup(jPanel5Layout
 						.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -834,42 +1234,45 @@ public class ControlPanel extends JFrame {
 								jPanel5Layout
 										.createSequentialGroup()
 										.addContainerGap()
-										.addComponent(this.jLabel41)
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel5Layout
-														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																this.jLabel42)
-														.addComponent(
-																this.jLabel45))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel5Layout
-														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																this.jLabel43)
-														.addComponent(
-																this.jLabel46))
-										.addGap(18, 18, 18)
-										.addGroup(
-												jPanel5Layout
-														.createParallelGroup(
-																GroupLayout.Alignment.BASELINE)
-														.addComponent(
-																this.jLabel44)
-														.addComponent(
-																this.jLabel47))
+										.addComponent(this.towerInfoLabel)
 										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED,
-												30, Short.MAX_VALUE)
-										.addComponent(this.jButton6)
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+										.addGroup(
+												jPanel5Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																this.towerLevelValueLabel)
+														.addComponent(
+																this.towerLevelLabel))
 										.addPreferredGap(
-												LayoutStyle.ComponentPlacement.RELATED)
-										.addComponent(this.jButton7)
-										.addGap(16, 16, 16)));
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										.addGroup(
+												jPanel5Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																this.towerDamageValueLabel)
+														.addComponent(
+																this.towerDamageLabel))
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+										.addGroup(
+												jPanel5Layout
+														.createParallelGroup(
+																GroupLayout.Alignment.LEADING)
+														.addComponent(
+																this.towerSpeedValueLabel)
+														.addComponent(
+																this.towerSpeedLabel))
+										.addGap(18, 18, 18)
+										.addComponent(this.towerUpgradeButton)
+										.addPreferredGap(
+												javax.swing.LayoutStyle.ComponentPlacement.RELATED,
+												GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(this.towerSellButton)
+										.addContainerGap()));
 
 		GroupLayout layout = new GroupLayout(getContentPane());
 		getContentPane().setLayout(layout);
@@ -879,39 +1282,40 @@ public class ControlPanel extends JFrame {
 						layout.createSequentialGroup()
 								.addGroup(
 										layout.createParallelGroup(
-												GroupLayout.Alignment.LEADING,
+												GroupLayout.Alignment.TRAILING,
 												false)
-												.addComponent(
-														this.jPanel4,
-														GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE,
-														Short.MAX_VALUE)
 												.addGroup(
+														GroupLayout.Alignment.LEADING,
 														layout.createSequentialGroup()
 																.addComponent(
-																		this.jPanel1,
+																		this.topLeftPanel,
+																		GroupLayout.PREFERRED_SIZE,
 																		GroupLayout.DEFAULT_SIZE,
-																		GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)
+																		GroupLayout.PREFERRED_SIZE)
 																.addPreferredGap(
-																		LayoutStyle.ComponentPlacement.RELATED)
+																		javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 																.addComponent(
-																		this.jPanel2,
+																		this.topCenterPanel,
 																		GroupLayout.DEFAULT_SIZE,
 																		GroupLayout.DEFAULT_SIZE,
-																		Short.MAX_VALUE)))
+																		Short.MAX_VALUE))
+												.addComponent(
+														this.bottomLeftPanel,
+														GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE,
+														GroupLayout.PREFERRED_SIZE))
 								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
 												GroupLayout.Alignment.LEADING)
 												.addComponent(
-														this.jPanel5,
+														this.bottomRightPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														this.jPanel3,
+														this.topRightPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))));
@@ -921,121 +1325,161 @@ public class ControlPanel extends JFrame {
 						layout.createSequentialGroup()
 								.addGroup(
 										layout.createParallelGroup(
-												GroupLayout.Alignment.LEADING)
+												GroupLayout.Alignment.TRAILING)
 												.addComponent(
-														this.jPanel1,
+														this.topLeftPanel,
+														GroupLayout.Alignment.LEADING,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														this.jPanel2,
+														this.topCenterPanel,
+														GroupLayout.Alignment.LEADING,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														this.jPanel3,
+														this.topRightPanel,
+														GroupLayout.Alignment.LEADING,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))
 								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
+										javax.swing.LayoutStyle.ComponentPlacement.RELATED)
 								.addGroup(
 										layout.createParallelGroup(
-												GroupLayout.Alignment.LEADING)
+												GroupLayout.Alignment.LEADING,
+												false)
 												.addComponent(
-														this.jPanel5,
+														this.bottomLeftPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE)
 												.addComponent(
-														this.jPanel4,
+														this.bottomRightPanel,
 														GroupLayout.DEFAULT_SIZE,
 														GroupLayout.DEFAULT_SIZE,
 														Short.MAX_VALUE))));
 	}
 
-	private void jButton6ActionPerformed(ActionEvent evt) {
-		// TODO add your handling code here:
+	// Called externally to update player information
+	public void updatePlayerInfo() {
+
 	}
 
-	/**
-	 * @param args
-	 *            the command line arguments
-	 */
-	public static void main(String args[]) {
+	// Called externally to update player information
+	public void updateWaveInfo() {
 
+	}
+
+	// Called externally to update player information
+	public void updateEnemyInfo() {
+
+	}
+
+	public static void main(String args[]) {
 		/*
 		 * Create and display the form
 		 */
-		EventQueue.invokeLater(new Runnable() {
+		java.awt.EventQueue.invokeLater(new Runnable() {
 
 			public void run() {
-				new ControlPanel(new Map(), new Player(),
-						new ArrayList<Enemy>(), new ArrayList<Tower>())
+				new ControlPanel(new Player(), new Map(),
+						new ArrayList<Tower>(), new ArrayList<Enemy>())
 						.setVisible(true);
 			}
 		});
 	}
 
-	// Variables declaration
-	private JButton jButton1;
-	private JButton jButton2;
-	private JButton jButton3;
-	private JButton jButton4;
-	private JButton jButton5;
-	private JButton jButton6;
-	private JButton jButton7;
-	private JLabel jLabel1;
-	private JLabel jLabel10;
-	private JLabel jLabel11;
-	private JLabel jLabel12;
-	private JLabel jLabel13;
-	private JLabel jLabel14;
-	private JLabel jLabel15;
-	private JLabel jLabel16;
-	private JLabel jLabel17;
-	private JLabel jLabel18;
-	private JLabel jLabel19;
-	private JLabel jLabel2;
-	private JLabel jLabel20;
-	private JLabel jLabel21;
-	private JLabel jLabel22;
-	private JLabel jLabel23;
-	private JLabel jLabel24;
-	private JLabel jLabel25;
-	private JLabel jLabel26;
-	private JLabel jLabel27;
-	private JLabel jLabel28;
-	private JLabel jLabel29;
-	private JLabel jLabel3;
-	private JLabel jLabel30;
-	private JLabel jLabel31;
-	private JLabel jLabel32;
-	private JLabel jLabel33;
-	private JLabel jLabel34;
-	private JLabel jLabel35;
-	private JLabel jLabel36;
-	private JLabel jLabel37;
-	private JLabel jLabel38;
-	private JLabel jLabel39;
-	private JLabel jLabel4;
-	private JLabel jLabel40;
-	private JLabel jLabel41;
-	private JLabel jLabel42;
-	private JLabel jLabel43;
-	private JLabel jLabel44;
-	private JLabel jLabel45;
-	private JLabel jLabel46;
-	private JLabel jLabel47;
-	private JLabel jLabel5;
-	private JLabel jLabel6;
-	private JLabel jLabel7;
-	private JLabel jLabel8;
-	private JLabel jLabel9;
-	private JPanel jPanel1;
-	private JPanel jPanel2;
-	private JPanel jPanel3;
-	private JPanel jPanel4;
-	private JPanel jPanel5;
-	// End of variables declaration
+	// Button, Label, and Panel declerations
+	private JButton towerUpgradeButton;
+	private JButton towerSellButton;
+	private JLabel playerInfoLabel;
+	private JLabel playerHealthValueLabel;
+	private JLabel playerTimeValueLabel;
+	private JLabel selectedEnemyLabel;
+	private JLabel waveLevelLabel;
+	private JLabel waveNameLabel;
+	private JLabel waveHealthLabel;
+	private JLabel waveArmorLabel;
+	private JLabel waveSpeedLabel;
+	private JLabel waveLevelValueLabel;
+	private JLabel waveNameValueLabel;
+	private JLabel playerScoreLabel;
+	private JLabel waveHealthValueLabel;
+	private JLabel waveArmorValueLabel;
+	private JLabel waveSpeedValueLabel;
+	private JLabel selectedHealthLabel;
+	private JLabel selectedArmorLabel;
+	private JLabel selectedSpeedLabel;
+	private JLabel selectedHealthValueLabel;
+	private JLabel selectedArmorValueLabel;
+	private JLabel selectedSpeedValueLabel;
+	private JLabel availableTowersLabel;
+	private JLabel playerManaLabel;
+	private JLabel fireCostLabel;
+	private JLabel fireCostValueLabel;
+	private JLabel waterCostLabel;
+	private JLabel waterCostValueLabel;
+	private JLabel waveInfoLabel;
+	private JLabel airCostLabel;
+	private JLabel airCostValueLabel;
+	private JLabel lightCostLabel;
+	private JLabel lightCostValueLabel;
+	private JLabel earthCostLabel;
+	private JLabel playerWaveLabel;
+	private JLabel earthCostValueLabel;
+	private JLabel towerInfoLabel;
+	private JLabel towerLevelLabel;
+	private JLabel towerDamageLabel;
+	private JLabel towerSpeedLabel;
+	private JLabel towerLevelValueLabel;
+	private JLabel towerDamageValueLabel;
+	private JLabel towerSpeedValueLabel;
+	private JButton fireButtonLabel;
+	private JButton waterButtonLabel;
+	private JButton airButtonLabel;
+	private JButton lightButtonLabel;
+	private JButton earthButtonLabel;
+	private JLabel playerHealthLabel;
+	private JLabel playerTimeLabel;
+	private JLabel playerScoreValueLabel;
+	private JLabel playerManaValueLabel;
+	private JLabel playerWaveValueLabel;
+	private JPanel topLeftPanel;
+	private JPanel topCenterPanel;
+	private JPanel topRightPanel;
+	private JPanel bottomLeftPanel;
+	private JPanel bottomRightPanel;
+	// End of declaration
+
+	/*
+	 * ImageIcon declerations
+	 */
+	// Fire
+	private Image fireClicked;
+	private Image fireUnclicked;
+	private Image fireNotAvailable;
+	private Image fireInsuffMana;
+	// Water
+	private Image waterClicked;
+	private Image waterUnclicked;
+	private Image waterNotAvailable;
+	private Image waterInsuffMana;
+	// Air
+	private Image airClicked;
+	private Image airUnclicked;
+	private Image airNotAvailable;
+	private Image airInsuffMana;
+	// Light
+	private Image lightClicked;
+	private Image lightUnclicked;
+	private Image lightNotAvailable;
+	private Image lightInsuffMana;
+	// Earth
+	private Image earthClicked;
+	private Image earthUnclicked;
+	private Image earthNotAvailable;
+	private Image earthInsuffMana;
+	// End of declerations
 }
