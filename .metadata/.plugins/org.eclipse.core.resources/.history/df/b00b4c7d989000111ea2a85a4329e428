@@ -36,7 +36,7 @@ public class ControlPanel extends JFrame {
 
 		initLabelInfo();
 
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setVisible(true);
 	}
 
@@ -147,15 +147,10 @@ public class ControlPanel extends JFrame {
 		 * Selected Enemy Information
 		 */
 		// Nothing to do
-
+		
 		/*
 		 * Available Tower Cost Information
 		 */
-		this.fireCostValueLabel.setText("0 Mana");
-		this.waterCostValueLabel.setText("0 Mana");
-		this.airCostValueLabel.setText("0 Mana");
-		this.lightCostValueLabel.setText("0 Mana");
-		this.earthCostValueLabel.setText("0 Mana");
 	}
 
 	private void initImageIcons() {
