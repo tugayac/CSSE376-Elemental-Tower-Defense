@@ -63,91 +63,89 @@ public class Frame extends JFrame implements Runnable {
 		this.setSize(new Dimension(800, 600));
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-		this.buffImg = new BufferedImage(21*this.rectSize, 15*this.rectSize, BufferedImage.TYPE_4BYTE_ABGR);
+		this.buffImg = new BufferedImage(21 * this.rectSize,
+				15 * this.rectSize, BufferedImage.TYPE_4BYTE_ABGR);
 		this.g = this.buffImg.createGraphics();
-		this.g.setClip(0,0,21*this.rectSize,15*this.rectSize);
-		
+		this.g.setClip(0, 0, 21 * this.rectSize, 15 * this.rectSize);
+
 		this.setVisible(true);
-		
+
 		this.thr.start();
 
 	}
-	
-	
-	
+
 	/**
 	 * Returns the value of the field called 'controlPanel'.
+	 * 
 	 * @return Returns the controlPanel.
 	 */
 	public ControlPanel getControlPanel() {
 		return this.controlPanel;
 	}
 
-
-
-	public void update(){
+	public void update() {
 		this.map.update();
 	}
 
 	@Override
 	public void paint(Graphics arg) {
-		
-		this.g.setClip(0,0,21*this.rectSize,15*this.rectSize);
+
+		this.g.setClip(0, 0, 21 * this.rectSize, 15 * this.rectSize);
 		this.g.setColor(Color.LIGHT_GRAY);
-		this.g.fillRect(0,0, 21*this.rectSize, 15*this.rectSize);
+		this.g.fillRect(0, 0, 21 * this.rectSize, 15 * this.rectSize);
 		this.g.setColor(Color.GREEN);
 		Point2D.Double d = new Point2D.Double(0, 7);
-		this.g.fillRect((int)d.x*this.rectSize, (int)d.y*this.rectSize,
-					this.rectSize, this.rectSize);
+		this.g.fillRect((int) d.x * this.rectSize, (int) d.y * this.rectSize,
+				this.rectSize, this.rectSize);
 		this.g.setColor(Color.BLACK);
-		this.g.drawLine(0,7*this.rectSize,this.rectSize,7*this.rectSize);
-		this.g.drawLine(0,8*this.rectSize,this.rectSize,8*this.rectSize);
-		for(Point2D.Double dir : this.map.getPath()){
-			d.x+= dir.x;
-			d.y+= dir.y;
+		this.g.drawLine(0, 7 * this.rectSize, this.rectSize, 7 * this.rectSize);
+		this.g.drawLine(0, 8 * this.rectSize, this.rectSize, 8 * this.rectSize);
+		for (Point2D.Double dir : this.map.getPath()) {
+			d.x += dir.x;
+			d.y += dir.y;
 			this.g.setColor(Color.GREEN);
-			int xLoc = (int) d.x*this.rectSize;
-			int	yLoc = (int) d.y*this.rectSize;
-			
+			int xLoc = (int) d.x * this.rectSize;
+			int yLoc = (int) d.y * this.rectSize;
+
 			this.g.fillRect(xLoc, yLoc, this.rectSize, this.rectSize);
 			this.g.setColor(Color.BLACK);
 			int index = this.map.getPath().indexOf(dir);
-			this.g.drawRect(xLoc,yLoc,this.rectSize, this.rectSize);
+			this.g.drawRect(xLoc, yLoc, this.rectSize, this.rectSize);
 			this.g.setColor(Color.GREEN);
-			if(dir.x == 1){
-				this.g.drawLine(xLoc, yLoc+1, xLoc, yLoc+this.rectSize-1);
-			}
-			else if(dir.y == 1){
-				this.g.drawLine(xLoc+1, yLoc, xLoc+this.rectSize-1, yLoc);
-			}
-			else{
-				this.g.drawLine(xLoc+1, yLoc+this.rectSize, xLoc+this.rectSize-1, yLoc+this.rectSize);
+			if (dir.x == 1) {
+				this.g.drawLine(xLoc, yLoc + 1, xLoc, yLoc + this.rectSize - 1);
+			} else if (dir.y == 1) {
+				this.g.drawLine(xLoc + 1, yLoc, xLoc + this.rectSize - 1, yLoc);
+			} else {
+				this.g.drawLine(xLoc + 1, yLoc + this.rectSize, xLoc
+						+ this.rectSize - 1, yLoc + this.rectSize);
 			}
 		}
-		d.x+=1;
-		int xLoc = (int) d.x*this.rectSize;
-		int	yLoc = (int) d.y*this.rectSize;
-		this.g.drawLine(xLoc, yLoc+1, xLoc, yLoc+this.rectSize-1);
-		
+		d.x += 1;
+		int xLoc = (int) d.x * this.rectSize;
+		int yLoc = (int) d.y * this.rectSize;
+		this.g.drawLine(xLoc, yLoc + 1, xLoc, yLoc + this.rectSize - 1);
+
 		this.g.setColor(Color.BLACK);
-		this.g.drawString(new String("FPS: "+ this.fps), 0, 15);
-		
+		this.g.drawString(new String("FPS: " + this.fps), 0, 15);
+
 		this.map.draw(this.g, this.rectSize);
 
 		arg.setColor(Color.BLACK);
-		arg.drawImage(this.buffImg,(800-21*this.rectSize)/2, (600-15*this.rectSize)/2,this.rectSize*21,this.rectSize*15,null);
-		/*for (int i = 0; i < 100; i++) {
-			this.g.drawLine(0, i * (this.getHeight() / 100), i
-					* (this.getWidth() / 100), this.getHeight());
-			this.g.drawLine(0, (100 - i) * (this.getHeight() / 100),
-					i * (this.getWidth() / 100), 0);
-			this.g.drawLine(this.getWidth(), i * (this.getHeight() / 100), (100 - i)
-					* (this.getWidth() / 100), this.getHeight());
-			this.g.drawLine(this.getWidth(), (100 - i) * (this.getHeight() / 100),
-					(100 - i) * (this.getWidth() / 100), 0);
-		}*/
+		arg.drawImage(this.buffImg, (800 - 21 * this.rectSize) / 2,
+				(600 - 15 * this.rectSize) / 2, this.rectSize * 21,
+				this.rectSize * 15, null);
+		/*
+		 * for (int i = 0; i < 100; i++) { this.g.drawLine(0, i *
+		 * (this.getHeight() / 100), i (this.getWidth() / 100),
+		 * this.getHeight()); this.g.drawLine(0, (100 - i) * (this.getHeight() /
+		 * 100), i * (this.getWidth() / 100), 0);
+		 * this.g.drawLine(this.getWidth(), i * (this.getHeight() / 100), (100 -
+		 * i) (this.getWidth() / 100), this.getHeight());
+		 * this.g.drawLine(this.getWidth(), (100 - i) * (this.getHeight() /
+		 * 100), (100 - i) * (this.getWidth() / 100), 0); }
+		 */
 
-		
 	}
 
 	public void run() {
@@ -157,7 +155,7 @@ public class Frame extends JFrame implements Runnable {
 
 		while (true) {
 			time = System.currentTimeMillis();
-			if(r.nextInt(100) == 0)
+			if (r.nextInt(100) == 0)
 				this.map.generateEnemy(1, Frame.element.AIR);
 			this.update();
 			this.repaint();

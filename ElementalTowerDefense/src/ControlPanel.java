@@ -23,25 +23,19 @@ public class ControlPanel extends JFrame {
 
 	private Player player;
 	private Map map;
-	private ArrayList<Tower> activeTowers;
+	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> activeEnemies;
 
-	public ControlPanel(Map map, Player player){
-		this(player, map, map.getTowers(), map.getEnemies());
-	}
-	
-	/**
-	 * Creates new form ControlPanel
-	 */
-	public ControlPanel(Player player, Map map, ArrayList<Tower> activeTowers,
-			ArrayList<Enemy> activeEnemies) {
+	public ControlPanel(Map map, Player player) {
 		this.player = player;
 		this.map = map;
+		this.towers = map.getTowers();
+		this.activeEnemies = map.getEnemies();
+
 		initComponents();
 
-
 		initLabelInfo();
-		
+
 		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setVisible(true);
 	}
@@ -141,14 +135,18 @@ public class ControlPanel extends JFrame {
 		this.playerHealthValueLabel.setText(Integer.toString(this.player
 				.getHealth()));
 
+		Stopwatch s = new Stopwatch(this.playerTimeValueLabel);
+		s.start();
+
 		/*
 		 * Wave Information
 		 */
+		// Nothing to do
 
 		/*
 		 * Selected Enemy Information
 		 */
-
+		// Nothing to do
 	}
 
 	private void initImageIcons() {
@@ -1382,20 +1380,6 @@ public class ControlPanel extends JFrame {
 	// Called externally to update player information
 	public void updateEnemyInfo() {
 
-	}
-
-	public static void main(String args[]) {
-		/*
-		 * Create and display the form
-		 */
-		java.awt.EventQueue.invokeLater(new Runnable() {
-
-			public void run() {
-				new ControlPanel(new Player(), new Map(),
-						new ArrayList<Tower>(), new ArrayList<Enemy>())
-						.setVisible(true);
-			}
-		});
 	}
 
 	// Button, Label, and Panel declerations

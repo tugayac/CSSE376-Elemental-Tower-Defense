@@ -1,0 +1,78 @@
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.Timer;
+
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created Apr 27, 2012.
+ */
+public class Stopwatch extends JFrame {
+
+	private JLabel displayTimeLabel;
+	private long watchStart;
+	private Timer chronometer;
+	private JButton activateTimerButton;
+
+	public static void main(String[] args) {
+		Stopwatch s = new Stopwatch();
+
+		s.setVisible(true);
+		s.setLocationRelativeTo(null);
+	}
+
+	public Stopwatch() {
+
+		super();
+		setSize(400, 150);
+		setLayout(new GridLayout(2, 1));
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle("Stop Watch");
+
+		// layout a display with a label at the top to display elapsed time
+		// and a row of buttons to control the timer
+
+		new Font("Calibri", Font.BOLD, 20);
+		new Font("Calibri", Font.PLAIN, 20);
+
+		JPanel buttonPanel = new JPanel();
+		buttonPanel.setLayout(new GridLayout(1, 3));
+
+		this.activateTimerButton = new JButton("Start");// will display resume
+		new JButton("Stop");
+		new JButton("Pause");
+
+		// the display for elapsed time
+		this.displayTimeLabel = new JLabel("Stop Watch Application");
+
+		this.chronometer = new Timer(1000, new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				int seconds = (int) (System.currentTimeMillis() - Stopwatch.this.watchStart) / 1000;
+				int days = seconds / 86400;
+				int hours = (seconds / 3600) - (days * 24);
+				int min = (seconds / 60) - (days * 1440) - (hours * 60);
+				int sec = seconds % 60;
+				String s = new String("" + hours + " hours " + min + " min "
+						+ sec + " sec");
+				Stopwatch.this.displayTimeLabel.setText(s);
+			}
+		});
+	}
+
+	public void start() {
+		this.watchStart = System.currentTimeMillis();
+		this.chronometer.start();
+	}
+
+	public void stop() {
+		this.chronometer.stop();
+	}
+}

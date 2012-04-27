@@ -5,10 +5,10 @@ import java.util.ArrayList;
 
 public abstract class Enemy {
 
-//	public enum element {
-//		FIRE, WATER, LIGHT, EARTH, AIR
-//	}
-	
+	// public enum element {
+	// FIRE, WATER, LIGHT, EARTH, AIR
+	// }
+
 	protected static int enemy_ids = 0;
 
 	protected int id;
@@ -30,39 +30,39 @@ public abstract class Enemy {
 		this.elem = elem;
 	}
 
-	public void move(ArrayList<Point2D.Double> path){
-		if(this.location.x < 0){
-			this.location.x+=speed * 0.01;
+	public void move(ArrayList<Point2D.Double> path) {
+		if (this.location.x < 0) {
+			this.location.x += speed * 0.01;
 			return;
 		}
-		
-		Point2D.Double loc = new Point2D.Double(0,7);
-		
-		for(Point2D.Double dir : path){
-			loc.x+=dir.x;
-			loc.y+=dir.y;
-			if(loc.x > this.location.x){
-				this.location.x += speed *0.01;
+
+		Point2D.Double loc = new Point2D.Double(0, 7);
+
+		for (Point2D.Double dir : path) {
+			loc.x += dir.x;
+			loc.y += dir.y;
+			if (loc.x > this.location.x) {
+				this.location.x += speed * 0.01;
 				return;
 			}
-			if(loc.x+1 > this.location.x){
-				if(loc.y > this.location.y && dir.y > 0){
+			if (loc.x + 1 > this.location.x) {
+				if (loc.y > this.location.y && dir.y > 0) {
 					this.location.y += speed * 0.01;
 					return;
 				}
-				if(loc.y < this.location.y && dir.y < 0){
+				if (loc.y < this.location.y && dir.y < 0) {
 					this.location.y -= speed * 0.01;
 					return;
 				}
 			}
-			
+
 		}
-		this.location.x += speed *0.01;
-		
-		if(this.location.x >= 21)
+		this.location.x += speed * 0.01;
+
+		if (this.location.x >= 21)
 			this.name = "FINISHED";
 	}
-	
+
 	/**
 	 * TODO Put here a description of what this method does.
 	 * 
@@ -142,9 +142,9 @@ public abstract class Enemy {
 	 */
 	public abstract void damage(int i);
 
-	
-	public void draw(Graphics2D g, int width){
+	public void draw(Graphics2D g, int width) {
 		g.setColor(Color.BLACK);
-		g.fillOval((int)(this.location.x*width), (int)(this.location.y*width), width, width);
+		g.fillOval((int) (this.location.x * width),
+				(int) (this.location.y * width), width, width);
 	}
 }

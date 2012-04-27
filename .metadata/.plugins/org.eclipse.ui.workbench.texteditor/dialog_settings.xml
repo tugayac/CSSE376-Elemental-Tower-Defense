@@ -2,9 +2,9 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
 		<item value="305" key="DIALOG_WIDTH"/>
-		<item value="231" key="DIALOG_Y_ORIGIN"/>
+		<item value="295" key="DIALOG_Y_ORIGIN"/>
 		<item value="442" key="DIALOG_HEIGHT"/>
-		<item value="817" key="DIALOG_X_ORIGIN"/>
+		<item value="716" key="DIALOG_X_ORIGIN"/>
 		<item value="1|Segoe UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Segoe UI" key="DIALOG_FONT_NAME"/>
 	</section>
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
@@ -13,26 +13,26 @@
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="java" key="selection"/>
+		<item value="chronometer" key="selection"/>
 		<list key="findhistory">
-			<item value="java"/>
-			<item value="javax"/>
-			<item value="javax.swing.LayoutStyle"/>
-			<item value="java.awt.event.ActionEvent"/>
-			<item value="java.awt.event.ActionListener()"/>
-			<item value="javax.swing.BorderFactory"/>
-			<item value="javax.swing.GroupLayout"/>
-			<item value="java.awt.Font"/>
+			<item value="theChronometer"/>
+			<item value="controlPanel"/>
+			<item value="fire"/>
+			<item value="ImageIcon"/>
+			<item value="water"/>
+			<item value="jLabel47"/>
+			<item value="jLabel46"/>
+			<item value="jLabel45"/>
 		</list>
 		<list key="replacehistory">
-			<item value="LayoutStyle"/>
-			<item value="ActionEvent"/>
-			<item value="ActionListener()"/>
-			<item value="BorderFactory"/>
-			<item value="GroupLayout"/>
-			<item value="Font"/>
-			<item value="Cursor"/>
-			<item value="Color"/>
+			<item value="chronometer"/>
+			<item value="earth"/>
+			<item value="light"/>
+			<item value="air"/>
+			<item value="water"/>
+			<item value="Image"/>
+			<item value="fire"/>
+			<item value="towerSpeedValueLabel"/>
 		</list>
 	</section>
 </section>
