@@ -147,7 +147,7 @@ public class ControlPanel extends JFrame {
 		 * Selected Enemy Information
 		 */
 		// Nothing to do
-
+		
 		/*
 		 * Available Tower Cost Information
 		 */

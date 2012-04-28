@@ -36,7 +36,7 @@ public class ControlPanel extends JFrame {
 
 		initLabelInfo();
 
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 		this.setVisible(true);
 	}
 
@@ -147,7 +147,7 @@ public class ControlPanel extends JFrame {
 		 * Selected Enemy Information
 		 */
 		// Nothing to do
-
+		
 		/*
 		 * Available Tower Cost Information
 		 */

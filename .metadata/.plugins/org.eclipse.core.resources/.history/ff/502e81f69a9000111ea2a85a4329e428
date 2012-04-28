@@ -37,6 +37,7 @@ public class ControlPanel extends JFrame {
 		initLabelInfo();
 
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setAlwaysOnTop(true);
 		this.setVisible(true);
 	}
 
