@@ -29,4 +29,8 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="ControlPanel"/>
 <fullyQualifiedTypeName name="Stopwatch"/>
+<fullyQualifiedTypeName name="ControlPanelNew"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
+<fullyQualifiedTypeName name="java.awt.GridBagConstraints"/>
+<fullyQualifiedTypeName name="java.awt.GridBagLayout"/>
 </qualifiedTypeNameHistroy>

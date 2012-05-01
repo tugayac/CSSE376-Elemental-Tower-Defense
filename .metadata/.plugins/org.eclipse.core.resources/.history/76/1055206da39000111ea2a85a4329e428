@@ -1,0 +1,218 @@
+import java.awt.Color;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.util.ArrayList;
+
+import javax.swing.*;
+
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created Apr 27, 2012.
+ */
+public class ControlPanelNew extends JFrame {
+
+	private Player player;
+	private Map map;
+	private ArrayList<Tower> towers;
+	private ArrayList<Enemy> activeEnemies;
+
+	public ControlPanelNew(Map map, Player player) {
+		this.player = player;
+		this.map = map;
+		this.towers = map.getTowers();
+		this.activeEnemies = map.getEnemies();
+
+		initComponents();
+		// initLabelInfo();
+
+		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setVisible(true);
+	}
+
+	private void initComponents() {
+		this.setLayout(new GridBagLayout());
+		GridBagConstraints c = new GridBagConstraints();
+
+		this.topLeftPanel = new JPanel();
+		this.topCenterPanel.setBorder(BorderFactory
+				.createLineBorder(Color.black));
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 0;
+		c.gridy = 0;
+		this.add(this.topLeftPanel, c);
+
+		this.topCenterPanel = new JPanel();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 1;
+		c.gridy = 0;
+		this.add(this.topCenterPanel, c);
+
+		this.topRightPanel = new JPanel();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 2;
+		c.gridy = 0;
+		this.add(this.topLeftPanel, c);
+
+		this.bottomLeftPanel = new JPanel();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridwidth = 2;
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(this.topLeftPanel, c);
+
+		this.bottomRightPanel = new JPanel();
+		c.fill = GridBagConstraints.BOTH;
+		c.gridx = 1;
+		c.gridy = 1;
+		this.add(this.topLeftPanel, c);
+
+		initTopLeftPanel();
+		initTopCenterPanel();
+		initTopRightPanel();
+		initBottomLeftPanel();
+		initBottomRightPanel();
+
+		pack();
+	}
+
+	private void initTopLeftPanel() {
+		this.playerInfoLabel = new JLabel();
+		this.playerScoreLabel = new JLabel();
+		this.playerManaLabel = new JLabel();
+		this.playerWaveLabel = new JLabel();
+		this.playerHealthLabel = new JLabel();
+		this.playerTimeLabel = new JLabel();
+		this.playerScoreValueLabel = new JLabel();
+		this.playerManaValueLabel = new JLabel();
+		this.playerWaveValueLabel = new JLabel();
+		this.playerHealthValueLabel = new JLabel();
+		this.playerTimeValueLabel = new JLabel();
+	}
+
+	private void initTopCenterPanel() {
+		this.waveInfoLabel = new JLabel();
+		this.waveLevelLabel = new JLabel();
+		this.waveNameLabel = new JLabel();
+		this.waveHealthLabel = new JLabel();
+		this.waveArmorLabel = new JLabel();
+		this.waveSpeedLabel = new JLabel();
+		this.waveLevelValueLabel = new JLabel();
+		this.waveNameValueLabel = new JLabel();
+		this.waveHealthValueLabel = new JLabel();
+		this.waveArmorValueLabel = new JLabel();
+		this.waveSpeedValueLabel = new JLabel();
+	}
+
+	private void initTopRightPanel() {
+		this.selectedEnemyLabel = new JLabel();
+		this.selectedHealthLabel = new JLabel();
+		this.selectedArmorLabel = new JLabel();
+		this.selectedSpeedLabel = new JLabel();
+		this.selectedHealthValueLabel = new JLabel();
+		this.selectedArmorValueLabel = new JLabel();
+		this.selectedSpeedValueLabel = new JLabel();
+	}
+
+	private void initBottomLeftPanel() {
+		this.availableTowersLabel = new JLabel();
+		this.fireCostLabel = new JLabel();
+		this.fireCostValueLabel = new JLabel();
+		this.waterCostLabel = new JLabel();
+		this.waterCostValueLabel = new JLabel();
+		this.airCostLabel = new JLabel();
+		this.airCostValueLabel = new JLabel();
+		this.lightCostLabel = new JLabel();
+		this.lightCostValueLabel = new JLabel();
+		this.earthCostLabel = new JLabel();
+		this.earthCostValueLabel = new JLabel();
+		this.fireButtonLabel = new JButton();
+		this.waterButtonLabel = new JButton();
+		this.airButtonLabel = new JButton();
+		this.lightButtonLabel = new JButton();
+		this.earthButtonLabel = new JButton();
+	}
+
+	private void initBottomRightPanel() {
+		this.towerUpgradeButton = new JButton();
+		this.towerSellButton = new JButton();
+		this.towerInfoLabel = new JLabel();
+		this.towerLevelLabel = new JLabel();
+		this.towerDamageLabel = new JLabel();
+		this.towerSpeedLabel = new JLabel();
+		this.towerLevelValueLabel = new JLabel();
+		this.towerDamageValueLabel = new JLabel();
+		this.towerSpeedValueLabel = new JLabel();
+	}
+
+	// Button, Label, and Panel declerations
+	private JButton towerUpgradeButton;
+	private JButton towerSellButton;
+	private JLabel playerInfoLabel;
+	private JLabel playerHealthValueLabel;
+	private JLabel playerTimeValueLabel;
+	private JLabel selectedEnemyLabel;
+	private JLabel waveLevelLabel;
+	private JLabel waveNameLabel;
+	private JLabel waveHealthLabel;
+	private JLabel waveArmorLabel;
+	private JLabel waveSpeedLabel;
+	private JLabel waveLevelValueLabel;
+	private JLabel waveNameValueLabel;
+	private JLabel playerScoreLabel;
+	private JLabel waveHealthValueLabel;
+	private JLabel waveArmorValueLabel;
+	private JLabel waveSpeedValueLabel;
+	private JLabel selectedHealthLabel;
+	private JLabel selectedArmorLabel;
+	private JLabel selectedSpeedLabel;
+	private JLabel selectedHealthValueLabel;
+	private JLabel selectedArmorValueLabel;
+	private JLabel selectedSpeedValueLabel;
+	private JLabel availableTowersLabel;
+	private JLabel playerManaLabel;
+	private JLabel fireCostLabel;
+	private JLabel fireCostValueLabel;
+	private JLabel waterCostLabel;
+	private JLabel waterCostValueLabel;
+	private JLabel waveInfoLabel;
+	private JLabel airCostLabel;
+	private JLabel airCostValueLabel;
+	private JLabel lightCostLabel;
+	private JLabel lightCostValueLabel;
+	private JLabel earthCostLabel;
+	private JLabel playerWaveLabel;
+	private JLabel earthCostValueLabel;
+	private JLabel towerInfoLabel;
+	private JLabel towerLevelLabel;
+	private JLabel towerDamageLabel;
+	private JLabel towerSpeedLabel;
+	private JLabel towerLevelValueLabel;
+	private JLabel towerDamageValueLabel;
+	private JLabel towerSpeedValueLabel;
+	private JButton fireButtonLabel;
+	private JButton waterButtonLabel;
+	private JButton airButtonLabel;
+	private JButton lightButtonLabel;
+	private JButton earthButtonLabel;
+	private JLabel playerHealthLabel;
+	private JLabel playerTimeLabel;
+	private JLabel playerScoreValueLabel;
+	private JLabel playerManaValueLabel;
+	private JLabel playerWaveValueLabel;
+	private JPanel topLeftPanel;
+	private JPanel topCenterPanel;
+	private JPanel topRightPanel;
+	private JPanel bottomLeftPanel;
+	private JPanel bottomRightPanel;
+
+	// End of declaration
+
+	public static void main(String[] args) {
+		javax.swing.SwingUtilities.invokeLater(new Runnable() {
+			public void run() {
+				new ControlPanelNew(new Map(), new Player());
+			}
+		});
+	}
+}
