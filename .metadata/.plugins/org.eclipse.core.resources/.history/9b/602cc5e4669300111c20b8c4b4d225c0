@@ -80,20 +80,20 @@ public class ControlPanelLocalizationTest {
 		assertEquals("Z\u0131rh:", strings.getString("waveArmor"));
 		assertEquals("H\u0131z:", strings.getString("waveSpeed"));
 		
-		assertEquals("Seçili Dü\u015Fman", strings.getString("selEnemyInfo"));
-		assertEquals("Can:", strings.getString("selEnemyHealth"));
-		assertEquals("Z\u0131rh:", strings.getString("selEnemyArmor"));
-		assertEquals("H\u0131z:", strings.getString("selEnemySpeed"));
+		assertEquals("Selected Enemy", strings.getString("selEnemyInfo"));
+		assertEquals("Health:", strings.getString("selEnemyHealth"));
+		assertEquals("Armor:", strings.getString("selEnemyArmor"));
+		assertEquals("Speed:", strings.getString("selEnemySpeed"));
 		
-		assertEquals("Kule Bilgileri", strings.getString("towerInfo"));
-		assertEquals("Seviye:", strings.getString("towerLevel"));
-		assertEquals("Hasar Miktar\u0131:", strings.getString("towerDamage"));
-		assertEquals("H\u0131z:", strings.getString("towerSpeed"));
-		assertEquals("Geli\u015Ftir", strings.getString("towerUpgrade"));
-		assertEquals("Sat", strings.getString("towerSell"));
+		assertEquals("Tower Information", strings.getString("towerInfo"));
+		assertEquals("Level:", strings.getString("towerLevel"));
+		assertEquals("Damage:", strings.getString("towerDamage"));
+		assertEquals("Speed:", strings.getString("towerSpeed"));
+		assertEquals("Upgrade", strings.getString("towerUpgrade"));
+		assertEquals("Sell", strings.getString("towerSell"));
 		
-		assertEquals("Seçilebilir Kuleler", strings.getString("availTowers"));
-		assertEquals("Fiyat:", strings.getString("availTowersCost"));
+		assertEquals("Available Towers", strings.getString("availTowers"));
+		assertEquals("Cost:", strings.getString("availTowersCost"));
 		assertEquals("Mana", strings.getString("availTowersLabel"));
 	}
 }

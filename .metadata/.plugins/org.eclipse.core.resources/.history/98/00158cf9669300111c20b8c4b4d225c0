@@ -92,8 +92,8 @@ public class ControlPanelLocalizationTest {
 		assertEquals("Geli\u015Ftir", strings.getString("towerUpgrade"));
 		assertEquals("Sat", strings.getString("towerSell"));
 		
-		assertEquals("Seçilebilir Kuleler", strings.getString("availTowers"));
-		assertEquals("Fiyat:", strings.getString("availTowersCost"));
+		assertEquals("Available Towers", strings.getString("availTowers"));
+		assertEquals("Cost:", strings.getString("availTowersCost"));
 		assertEquals("Mana", strings.getString("availTowersLabel"));
 	}
 }

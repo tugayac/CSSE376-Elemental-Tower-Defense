@@ -818,31 +818,6 @@ public class ControlPanel extends JFrame {
 		c.gridy = 5;
 		this.bottomRightPanel.add(this.towerSellButton, c);
 	}
-	
-	/**
-	 * Method used by the tests to check if resource bundle is initialized
-	 * correctly.
-	 * 
-	 * @return the current resource bundle
-	 */
-	public ResourceBundle getResourceBundle() {
-		return this.strings;
-	}
-
-	/**
-	 * Method used by the tests to set the language and country so that all
-	 * resource bundles can be tested.
-	 * 
-	 * @param lang
-	 *            - language to be tested.
-	 * @param country
-	 *            - country the language is used in.
-	 */
-	public void setResourceBundle(String lang, String country) {
-		this.currentLocale = new Locale(lang, country);
-		this.strings = ResourceBundle.getBundle(
-				"resources.localization.localization", this.currentLocale);
-	}
 
 	// Button, Label, and Panel declerations
 	private JButton towerUpgradeButton;

@@ -18,6 +18,7 @@ public class ControlPanelLocalizationTest {
 	@Before
 	public void setUp() throws Exception {
 		this.cp = new ControlPanel(new Map(), new Player());
+		this.cp.setResourceBundle("en", "US");
 	}
 
 	@After
@@ -27,7 +28,6 @@ public class ControlPanelLocalizationTest {
 
 	@Test
 	public void testLocalityEN() {
-		this.cp.setResourceBundle("en", "US");
 		ResourceBundle strings = this.cp.getResourceBundle();
 
 		assertEquals("Player Information", strings.getString("playerInfo"));
@@ -58,42 +58,6 @@ public class ControlPanelLocalizationTest {
 		
 		assertEquals("Available Towers", strings.getString("availTowers"));
 		assertEquals("Cost:", strings.getString("availTowersCost"));
-		assertEquals("Mana", strings.getString("availTowersLabel"));
-	}
-	
-	@Test
-	public void testLocalityTR() {
-		this.cp.setResourceBundle("tr", "TR");
-		ResourceBundle strings = this.cp.getResourceBundle();
-
-		assertEquals("Oyuncu Bilgileri", strings.getString("playerInfo"));
-		assertEquals("Puan:", strings.getString("playerScore"));
-		assertEquals("Mana:", strings.getString("playerMana"));
-		assertEquals("Dalga:", strings.getString("playerWave"));
-		assertEquals("Can:", strings.getString("playerHealth"));
-		assertEquals("Zaman:", strings.getString("playerTime"));
-		
-		assertEquals("Dü\u015Fman Dalga Bilgileri", strings.getString("waveInfo"));
-		assertEquals("Seviye:", strings.getString("waveLevel"));
-		assertEquals("Can:", strings.getString("waveHealth"));
-		assertEquals("\u0130sim:", strings.getString("waveName"));
-		assertEquals("Z\u0131rh:", strings.getString("waveArmor"));
-		assertEquals("H\u0131z:", strings.getString("waveSpeed"));
-		
-		assertEquals("Seçili Dü\u015Fman", strings.getString("selEnemyInfo"));
-		assertEquals("Can:", strings.getString("selEnemyHealth"));
-		assertEquals("Z\u0131rh:", strings.getString("selEnemyArmor"));
-		assertEquals("H\u0131z:", strings.getString("selEnemySpeed"));
-		
-		assertEquals("Kule Bilgileri", strings.getString("towerInfo"));
-		assertEquals("Seviye:", strings.getString("towerLevel"));
-		assertEquals("Hasar Miktar\u0131:", strings.getString("towerDamage"));
-		assertEquals("H\u0131z:", strings.getString("towerSpeed"));
-		assertEquals("Geli\u015Ftir", strings.getString("towerUpgrade"));
-		assertEquals("Sat", strings.getString("towerSell"));
-		
-		assertEquals("Seçilebilir Kuleler", strings.getString("availTowers"));
-		assertEquals("Fiyat:", strings.getString("availTowersCost"));
 		assertEquals("Mana", strings.getString("availTowersLabel"));
 	}
 }
