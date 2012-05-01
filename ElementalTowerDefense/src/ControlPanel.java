@@ -141,11 +141,11 @@ public class ControlPanel extends JFrame {
 		/*
 		 * Available Tower Cost Information
 		 */
-		this.fireCostValueLabel.setText("0 Mana");
-		this.waterCostValueLabel.setText("0 Mana");
-		this.airCostValueLabel.setText("0 Mana");
-		this.lightCostValueLabel.setText("0 Mana");
-		this.earthCostValueLabel.setText("0 Mana");
+		this.fireCostValueLabel.setText(Integer.toString(Tower_Fire.cost));
+		this.waterCostValueLabel.setText(Integer.toString(Tower_Water.cost));
+		this.airCostValueLabel.setText(Integer.toString(Tower_Air.cost));
+		this.lightCostValueLabel.setText(Integer.toString(Tower_Light.cost));
+		this.earthCostValueLabel.setText(Integer.toString(Tower_Earth.cost));
 	}
 
 	private void initImageIcons() {
@@ -516,6 +516,7 @@ public class ControlPanel extends JFrame {
 		this.fireButton = new JButton(new ImageIcon(this.fireUnclicked));
 		this.fireButton.setBorderPainted(false);
 		this.fireButton.setContentAreaFilled(false);
+		this.fireButton.setFocusable(false);
 		c.fill = GridBagConstraints.RELATIVE;
 		// For buttons
 		c.gridwidth = 2;
@@ -550,6 +551,7 @@ public class ControlPanel extends JFrame {
 		this.waterButton = new JButton(new ImageIcon(this.waterUnclicked));
 		this.waterButton.setBorderPainted(false);
 		this.waterButton.setContentAreaFilled(false);
+		this.waterButton.setFocusable(false);
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 2;
@@ -583,6 +585,7 @@ public class ControlPanel extends JFrame {
 		this.airButton = new JButton(new ImageIcon(this.airUnclicked));
 		this.airButton.setBorderPainted(false);
 		this.airButton.setContentAreaFilled(false);
+		this.airButton.setFocusable(false);
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 4;
@@ -616,6 +619,7 @@ public class ControlPanel extends JFrame {
 		this.lightButton = new JButton(new ImageIcon(this.lightUnclicked));
 		this.lightButton.setBorderPainted(false);
 		this.lightButton.setContentAreaFilled(false);
+		this.lightButton.setFocusable(false);
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 6;
@@ -649,6 +653,7 @@ public class ControlPanel extends JFrame {
 		this.earthButton = new JButton(new ImageIcon(this.earthUnclicked));
 		this.earthButton.setBorderPainted(false);
 		this.earthButton.setContentAreaFilled(false);
+		this.earthButton.setFocusable(false);
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 8;
@@ -832,6 +837,24 @@ public class ControlPanel extends JFrame {
 		this.bottomRightPanel.add(this.towerSellButton, c);
 	}
 
+	public void updatePlayerInfo() {
+		if (this.player.getMana() < Tower_Fire.cost) {
+			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
+		}
+		if (this.player.getMana() < Tower_Air.cost) {
+			this.airButton.setIcon(new ImageIcon(this.airInsuffMana));
+		}
+		if (this.player.getMana() < Tower_Water.cost) {
+			this.waterButton.setIcon(new ImageIcon(this.waterInsuffMana));
+		}
+		if (this.player.getMana() < Tower_Light.cost) {
+			this.lightButton.setIcon(new ImageIcon(this.lightInsuffMana));
+		}
+		if (this.player.getMana() < Tower_Earth.cost) {
+			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
+		}
+	}
+
 	/**
 	 * Method used by the tests to check if resource bundle is initialized
 	 * correctly.
@@ -954,7 +977,7 @@ public class ControlPanel extends JFrame {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new ControlPanel(new Map(), new Player(),
-						new Locale("tr", "TR"));
+						new Locale("en", "US"));
 			}
 		});
 	}

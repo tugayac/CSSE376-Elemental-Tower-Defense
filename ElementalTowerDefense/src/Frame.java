@@ -4,6 +4,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.util.Locale;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -56,7 +57,8 @@ public class Frame extends JFrame implements Runnable {
 	public Frame(int fps) {
 		this.map = new Map();
 		this.player = new Player();
-		this.controlPanel = new ControlPanel(this.map, this.player);
+		this.controlPanel = new ControlPanel(this.map, this.player, new Locale(
+				"en", "US"));
 		this.rectSize = 30;
 		this.requestedFPS = fps;
 		this.thr = new Thread(this);
@@ -85,6 +87,7 @@ public class Frame extends JFrame implements Runnable {
 
 	public void update() {
 		this.map.update();
+		this.controlPanel.updatePlayerInfo();
 	}
 
 	@Override

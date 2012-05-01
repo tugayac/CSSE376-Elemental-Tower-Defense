@@ -1,0 +1,88 @@
+import java.awt.geom.Point2D;
+
+abstract class Tower {
+
+	static int tower_ids = 0;
+	protected int id;
+	protected Object element;
+	protected Point2D.Double location;
+	protected String name;
+	protected boolean available;
+	protected float speed;
+	protected int cost;
+	protected int level;
+
+	public Tower(int id, String name, float speed, Point2D.Double loc,
+			Frame.element el, boolean avail, int cost, int level) {
+
+		this.id = id;
+		this.element = el;
+		this.location = loc;
+		this.name = name;
+		this.available = avail;
+		this.speed = speed;
+		this.cost = cost;
+		this.level = level;
+
+	}
+
+	public Bullet fireBulletTowards(Enemy e) {
+		return new Bullet(this.location, e);
+	}
+
+	public Object getElement() {
+		// TODO Auto-generated method stub
+		return element;
+	}
+
+	public Point2D getLocation() {
+		// TODO Auto-generated method stub
+		return location;
+	}
+
+	public int getID() {
+		// TODO Auto-generated method stub
+		return id;
+	}
+
+	public String getName() {
+		// TODO Auto-generated method stub
+		return name;
+	}
+
+	public boolean isAvailable() {
+		// TODO Auto-generated method stub
+		return available;
+	}
+
+	public float getSpeed() {
+		// TODO Auto-generated method stub
+		return speed;
+	}
+
+	public int getCost() {
+		// TODO Auto-generated method stub
+		return cost;
+	}
+
+	public int getLevel() {
+		// TODO Auto-generated method stub
+		return level;
+	}
+
+	public void upgrade() {
+		// TODO Auto-generated method stub
+		this.level++;
+
+	}
+
+	// public static Tower createTower(Frame.element el, Double loc) {
+	// // TODO Auto-generated method stub
+	//
+	// return new Tower(el, loc);
+	// // return new Tower(){
+	// //
+	// // };
+	// }
+
+}
