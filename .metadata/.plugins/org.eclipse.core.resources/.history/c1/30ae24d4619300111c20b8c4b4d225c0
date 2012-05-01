@@ -1,0 +1,18 @@
+playerInfo = Player Information
+playerScore = Score:
+playerMana = Mana:
+playerWave = Wave:
+playerHealth = Health:
+playerTime = Time:
+
+waveInfo = Wave Information
+waveLevel = Level:
+waveHealth = Health:
+waveName = Name:
+waveArmor = Armor:
+waveSpeed = Speed:
+
+selEnemyInfo = Selected Enemy
+selEnemyHealth = Health:
+selEnemyArmor = Armor:
+selEnemySpeed = Speed:

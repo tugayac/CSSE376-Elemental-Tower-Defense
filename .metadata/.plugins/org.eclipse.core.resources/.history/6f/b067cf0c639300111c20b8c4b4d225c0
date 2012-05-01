@@ -1,0 +1,29 @@
+playerInfo = Oyuncu Bilgileri
+playerScore = Puan:
+playerMana = Mana:
+playerWave = Dalga:
+playerHealth = Can:
+playerTime = Zaman:
+
+waveInfo = Dü\u015Fman Dalga Bilgileri
+waveLevel = Seviye:
+waveHealth = Can:
+waveName = \u0130sim:
+waveArmor = Z\u0131rh:
+waveSpeed = H\u0131z:
+
+selEnemyInfo = Selected Enemy
+selEnemyHealth = Health:
+selEnemyArmor = Armor:
+selEnemySpeed = Speed:
+
+towerInfo = Tower Information
+towerLevel = Level:
+towerDamage = Damage:
+towerSpeed = Speed:
+towerUpgrade = Upgrade
+towerSell = Sell
+
+availTowers = Available Towers
+availTowersCost = Cost:
+availTowersLabel = Mana
