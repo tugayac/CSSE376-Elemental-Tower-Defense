@@ -699,8 +699,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.fireCostValueLabel, c);
 
-		this.waterCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.waterCostLabel = new JLabel(this.strings.getString("availTowers"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -715,8 +714,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.waterCostValueLabel, c);
 
-		this.airCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.airCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -731,8 +729,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.airCostValueLabel, c);
 
-		this.lightCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.lightCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -747,8 +744,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.lightCostValueLabel, c);
 
-		this.earthCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.earthCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -770,7 +766,7 @@ public class ControlPanel extends JFrame {
 		// Global for all components
 		c.insets = new Insets(5, 10, 10, 10);
 
-		this.towerInfoLabel = new JLabel(this.strings.getString("towerInfo"));
+		this.towerInfoLabel = new JLabel("Tower Information");
 		this.towerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
@@ -778,7 +774,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.bottomRightPanel.add(this.towerInfoLabel, c);
 
-		this.towerLevelLabel = new JLabel(this.strings.getString("towerLevel"));
+		this.towerLevelLabel = new JLabel("Level:");
 		c.fill = GridBagConstraints.RELATIVE;
 		// Set once
 		c.gridwidth = 1;
@@ -792,8 +788,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.bottomRightPanel.add(this.towerLevelValueLabel, c);
 
-		this.towerDamageLabel = new JLabel(
-				this.strings.getString("towerDamage"));
+		this.towerDamageLabel = new JLabel("Damage:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -805,7 +800,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomRightPanel.add(this.towerDamageValueLabel, c);
 
-		this.towerSpeedLabel = new JLabel(this.strings.getString("towerSpeed"));
+		this.towerSpeedLabel = new JLabel("Speed:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -817,15 +812,14 @@ public class ControlPanel extends JFrame {
 		c.gridy = 3;
 		this.bottomRightPanel.add(this.towerSpeedValueLabel, c);
 
-		this.towerUpgradeButton = new JButton(
-				this.strings.getString("towerUpgrade"));
+		this.towerUpgradeButton = new JButton("Upgrade");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 4;
 		this.bottomRightPanel.add(this.towerUpgradeButton, c);
 
-		this.towerSellButton = new JButton(this.strings.getString("towerSell"));
+		this.towerSellButton = new JButton("Sell");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 5;
@@ -954,7 +948,7 @@ public class ControlPanel extends JFrame {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new ControlPanel(new Map(), new Player(),
-						new Locale("tr", "TR"));
+						new Locale("en", "US"));
 			}
 		});
 	}

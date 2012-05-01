@@ -299,8 +299,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.topLeftPanel.add(this.playerInfoLabel, c);
 
-		this.playerScoreLabel = new JLabel(
-				this.strings.getString("playerScore"));
+		this.playerScoreLabel = new JLabel(this.strings.getString("playerScore"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 1;
 		c.gridx = 0;
@@ -325,7 +324,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topLeftPanel.add(this.playerManaValueLabel, c);
 
-		this.playerWaveLabel = new JLabel(this.strings.getString("playerWave"));
+		this.playerWaveLabel = new JLabel("Wave:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -337,8 +336,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topLeftPanel.add(this.playerWaveValueLabel, c);
 
-		this.playerHealthLabel = new JLabel(
-				this.strings.getString("playerHealth"));
+		this.playerHealthLabel = new JLabel("Health:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 2;
 		c.gridy = 2;
@@ -350,7 +348,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topLeftPanel.add(this.playerHealthValueLabel, c);
 
-		this.playerTimeLabel = new JLabel(this.strings.getString("playerTime"));
+		this.playerTimeLabel = new JLabel("Time:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -369,7 +367,7 @@ public class ControlPanel extends JFrame {
 		// Global for all components
 		c.insets = new Insets(5, 10, 10, 10);
 
-		this.waveInfoLabel = new JLabel(this.strings.getString("waveInfo"));
+		this.waveInfoLabel = new JLabel("Wave Information");
 		this.waveInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 4;
@@ -377,7 +375,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.topCenterPanel.add(this.waveInfoLabel, c);
 
-		this.waveLevelLabel = new JLabel(this.strings.getString("waveLevel"));
+		this.waveLevelLabel = new JLabel("Level:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 1;
 		c.gridx = 0;
@@ -390,7 +388,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topCenterPanel.add(this.waveLevelValueLabel, c);
 
-		this.waveHealthLabel = new JLabel(this.strings.getString("waveHealth"));
+		this.waveHealthLabel = new JLabel("Health:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 2;
 		c.gridy = 1;
@@ -402,7 +400,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topCenterPanel.add(this.waveHealthValueLabel, c);
 
-		this.waveNameLabel = new JLabel(this.strings.getString("waveName"));
+		this.waveNameLabel = new JLabel("Name:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -414,7 +412,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topCenterPanel.add(this.waveNameValueLabel, c);
 
-		this.waveArmorLabel = new JLabel(this.strings.getString("waveArmor"));
+		this.waveArmorLabel = new JLabel("Armor:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 2;
 		c.gridy = 2;
@@ -426,7 +424,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topCenterPanel.add(this.waveArmorValueLabel, c);
 
-		this.waveSpeedLabel = new JLabel(this.strings.getString("waveSpeed"));
+		this.waveSpeedLabel = new JLabel("Speed:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -445,8 +443,7 @@ public class ControlPanel extends JFrame {
 		// Global for all components
 		c.insets = new Insets(5, 10, 10, 10);
 
-		this.selectedEnemyLabel = new JLabel(
-				this.strings.getString("selEnemyInfo"));
+		this.selectedEnemyLabel = new JLabel("Selected Enemy");
 		this.selectedEnemyLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
@@ -454,8 +451,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.topRightPanel.add(this.selectedEnemyLabel, c);
 
-		this.selectedHealthLabel = new JLabel(
-				this.strings.getString("selEnemyHealth"));
+		this.selectedHealthLabel = new JLabel("Health:");
 		c.fill = GridBagConstraints.RELATIVE;
 		// Set once
 		c.gridwidth = 1;
@@ -469,8 +465,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topRightPanel.add(this.selectedHealthValueLabel, c);
 
-		this.selectedArmorLabel = new JLabel(
-				this.strings.getString("selEnemyArmor"));
+		this.selectedArmorLabel = new JLabel("Armor:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -482,8 +477,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topRightPanel.add(this.selectedArmorValueLabel, c);
 
-		this.selectedSpeedLabel = new JLabel(
-				this.strings.getString("selEnemySpeed"));
+		this.selectedSpeedLabel = new JLabel("Speed:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -502,8 +496,7 @@ public class ControlPanel extends JFrame {
 		// Global for all components
 		c.insets = new Insets(0, 5, 5, 5);
 
-		this.availableTowersLabel = new JLabel(
-				this.strings.getString("availTowers"));
+		this.availableTowersLabel = new JLabel("Available Towers");
 		this.availableTowersLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		c.fill = GridBagConstraints.RELATIVE;
 		// For heading
@@ -681,8 +674,7 @@ public class ControlPanel extends JFrame {
 
 		c.insets = new Insets(0, 5, 0, 5);
 
-		this.fireCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.fireCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		// For labels
@@ -699,8 +691,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.fireCostValueLabel, c);
 
-		this.waterCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.waterCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -715,8 +706,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.waterCostValueLabel, c);
 
-		this.airCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.airCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -731,8 +721,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.airCostValueLabel, c);
 
-		this.lightCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.lightCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -747,8 +736,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.lightCostValueLabel, c);
 
-		this.earthCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.earthCostLabel = new JLabel("Cost:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -770,7 +758,7 @@ public class ControlPanel extends JFrame {
 		// Global for all components
 		c.insets = new Insets(5, 10, 10, 10);
 
-		this.towerInfoLabel = new JLabel(this.strings.getString("towerInfo"));
+		this.towerInfoLabel = new JLabel("Tower Information");
 		this.towerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
@@ -778,7 +766,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.bottomRightPanel.add(this.towerInfoLabel, c);
 
-		this.towerLevelLabel = new JLabel(this.strings.getString("towerLevel"));
+		this.towerLevelLabel = new JLabel("Level:");
 		c.fill = GridBagConstraints.RELATIVE;
 		// Set once
 		c.gridwidth = 1;
@@ -792,8 +780,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.bottomRightPanel.add(this.towerLevelValueLabel, c);
 
-		this.towerDamageLabel = new JLabel(
-				this.strings.getString("towerDamage"));
+		this.towerDamageLabel = new JLabel("Damage:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
@@ -805,7 +792,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomRightPanel.add(this.towerDamageValueLabel, c);
 
-		this.towerSpeedLabel = new JLabel(this.strings.getString("towerSpeed"));
+		this.towerSpeedLabel = new JLabel("Speed:");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 3;
@@ -817,15 +804,14 @@ public class ControlPanel extends JFrame {
 		c.gridy = 3;
 		this.bottomRightPanel.add(this.towerSpeedValueLabel, c);
 
-		this.towerUpgradeButton = new JButton(
-				this.strings.getString("towerUpgrade"));
+		this.towerUpgradeButton = new JButton("Upgrade");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 0;
 		c.gridy = 4;
 		this.bottomRightPanel.add(this.towerUpgradeButton, c);
 
-		this.towerSellButton = new JButton(this.strings.getString("towerSell"));
+		this.towerSellButton = new JButton("Sell");
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 5;
@@ -954,7 +940,7 @@ public class ControlPanel extends JFrame {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new ControlPanel(new Map(), new Player(),
-						new Locale("tr", "TR"));
+						new Locale("en", "US"));
 			}
 		});
 	}

@@ -699,8 +699,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.fireCostValueLabel, c);
 
-		this.waterCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.waterCostLabel = new JLabel(this.strings.getString("availTowers"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -715,8 +714,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.waterCostValueLabel, c);
 
-		this.airCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.airCostLabel = new JLabel(this.strings.getString("availTowers"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -731,8 +729,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.airCostValueLabel, c);
 
-		this.lightCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.lightCostLabel = new JLabel(this.strings.getString("availTowers"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
@@ -747,8 +744,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.bottomLeftPanel.add(this.lightCostValueLabel, c);
 
-		this.earthCostLabel = new JLabel(
-				this.strings.getString("availTowersCost"));
+		this.earthCostLabel = new JLabel(this.strings.getString("availTowers"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.anchor = GridBagConstraints.LINE_END;
 		c.weightx = 0.5;
