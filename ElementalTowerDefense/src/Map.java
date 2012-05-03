@@ -177,4 +177,19 @@ public class Map {
 		return this.waveNumber;
 	}
 
+	public void addEnemy(Enemy enemy) {
+		
+		activeEnemies.add(enemy);
+		
+	}
+
+	public void killEnemy(Enemy enemy, Player player) {
+			
+		if (activeEnemies.contains(enemy)){
+			player.incCurrency(enemy.getWorth());
+			activeEnemies.remove(enemy);
+		}
+		
+	}
+
 }

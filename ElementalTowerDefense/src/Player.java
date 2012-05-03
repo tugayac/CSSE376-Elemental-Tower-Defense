@@ -8,6 +8,7 @@ public class Player {
 	private int score;
 	private int mana;
 	private int health;
+	private int currency;
 
 	public Player() {
 		this.score = 0;
@@ -60,50 +61,60 @@ public class Player {
 		this.score += score;
 	}
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @param i
-	 */
-	public void setMana(int mana) {
-		if (mana < 0) {
-			this.mana = 0;
-		} else {
-			this.mana = mana;
+	// ----------------------------
+	
+//	public void setMana(int mana) {
+//		if (mana < 0) {
+//			this.mana = 0;
+//		} else {
+//			this.mana = mana;
+//		}
+//	}
+//
+//	public int getMana() {
+//		return this.mana;
+//	}
+
+//	public void decMana(int mana) {
+//		int temp = this.mana - mana;
+//		if (temp < 0) {
+//			this.mana = 0;
+//		} else {
+//			this.mana = temp;
+//		}
+//	}
+
+//	public void incMana(int mana) {
+//		this.mana += mana;
+//	}
+	
+	
+	public void setCurrency(int amount) {
+		if (amount <= 0){
+			this.currency = 0;
+		}
+		else{
+			this.currency = amount;
 		}
 	}
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
-	public int getMana() {
-		return this.mana;
-	}
-
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @param i
-	 */
-	public void decMana(int mana) {
-		int temp = this.mana - mana;
-		if (temp < 0) {
-			this.mana = 0;
-		} else {
-			this.mana = temp;
+	public boolean decCurrency(int amount) {
+		if (amount <= currency){
+			currency -= amount;
+			return true;
 		}
+		return false;
 	}
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @param i
-	 */
-	public void incMana(int mana) {
-		this.mana += mana;
+	public int getCurrency() {
+		return currency;
 	}
+
+	public void incCurrency(int amount) {
+		currency += amount;
+	}
+	
+	// -----------------------------
 
 	/**
 	 * TODO Put here a description of what this method does.

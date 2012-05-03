@@ -102,18 +102,18 @@ public class TowerTest {
 	}
 	
 	@Test
-	public void testUpgradeWorkds(){
+	public void testUpgradeWorks(){
 		assertEquals(1, FireTower.getLevel());
 		assertEquals(1, WaterTower.getLevel());
 		assertEquals(1, LightTower.getLevel());
 		assertEquals(1, EarthTower.getLevel());
 		assertEquals(1, AirTower.getLevel());
 		
-		FireTower.upgrade();
-		WaterTower.upgrade();
-		LightTower.upgrade();
-		EarthTower.upgrade();
-		AirTower.upgrade();
+		FireTower.upgrade(null);
+		WaterTower.upgrade(null);
+		LightTower.upgrade(null);
+		EarthTower.upgrade(null);
+		AirTower.upgrade(null);
 		
 		assertEquals(2, FireTower.getLevel());
 		assertEquals(2, WaterTower.getLevel());

@@ -150,6 +150,27 @@ public class Frame extends JFrame implements Runnable {
 		 */
 
 	}
+	
+	public Frame.element genEle(){
+		Random r = new Random();
+		int num = r.nextInt(5);
+		if (num == 0){
+			return Frame.element.AIR;
+		}
+		if (num == 1){
+			return Frame.element.EARTH;
+		}
+		if (num == 2){
+			return Frame.element.FIRE;
+		}
+		if (num == 3){
+			return Frame.element.WATER;
+		}
+		if (num == 4){
+			return Frame.element.LIGHT;
+		}
+		return null;
+	}
 
 	public void run() {
 		long time;
@@ -158,8 +179,10 @@ public class Frame extends JFrame implements Runnable {
 
 		while (true) {
 			time = System.currentTimeMillis();
-			if (r.nextInt(100) == 0)
-				this.map.generateEnemy(1, Frame.element.AIR);
+			if (r.nextInt(100) == 0){
+				this.map.generateEnemy(1, genEle());
+//				this.map.generateEnemy(1, Frame.element.AIR);
+			}
 			this.update();
 			this.repaint();
 			timeDiff = System.currentTimeMillis() - time;

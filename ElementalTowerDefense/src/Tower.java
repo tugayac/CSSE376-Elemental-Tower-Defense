@@ -70,9 +70,19 @@ abstract class Tower {
 		return this.level;
 	}
 
-	public void upgrade() {
+	public boolean upgrade(Player player) {
 		// TODO Auto-generated method stub
-		this.level++;
+		if (player == null){
+			this.level++;
+		}
+		
+		if (player.getCurrency() >= this.cost){
+			player.decCurrency(this.cost);
+			this.level++;
+			return true;
+		}
+		return false;
+		
 
 	}
 

@@ -49,23 +49,23 @@ public class PlayerTest {
 	}
 
 	@Test
-	public void testCanSetAndGetMana() {
-		this.player.setMana(1000);
-		assertEquals(1000, this.player.getMana());
+	public void testCanSetAndGetCurrency() {
+		this.player.setCurrency(1000);
+		assertEquals(1000, this.player.getCurrency());
 
-		this.player.setMana(-1000);
-		assertEquals(0, this.player.getMana());
+		this.player.setCurrency(-1000);
+		assertEquals(0, this.player.getCurrency());
 	}
 
 	@Test
-	public void testIncrementAndDecrementMana() {
-		this.player.setMana(1000);
-		this.player.decMana(1100);
-		assertEquals(0, this.player.getMana());
+	public void testIncrementAndDecrementCurrency() {
+		this.player.setCurrency(1000);
+		assertFalse(this.player.decCurrency(1100));
+		assertEquals(1000, this.player.getCurrency());
 
-		this.player.setMana(1000);
-		this.player.incMana(100);
-		assertEquals(1100, this.player.getMana());
+		this.player.setCurrency(1000);
+		this.player.incCurrency(100);
+		assertEquals(1100, this.player.getCurrency());
 	}
 
 	@Test

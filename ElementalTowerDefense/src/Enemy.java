@@ -1,7 +1,10 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 public abstract class Enemy {
 
@@ -16,8 +19,55 @@ public abstract class Enemy {
 	protected float speed;
 	protected int armor;
 	protected int hp;
+	protected int worth;
 	protected Point2D.Double location;
 	protected Frame.element elem;
+	
+	static protected Image earthImage;
+	static protected Image airImage;
+	static protected Image waterImage;
+	static protected Image fireImage;
+	static protected Image lightImage;
+	
+	static boolean loaded = false;
+	
+	
+	
+	public void initImages(){
+		//System.out.println("I should only be called once");
+		Image tempImage;
+		ImageIcon tempIcon;
+		
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Earth.png"));
+		tempImage = tempIcon.getImage();
+		this.earthImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Air.png"));
+		tempImage = tempIcon.getImage();
+		this.airImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Water.png"));
+		tempImage = tempIcon.getImage();
+		this.waterImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Fire.png"));
+		tempImage = tempIcon.getImage();
+		this.fireImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Dark.png"));
+		tempImage = tempIcon.getImage();
+		this.lightImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
+		
+		
+		loaded = true;
+	}
+	
+	
+//	tempIcon = new ImageIcon(getClass().getResource(
+//	"/resources/images/towers/earth_clicked.png"));
+//tempImage = tempIcon.getImage();
+//this.earthClicked = tempImage.getScaledInstance(100, 100,
+//	Image.SCALE_SMOOTH);
 
 	public Enemy(int id, String name, float speed, int armor, int hp,
 			Point2D.Double location, Frame.element elem) {
@@ -28,6 +78,11 @@ public abstract class Enemy {
 		this.hp = hp;
 		this.location = location;
 		this.elem = elem;
+		this.worth = hp * 2;
+		
+		if (!loaded){
+			initImages();
+		}
 	}
 
 	public void move(ArrayList<Point2D.Double> path) {
@@ -143,8 +198,42 @@ public abstract class Enemy {
 	public abstract void damage(int i);
 
 	public void draw(Graphics2D g, int width) {
-		g.setColor(Color.BLACK);
-		g.fillOval((int) (this.location.x * width),
-				(int) (this.location.y * width), width, width);
+		
+		if (this.elem == Frame.element.AIR){
+			g.drawImage(this.airImage, (int) (this.location.x * width), (int) (this.location.y * width),width,width, null);
+			
+			//g.setColor(Color.WHITE);
+		}
+		else if (this.elem == Frame.element.EARTH){
+			g.drawImage(this.earthImage, (int) (this.location.x * width), (int) (this.location.y * width),width,width, null);
+			
+			//g.setColor(Color.DARK_GRAY);
+		}
+		else if (this.elem == Frame.element.WATER){
+			g.drawImage(this.waterImage, (int) (this.location.x * width), (int) (this.location.y * width),width,width, null);
+			
+			//g.setColor(Color.BLUE);
+		}
+		else if (this.elem == Frame.element.FIRE){
+			g.drawImage(this.fireImage, (int) (this.location.x * width), (int) (this.location.y * width),width,width, null);
+			
+			//g.setColor(Color.RED);
+		}
+		else if (this.elem == Frame.element.LIGHT){
+			g.drawImage(this.lightImage, (int) (this.location.x * width), (int) (this.location.y * width),width,width, null);
+			
+			//g.setColor(Color.YELLOW);
+		}
+
+//		g.fillOval((int) (this.location.x * width),
+//				(int) (this.location.y * width), width, width);		
+		
 	}
+
+	public int getWorth() {
+		return worth;
+	}
+
+
+
 }
