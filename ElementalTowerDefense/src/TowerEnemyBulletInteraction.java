@@ -1,6 +1,8 @@
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 import org.junit.After;
 import org.junit.Before;
@@ -30,7 +32,7 @@ public class TowerEnemyBulletInteraction {
 		this.map = new Map();
 		this.map.addTower(this.tower);
 		this.map.generateEnemy(1, Frame.element.WATER);
-		this.enemy = this.map.getEnemies().get(0);
+		this.enemy = this.map.getEnemies().get(0); // loc = -1 7
 		
 	}
 	
@@ -51,7 +53,7 @@ public class TowerEnemyBulletInteraction {
 	 */
 	@Test
 	public void testThatTowerShootsBulletTowardsEnemy(){
-		Bullet b = this.tower.fireBulletTowards(this.enemy);
+		Bullet b = this.tower.fireBulletTowards(this.enemy, new ArrayList<Point2D.Double>());
 		
 		assertEquals(b.getVector(), normalize(new Point2D.Double(-1-1, 7-1)));
 		assertEquals(b.getLocation(), this.tower.getLocation());
@@ -65,7 +67,7 @@ public class TowerEnemyBulletInteraction {
 	@Test
 	public void testThatEnemyTakesDamage(){
 		int health = this.enemy.getHP();
-		Bullet b = this.tower.fireBulletTowards(this.enemy);
+		Bullet b = this.tower.fireBulletTowards(this.enemy, new ArrayList<Point2D.Double>());
 		this.map.addBullet(b);
 		for(int i = 0; i < 100; i++)
 			b.move();
@@ -79,7 +81,7 @@ public class TowerEnemyBulletInteraction {
 	 */
 	@Test
 	public void testThatBulletIsRemovedAfterHitsEnemy(){
-		Bullet b = this.tower.fireBulletTowards(this.enemy);
+		Bullet b = this.tower.fireBulletTowards(this.enemy, new ArrayList<Point2D.Double>());
 		this.map.addBullet(b);
 		for(int i = 0; i < 100; i++)
 			b.move();

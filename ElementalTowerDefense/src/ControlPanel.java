@@ -31,8 +31,10 @@ public class ControlPanel extends JFrame {
 	private ArrayList<Enemy> activeEnemies;
 	private Locale currentLocale;
 	private ResourceBundle strings;
+	private Frame frame;
 
-	public ControlPanel(Map map, Player player, Locale cl) {
+	public ControlPanel(Frame f, Map map, Player player, Locale cl) {
+		this.frame = f;
 		this.player = player;
 		this.map = map;
 		this.towers = map.getTowers();
@@ -526,9 +528,10 @@ public class ControlPanel extends JFrame {
 		this.fireButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() > Tower_Fire.cost) {
+				if (player.getCurrency() >= Tower_Fire.cost) {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireUnclicked));
+					frame.setElement(Frame.element.FIRE);
 				}
 				else {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
@@ -537,7 +540,7 @@ public class ControlPanel extends JFrame {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() > Tower_Fire.cost) {
+				if (player.getCurrency() >=Tower_Fire.cost) {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireClicked));
 				}
@@ -572,9 +575,10 @@ public class ControlPanel extends JFrame {
 		this.waterButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() > Tower_Water.cost) {
+				if (player.getCurrency() >= Tower_Water.cost) {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterUnclicked));
+					frame.setElement(Frame.element.WATER);
 				}
 				else {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
@@ -583,7 +587,7 @@ public class ControlPanel extends JFrame {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() > Tower_Fire.cost) {
+				if (player.getCurrency() >= Tower_Fire.cost) {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterClicked));
 				}
@@ -618,9 +622,10 @@ public class ControlPanel extends JFrame {
 		this.airButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() > Tower_Air.cost) {
+				if (player.getCurrency() >= Tower_Air.cost) {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airUnclicked));
+					frame.setElement(Frame.element.AIR);
 				}
 				else {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
@@ -629,7 +634,7 @@ public class ControlPanel extends JFrame {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() > Tower_Air.cost) {
+				if (player.getCurrency() >= Tower_Air.cost) {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airClicked));
 				}
@@ -664,9 +669,10 @@ public class ControlPanel extends JFrame {
 		this.lightButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() > Tower_Light.cost) {
+				if (player.getCurrency() >= Tower_Light.cost) {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightUnclicked));
+					frame.setElement(Frame.element.LIGHT);
 				}
 				else {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
@@ -675,7 +681,7 @@ public class ControlPanel extends JFrame {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() > Tower_Light.cost) {
+				if (player.getCurrency() >= Tower_Light.cost) {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightClicked));
 				}
@@ -710,9 +716,10 @@ public class ControlPanel extends JFrame {
 		this.earthButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() > Tower_Earth.cost) {
+				if (player.getCurrency() >= Tower_Earth.cost) {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthUnclicked));
+					frame.setElement(Frame.element.EARTH);
 				}
 				else {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
@@ -721,7 +728,7 @@ public class ControlPanel extends JFrame {
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() > Tower_Earth.cost) {
+				if (player.getCurrency() >= Tower_Earth.cost) {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthClicked));
 				}
@@ -913,6 +920,15 @@ public class ControlPanel extends JFrame {
 		if (this.player.getCurrency() < Tower_Earth.cost) {
 			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
 		}
+		
+		this.playerScoreValueLabel.setText(Integer.toString(this.player
+				.getScore()));
+		this.playerManaValueLabel.setText(Integer.toString(this.player
+				.getCurrency()));
+		this.playerWaveValueLabel.setText(Integer.toString(this.map
+				.getWaveNumber()));
+		this.playerHealthValueLabel.setText(Integer.toString(this.player
+				.getHealth()));
 	}
 
 	/**
@@ -1033,12 +1049,12 @@ public class ControlPanel extends JFrame {
 
 	// End of declerations
 
-	public static void main(String[] args) {
+	/*public static void main(String[] args) {
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
 			public void run() {
 				new ControlPanel(new Map(), new Player(),
 						new Locale("en", "US"));
 			}
 		});
-	}
+	}*/
 }

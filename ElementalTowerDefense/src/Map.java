@@ -12,6 +12,7 @@ import java.util.Random;
  */
 public class Map {
 	private int waveNumber;
+	private Player player;
 	private ArrayList<Point2D.Double> path;
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> activeEnemies;
@@ -30,6 +31,28 @@ public class Map {
 		this.towers = new ArrayList<Tower>();
 		this.activeEnemies = new ArrayList<Enemy>();
 	}
+	
+	
+
+	/**
+	 * Returns the value of the field called 'player'.
+	 * @return Returns the player.
+	 */
+	public Player getPlayer() {
+		return this.player;
+	}
+
+
+
+	/**
+	 * Sets the field called 'player' to the given value.
+	 * @param player The player to set.
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
 
 	/**
 	 * generates a random path which the enemies will walk on, it will not cross
@@ -94,6 +117,23 @@ public class Map {
 		this.towers.add(t);
 		return 0;
 	}
+	
+	public int addTower(Point2D.Double d, Frame.element e){
+		switch(e){
+		case FIRE:
+			return this.addTower(new Tower_Fire(d));
+		case WATER:
+			return this.addTower(new Tower_Water(d));
+		case LIGHT:
+			return this.addTower(new Tower_Light(d));
+		case EARTH:
+			return this.addTower(new Tower_Earth(d));
+		case AIR:
+			return this.addTower(new Tower_Air(d));
+		default:
+			return -1;
+		}
+	}
 
 	/**
 	 * Generates an enemy
@@ -155,22 +195,56 @@ public class Map {
 		}
 		this.activeEnemies.removeAll(remove);
 		
+		
 		remove = null;
-		for(Tower t : this.towers){
-			
-		}
+		Random r = new Random();
 	}
 	
-	public void draw(Graphics2D g, int width){
-		for(Bullet b : this.bullets){
-			b.move();
-		}
+	public synchronized void draw(Graphics2D g, int width){
+		
+		ArrayList<Enemy> died = new ArrayList<Enemy>();
+		
 		for(Enemy e : this.activeEnemies){
 			e.draw(g, width);
+			if(e.getHP() <= 0)
+				died.add(e);
 		}
+		
+		for(Enemy e : died){
+			this.killEnemy(e, this.player);
+		}
+		
+		Random r = new Random();
+		
 		for(Tower t : this.towers){
+			t.draw(g,width);
+			int i = r.nextInt(200);
+			if(i == 0){
+				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path));
+			}
+		}
+		
+		ArrayList<Bullet> toBeRemoved = new ArrayList<Bullet>();
+		
+		for(Bullet b : this.bullets){
+			if(b.getVector().equals(new Point2D.Double(0,0)))
+				toBeRemoved.add(b);
+			else
+				b.draw(g, width);
 			
 		}
+		
+		this.bullets.removeAll(toBeRemoved);
+		
+		
+	}
+	
+	private Enemy chooseEnemy(){
+		for(Enemy e : this.activeEnemies){
+			if(!e.targeted())
+				return e;
+		}
+		return null;
 	}
 	
 	public int getWaveNumber() {

@@ -1,4 +1,6 @@
+import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
 abstract class Tower {
 
@@ -26,8 +28,8 @@ abstract class Tower {
 
 	}
 
-	public Bullet fireBulletTowards(Enemy e) {
-		return new Bullet(this.location, e);
+	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path) {
+		return new Bullet(this.location, e, path);
 	}
 
 	public Object getElement() {
@@ -69,11 +71,16 @@ abstract class Tower {
 		// TODO Auto-generated method stub
 		return this.level;
 	}
+	
+	public void draw(Graphics2D g, int width){
+		g.fillOval((int) this.location.x*width, (int) this.location.y*width, width, width);
+	}
 
 	public boolean upgrade(Player player) {
 		// TODO Auto-generated method stub
 		if (player == null){
 			this.level++;
+			return true;
 		}
 		
 		if (player.getCurrency() >= this.cost){

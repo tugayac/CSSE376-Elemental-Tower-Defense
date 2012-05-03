@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.util.Locale;
@@ -46,6 +48,7 @@ public class Frame extends JFrame implements Runnable {
 	private Player player;
 	private ControlPanel controlPanel;
 	private int rectSize;
+	private element ele = null;
 
 	/**
 	 * creates the frame, setting it to be the size of the screen and setting
@@ -57,7 +60,9 @@ public class Frame extends JFrame implements Runnable {
 	public Frame(int fps) {
 		this.map = new Map();
 		this.player = new Player();
-		this.controlPanel = new ControlPanel(this.map, this.player, new Locale(
+		this.player.incCurrency(2000);
+		this.map.setPlayer(this.player);
+		this.controlPanel = new ControlPanel(this, this.map, this.player, new Locale(
 				"en", "US"));
 		this.rectSize = 30;
 		this.requestedFPS = fps;
@@ -70,10 +75,30 @@ public class Frame extends JFrame implements Runnable {
 		this.g = this.buffImg.createGraphics();
 		this.g.setClip(0, 0, 21 * this.rectSize, 15 * this.rectSize);
 
+		this.addMouseListener(new MouseAdapter(){
+			@Override
+			public void mousePressed(MouseEvent e){
+				if(Frame.this.ele != null){
+					int x = (e.getX()-(800 - 21 * Frame.this.rectSize) / 2)/Frame.this.rectSize;
+					int y = (e.getY()-(600 - 15 * Frame.this.rectSize) / 2)/Frame.this.rectSize;
+					Frame.this.map.addTower(new Point2D.Double(x,y), Frame.this.ele);
+					
+					Frame.this.player.decCurrency(1000);
+					Frame.this.ele = null;
+				}
+			}
+		});
+		
 		this.setVisible(true);
 
+		
+		
 		this.thr.start();
 
+	}
+	
+	public void setElement(element e){
+		this.ele = e;
 	}
 
 	/**

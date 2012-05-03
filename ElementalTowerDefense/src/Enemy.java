@@ -23,6 +23,8 @@ public abstract class Enemy {
 	protected Point2D.Double location;
 	protected Frame.element elem;
 	
+	private boolean targeted = false;
+	
 	static protected Image earthImage;
 	static protected Image airImage;
 	static protected Image waterImage;
@@ -31,7 +33,13 @@ public abstract class Enemy {
 	
 	static boolean loaded = false;
 	
+	public void target(){
+		this.targeted = true;
+	}
 	
+	public boolean targeted(){
+		return this.targeted;
+	}
 	
 	public void initImages(){
 		//System.out.println("I should only be called once");
@@ -54,7 +62,7 @@ public abstract class Enemy {
 		tempImage = tempIcon.getImage();
 		this.fireImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 		
-		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Dark.png"));
+		tempIcon = new ImageIcon(getClass().getResource("/resources/images/enemies/Enemy_Light.png"));
 		tempImage = tempIcon.getImage();
 		this.lightImage = tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 		
