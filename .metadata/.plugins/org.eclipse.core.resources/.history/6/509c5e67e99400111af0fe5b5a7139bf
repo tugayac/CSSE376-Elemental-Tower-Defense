@@ -1,0 +1,42 @@
+import java.io.IOException;
+import java.net.URL;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created May 1, 2012.
+ */
+public class AudioPlayer implements Runnable {
+
+	private Clip clip1;
+
+	public AudioPlayer() {
+		try {
+			URL url = this.getClass().getClassLoader()
+					.getResource("resources/sounds/ringout.wav");
+			AudioInputStream soundTemp = AudioSystem.getAudioInputStream(url);
+			this.clip1 = AudioSystem.getClip();
+			this.clip1.open(soundTemp);
+		} catch (UnsupportedAudioFileException exception) {
+			exception.printStackTrace();
+		} catch (IOException exception) {
+			exception.printStackTrace();
+		} catch (LineUnavailableException exception) {
+			exception.printStackTrace();
+		}
+	}
+
+	public static void main(String[] args) {
+		AudioPlayer ap = new AudioPlayer();
+	}
+
+	public void run() {
+		this.clip1.start();
+	}
+}

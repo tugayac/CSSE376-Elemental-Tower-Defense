@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <workbench progressCount="32" version="2.0">
 <workbenchAdvisor/>
-<window height="1032" maximized="true" minimized="true" width="960" x="2057" y="-11">
+<window height="1032" width="960" x="960" y="0">
 <fastViewData fastViewLocation="1024"/>
 <perspectiveBar>
 <itemSize x="160"/>
@@ -39,6 +39,7 @@
 <part id="1"/>
 <part id="2"/>
 <part id="3"/>
+<part id="4"/>
 </presentation>
 </folder>
 </info>
@@ -49,7 +50,7 @@
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Frame.java" partName="Frame.java" path="C:/Users/tugayac/CSSE376-Elemental-Tower-Defense/ElementalTowerDefense/src/Frame.java" title="Frame.java" tooltip="ElementalTowerDefense/src/Frame.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ElementalTowerDefense/src/Frame.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="1946" selectionTopPixel="1650"/>
+<editorState selectionHorizontalPixel="0" selectionLength="3" selectionOffset="812" selectionTopPixel="994"/>
 </editor>
 <editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Main.java" partName="Main.java" path="C:/Users/tugayac/CSSE376-Elemental-Tower-Defense/ElementalTowerDefense/src/Main.java" title="Main.java" tooltip="ElementalTowerDefense/src/Main.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ElementalTowerDefense/src/Main.java"/>
@@ -57,7 +58,11 @@
 </editor>
 <editor activePart="true" focus="true" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AudioPlayer.java" partName="AudioPlayer.java" path="C:/Users/tugayac/CSSE376-Elemental-Tower-Defense/ElementalTowerDefense/src/AudioPlayer.java" title="AudioPlayer.java" tooltip="ElementalTowerDefense/src/AudioPlayer.java" workbook="DefaultEditorWorkbook">
 <input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ElementalTowerDefense/src/AudioPlayer.java"/>
-<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="189" selectionTopPixel="0"/>
+<editorState selectionHorizontalPixel="0" selectionLength="0" selectionOffset="681" selectionTopPixel="279"/>
+</editor>
+<editor id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ControlPanel.java" partName="ControlPanel.java" path="C:/Users/tugayac/CSSE376-Elemental-Tower-Defense/ElementalTowerDefense/src/ControlPanel.java" title="ControlPanel.java" tooltip="ElementalTowerDefense/src/ControlPanel.java" workbook="DefaultEditorWorkbook">
+<input factoryID="org.eclipse.ui.part.FileEditorInputFactory" path="/ElementalTowerDefense/src/ControlPanel.java"/>
+<editorState selectionHorizontalPixel="0" selectionLength="23" selectionOffset="4117" selectionTopPixel="3146"/>
 </editor>
 </editors>
 <views>
@@ -70,10 +75,6 @@
 <view id="org.eclipse.jdt.ui.TypeHierarchy" partName="Hierarchy"/>
 <view id="org.eclipse.ui.views.ProblemView" partName="Problems">
 <viewState PRIMARY_SORT_FIELD="org.eclipse.ui.ide.severityAndDescriptionField" categoryGroup="org.eclipse.ui.ide.severity" markerContentGenerator="org.eclipse.ui.ide.problemsGenerator" partName="Problems">
-<expanded>
-<category IMemento.internal.id="Warnings"/>
-<category IMemento.internal.id="Errors"/>
-</expanded>
 <columnWidths org.eclipse.ui.ide.locationField="84" org.eclipse.ui.ide.markerType="124" org.eclipse.ui.ide.pathField="164" org.eclipse.ui.ide.resourceField="124" org.eclipse.ui.ide.severityAndDescriptionField="400"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.severityAndDescriptionField"/>
 <visible IMemento.internal.id="org.eclipse.ui.ide.resourceField"/>
@@ -87,9 +88,7 @@
 </view>
 <view id="org.eclipse.jdt.ui.PackageExplorer" partName="Package Explorer">
 <viewState group_libraries="1" layout="2" linkWithEditor="0" rootMode="1" workingSetName="">
-<customFilters userDefinedPatternsEnabled="false">
-<xmlDefinedFilters>
-<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
+<customFilters userDefinedPatternsEnabled="false">&#x0A;<xmlDefinedFilters>&#x0A;<child filterId="org.eclipse.jdt.ui.PackageExplorer.LibraryFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.LocalTypesFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.StaticsFilter" isEnabled="false"/>
 <child filterId="org.eclipse.jdt.ui.PackageExplorer.ClosedProjectsFilter" isEnabled="false"/>
@@ -117,17 +116,17 @@
 <view id="de.tobject.findbugs.view.buginfoview" partName="Bug Info">
 <viewState/>
 </view>
-<view id="de.tobject.findbugs.view.userannotationsview" partName="Bug Reviews">
-<viewState/>
-</view>
 <view id="org.eclipse.ui.views.ContentOutline" partName="Outline">
 <viewState/>
 </view>
 <view id="org.eclipse.jdt.ui.SourceView" partName="Declaration"/>
+<view id="de.tobject.findbugs.view.userannotationsview" partName="Bug Reviews">
+<viewState/>
+</view>
 <view id="org.eclipse.jdt.ui.JavadocView" partName="Javadoc"/>
 </views>
 <perspectives activePart="org.eclipse.jdt.ui.CompilationUnitEditor" activePerspective="org.eclipse.jdt.ui.JavaPerspective">
-<perspective editorAreaTrimState="2" editorAreaVisible="1" fixed="0" version="0.016">
+<perspective editorAreaTrimState="1" editorAreaVisible="1" fixed="0" version="0.016">
 <descriptor class="org.eclipse.jdt.internal.ui.JavaPerspectiveFactory" id="org.eclipse.jdt.ui.JavaPerspective" label="Java"/>
 <alwaysOnActionSet id="org.eclipse.ui.cheatsheets.actionSet"/>
 <alwaysOnActionSet id="org.eclipse.search.searchActionSet"/>
@@ -185,9 +184,6 @@
 <perspective_action id="org.eclipse.debug.ui.DebugPerspective"/>
 <perspective_action id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
 <hide_toolbar_item_id id="org.eclipse.ui.edit.text.toggleShowSelectedElementOnly"/>
-<view id="org.eclipse.jdt.ui.PackageExplorer"/>
-<view id="org.eclipse.jdt.ui.TypeHierarchy"/>
-<view id="org.eclipse.jdt.junit.ResultView"/>
 <fastViewBars>
 <fastViewBar fastViewLocation="131072" id="bottom" orientation="256" selectedTabId="de.tobject.findbugs.view.buginfoview" style="0">
 <fastViews>
@@ -198,27 +194,30 @@
 <view id="de.tobject.findbugs.view.buginfoview" ratio="0.3"/>
 </fastViews>
 </fastViewBar>
+<fastViewBar fastViewLocation="16384" id="left" orientation="512" selectedTabId="org.eclipse.jdt.ui.PackageExplorer" style="1">
+<fastViews>
+<view id="org.eclipse.jdt.ui.PackageExplorer" ratio="0.3"/>
+<view id="org.eclipse.jdt.ui.TypeHierarchy" ratio="0.3"/>
+<view id="org.eclipse.jdt.junit.ResultView" ratio="0.4"/>
+</fastViews>
+</fastViewBar>
 <fastViewBar fastViewLocation="131072" id="org.eclipse.ui.internal.ViewStack@1c9bdf0" orientation="512" selectedTabId="org.eclipse.ui.console.ConsoleView" style="0">
 <fastViews>
 <view id="org.eclipse.ui.views.ContentOutline" ratio="0.3"/>
-<view id="org.eclipse.ui.console.ConsoleView" ratio="0.2992465"/>
+<view id="org.eclipse.ui.console.ConsoleView" ratio="0.3943182"/>
 </fastViews>
 </fastViewBar>
 </fastViewBars>
 <layout>
 <mainWindow>
 <info folder="true" part="left">
-<folder activePageID="org.eclipse.jdt.ui.PackageExplorer" appearance="2" expanded="2">
-<page content="org.eclipse.jdt.ui.PackageExplorer" label="Package Explorer"/>
-<page content="org.eclipse.jdt.ui.TypeHierarchy" label="Hierarchy"/>
-<page content="org.eclipse.jdt.junit.ResultView" label="JUnit"/>
+<folder appearance="2" expanded="2">
+<page content="org.eclipse.jdt.ui.PackageExplorer" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.ui.TypeHierarchy" label="LabelNotFound"/>
+<page content="org.eclipse.jdt.junit.ResultView" label="LabelNotFound"/>
 <page content="org.eclipse.ui.views.ResourceNavigator" label="LabelNotFound"/>
 <page content="org.eclipse.ui.navigator.ProjectExplorer" label="LabelNotFound"/>
-<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory">
-<part id="0"/>
-<part id="1"/>
-<part id="2"/>
-</presentation>
+<presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1f41467" ratio="0.749499" ratioLeft="748" ratioRight="250" relationship="2" relative="left">
@@ -231,7 +230,7 @@
 </info>
 <info part="org.eclipse.ui.editorss" ratio="0.249499" ratioLeft="249" ratioRight="749" relationship="2" relative="left"/>
 <info folder="true" part="bottom" ratio="0.7496063" ratioLeft="476" ratioRight="159" relationship="4" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="0">
+<folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ProblemView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.JavadocView" label="LabelNotFound"/>
 <page content="org.eclipse.jdt.ui.SourceView" label="LabelNotFound"/>
@@ -257,7 +256,7 @@
 </folder>
 </info>
 <info folder="true" part="org.eclipse.ui.internal.ViewStack@1c9bdf0" ratio="0.7498497" ratioLeft="1247" ratioRight="416" relationship="2" relative="org.eclipse.ui.editorss">
-<folder appearance="2" expanded="0">
+<folder appearance="2" expanded="2">
 <page content="org.eclipse.ui.views.ContentOutline" label="LabelNotFound"/>
 <page content="org.eclipse.ui.console.ConsoleView" label="LabelNotFound"/>
 <presentation id="org.eclipse.ui.presentations.WorkbenchPresentationFactory"/>
@@ -334,170 +333,165 @@
 <workingSets/>
 <navigationHistory>
 <editors>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" path="/ElementalTowerDefense/src/resources/localization/localization_tr_TR.properties"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/ControlPanelLocalizationTest.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/ControlPanel.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.PropertiesFileEditor" path="/ElementalTowerDefense/src/resources/localization/localization_en_US.properties"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Air.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Air.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Frame.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Earth.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Fire.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Light.java"/>
-<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower_Water.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Main.java"/>
 <editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/AudioPlayer.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/ControlPanel.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Player.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Frame.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Main.java"/>
+<editor factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" path="/ElementalTowerDefense/src/Tower.java"/>
 </editors>
-<item historyLabel="ControlPanelLocalizationTest.java" index="1">
-<position info="not_deleted" x="593" y="0"/>
-</item>
-<item historyLabel="ControlPanelLocalizationTest.java" index="1">
-<position info="not_deleted" x="511" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position/>
-</item>
-<item historyLabel="localization_tr_TR.properties" index="0">
-<position info="not_deleted" x="558" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position/>
-</item>
-<item historyLabel="localization_tr_TR.properties" index="0">
-<position info="not_deleted" x="558" y="0"/>
-</item>
-<item historyLabel="ControlPanelLocalizationTest.java" index="1">
-<position info="not_deleted" x="511" y="0"/>
-</item>
-<item historyLabel="localization_tr_TR.properties" index="0">
-<position info="not_deleted" x="558" y="0"/>
-</item>
-<item historyLabel="localization_en_US.properties" index="3">
-<position info="not_deleted" x="599" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position info="not_deleted" x="3427" y="0"/>
-</item>
-<item historyLabel="Tower_Air.java" index="4">
-<position info="not_deleted" x="106" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="48" y="5"/>
-</item>
-<item historyLabel="Tower_Air.java" index="6">
-<position/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="296" y="0"/>
-</item>
-<item historyLabel="Frame.java" index="7">
-<position info="not_deleted" x="1439" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position/>
-</item>
-<item historyLabel="Tower_Air.java" index="6">
-<position/>
-</item>
-<item historyLabel="Tower_Earth.java" index="8">
-<position/>
-</item>
-<item historyLabel="Tower_Fire.java" index="9">
-<position/>
-</item>
-<item historyLabel="Tower_Light.java" index="10">
-<position/>
-</item>
-<item historyLabel="Tower_Water.java" index="11">
-<position/>
-</item>
-<item historyLabel="Tower_Light.java" index="10">
-<position/>
-</item>
-<item historyLabel="Tower_Fire.java" index="9">
-<position/>
-</item>
-<item historyLabel="Tower_Earth.java" index="8">
-<position/>
-</item>
-<item historyLabel="Tower_Air.java" index="6">
-<position/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="1475" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position info="not_deleted" x="3692" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="1475" y="0"/>
-</item>
-<item historyLabel="Tower_Air.java" index="6">
-<position info="not_deleted" x="114" y="29"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="1475" y="0"/>
-</item>
-<item historyLabel="Tower_Earth.java" index="8">
-<position info="not_deleted" x="281" y="0"/>
-</item>
-<item historyLabel="Tower_Fire.java" index="9">
-<position info="not_deleted" x="277" y="0"/>
-</item>
-<item historyLabel="Tower_Earth.java" index="8">
-<position info="not_deleted" x="281" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="1475" y="0"/>
-</item>
-<item historyLabel="Tower_Light.java" index="10">
-<position info="not_deleted" x="190" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="1475" y="0"/>
-</item>
-<item historyLabel="Tower_Water.java" index="11">
-<position info="not_deleted" x="281" y="0"/>
-</item>
-<item historyLabel="Tower.java" index="5">
-<position info="not_deleted" x="406" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position info="not_deleted" x="3692" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
-<position info="not_deleted" x="25831" y="0"/>
-</item>
-<item historyLabel="ControlPanel.java" index="2">
+<item historyLabel="ControlPanel.java" index="0">
 <position info="not_deleted" x="25949" y="0"/>
 </item>
-<item historyLabel="Frame.java" index="7">
+<item historyLabel="Frame.java" index="1">
 <position info="not_deleted" x="1946" y="0"/>
 </item>
-<item historyLabel="Main.java" index="12">
+<item historyLabel="Main.java" index="2">
 <position info="not_deleted" x="311" y="0"/>
 </item>
-<item historyLabel="ControlPanel.java" index="2">
+<item historyLabel="ControlPanel.java" index="0">
 <position info="not_deleted" x="26422" y="0"/>
 </item>
-<item historyLabel="Main.java" index="12">
+<item historyLabel="Main.java" index="2">
 <position info="not_deleted" x="279" y="0"/>
 </item>
-<item historyLabel="Frame.java" index="7">
+<item historyLabel="Frame.java" index="1">
 <position info="not_deleted" x="1946" y="0"/>
 </item>
-<item historyLabel="Main.java" index="12">
+<item historyLabel="Main.java" index="2">
 <position info="not_deleted" x="279" y="0"/>
 </item>
-<item historyLabel="ControlPanel.java" index="2">
+<item historyLabel="ControlPanel.java" index="0">
 <position info="not_deleted" x="26422" y="0"/>
 </item>
-<item historyLabel="Main.java" index="12">
+<item historyLabel="Main.java" index="2">
 <position info="not_deleted" x="279" y="0"/>
 </item>
-<item active="true" historyLabel="AudioPlayer.java" index="13">
+<item historyLabel="AudioPlayer.java" index="3">
 <position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="2931" y="0"/>
+</item>
+<item historyLabel="Player.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="Player.java" index="5">
+<position info="not_deleted" x="0" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="2931" y="0"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4147" y="17"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4147" y="17"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position info="not_deleted" x="1744" y="0"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4147" y="17"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4147" y="17"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position info="not_deleted" x="505" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4117" y="23"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4117" y="23"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="1946" y="0"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position info="not_deleted" x="1143" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4117" y="23"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="1946" y="0"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="1893" y="0"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="812" y="3"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="1501" y="0"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="812" y="3"/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position info="not_deleted" x="279" y="0"/>
+</item>
+<item historyLabel="ControlPanel.java" index="4">
+<position info="not_deleted" x="4117" y="23"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="Main.java" index="7">
+<position info="not_deleted" x="279" y="0"/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="812" y="3"/>
+</item>
+<item historyLabel="Tower.java" index="8">
+<position info="not_deleted" x="406" y="0"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position/>
+</item>
+<item historyLabel="Frame.java" index="6">
+<position info="not_deleted" x="812" y="3"/>
+</item>
+<item historyLabel="AudioPlayer.java" index="3">
+<position info="not_deleted" x="1637" y="0"/>
+</item>
+<item active="true" historyLabel="AudioPlayer.java" index="3">
+<position info="not_deleted" x="636" y="0"/>
 </item>
 </navigationHistory>
 <input factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/" type="8"/>
@@ -524,6 +518,12 @@
 </trimLayout>
 </window>
 <mruList>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Player.java" tooltip="ElementalTowerDefense/src/Player.java">
+<persistable path="/ElementalTowerDefense/src/Player.java"/>
+</file>
+<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="ControlPanel.java" tooltip="ElementalTowerDefense/src/ControlPanel.java">
+<persistable path="/ElementalTowerDefense/src/ControlPanel.java"/>
+</file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="AudioPlayer.java" tooltip="ElementalTowerDefense/src/AudioPlayer.java">
 <persistable path="/ElementalTowerDefense/src/AudioPlayer.java"/>
 </file>
@@ -562,12 +562,6 @@
 </file>
 <file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tower_Fire.java" tooltip="ElementalTowerDefense/src/Tower_Fire.java">
 <persistable path="/ElementalTowerDefense/src/Tower_Fire.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tower_Earth.java" tooltip="ElementalTowerDefense/src/Tower_Earth.java">
-<persistable path="/ElementalTowerDefense/src/Tower_Earth.java"/>
-</file>
-<file factoryID="org.eclipse.ui.part.FileEditorInputFactory" id="org.eclipse.jdt.ui.CompilationUnitEditor" name="Tower_Air.java" tooltip="ElementalTowerDefense/src/Tower_Air.java">
-<persistable path="/ElementalTowerDefense/src/Tower_Air.java"/>
 </file>
 </mruList>
 </workbench>
