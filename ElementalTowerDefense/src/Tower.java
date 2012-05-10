@@ -1,6 +1,9 @@
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
+
+import javax.swing.ImageIcon;
 
 abstract class Tower {
 
@@ -13,10 +16,22 @@ abstract class Tower {
 	protected float speed;
 	protected int cost;
 	protected int level;
+	protected Image image;
 
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 * 
+	 * @param id
+	 * @param name
+	 * @param speed
+	 * @param loc
+	 * @param el
+	 * @param avail
+	 * @param cost
+	 * @param level
+	 */
 	public Tower(int id, String name, float speed, Point2D.Double loc,
 			Frame.element el, boolean avail, int cost, int level) {
-
 		this.id = id;
 		this.element = el;
 		this.location = loc;
@@ -25,7 +40,7 @@ abstract class Tower {
 		this.speed = speed;
 		this.cost = cost;
 		this.level = level;
-
+		this.image = null;
 	}
 
 	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path) {
@@ -34,52 +49,52 @@ abstract class Tower {
 	}
 
 	public Object getElement() {
-		// TODO Auto-generated method stub
 		return this.element;
 	}
 
 	public Point2D getLocation() {
-		// TODO Auto-generated method stub
 		return this.location;
 	}
 
 	public int getID() {
-		// TODO Auto-generated method stub
 		return this.id;
 	}
 
 	public String getName() {
-		// TODO Auto-generated method stub
 		return this.name;
 	}
 
 	public boolean isAvailable() {
-		// TODO Auto-generated method stub
 		return this.available;
 	}
 
 	public float getSpeed() {
-		// TODO Auto-generated method stub
 		return this.speed;
 	}
 
 	public int getCost() {
-		// TODO Auto-generated method stub
 		return this.cost;
 	}
 
 	public int getLevel() {
-		// TODO Auto-generated method stub
 		return this.level;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param g
+	 * @param width
+	 * @param image
+	 */
 	public void draw(Graphics2D g, int width) {
-		g.fillOval((int) this.location.x * width,
-				(int) this.location.y * width, width, width);
+		g.drawImage(this.image, (int) this.location.x * width,
+				(int) this.location.y * width, width, width, null);
+		// g.fillOval((int) this.location.x * width,
+		// (int) this.location.y * width, width, width);
 	}
 
 	public boolean upgrade(Player player) {
-		// TODO Auto-generated method stub
 		if (player == null) {
 			this.level++;
 			return true;
@@ -94,6 +109,9 @@ abstract class Tower {
 
 	}
 
+	protected void setImage(ImageIcon image) {
+		this.image = image.getImage();
+	}
 	// public static Tower createTower(Frame.element el, Double loc) {
 	// // TODO Auto-generated method stub
 	//

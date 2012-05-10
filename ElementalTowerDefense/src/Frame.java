@@ -74,7 +74,7 @@ public class Frame extends JFrame implements Runnable {
 		sounds = new HashMap<String, URL>();
 		loadSounds();
 		ap = new AudioPlayer();
-		ap.playClip("music", true, -5.0f);
+		ap.playClip("music", true, -4.0f);
 
 		this.map = new Map();
 		this.player = new Player();

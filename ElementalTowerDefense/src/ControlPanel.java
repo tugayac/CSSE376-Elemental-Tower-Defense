@@ -6,7 +6,6 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -164,25 +163,25 @@ public class ControlPanel extends JFrame {
 		 * Fire button image initialization
 		 */
 		ImageIcon tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/fire_clicked.png"));
+				"/resources/images/buttonimages/fire_clicked.png"));
 		Image tempImage = tempIcon.getImage();
 		this.fireClicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/fire_unclicked.png"));
+				"/resources/images/buttonimages/fire_unclicked.png"));
 		tempImage = tempIcon.getImage();
 		this.fireUnclicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/fire_grey1.png"));
+				"/resources/images/buttonimages/fire_grey1.png"));
 		tempImage = tempIcon.getImage();
 		this.fireInsuffMana = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/fire_grey.png"));
+				"/resources/images/buttonimages/fire_grey.png"));
 		tempImage = tempIcon.getImage();
 		this.fireNotAvailable = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
@@ -191,25 +190,25 @@ public class ControlPanel extends JFrame {
 		 * Water button image initialization
 		 */
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/water_clicked.png"));
+				"/resources/images/buttonimages/water_clicked.png"));
 		tempImage = tempIcon.getImage();
 		this.waterClicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/water_unclicked.png"));
+				"/resources/images/buttonimages/water_unclicked.png"));
 		tempImage = tempIcon.getImage();
 		this.waterUnclicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/water_grey1.png"));
+				"/resources/images/buttonimages/water_grey1.png"));
 		tempImage = tempIcon.getImage();
 		this.waterInsuffMana = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/water_grey.png"));
+				"/resources/images/buttonimages/water_grey.png"));
 		tempImage = tempIcon.getImage();
 		this.waterNotAvailable = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
@@ -218,25 +217,25 @@ public class ControlPanel extends JFrame {
 		 * Air button image initialization
 		 */
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/air_clicked.png"));
+				"/resources/images/buttonimages/air_clicked.png"));
 		tempImage = tempIcon.getImage();
 		this.airClicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/air_unclicked.png"));
+				"/resources/images/buttonimages/air_unclicked.png"));
 		tempImage = tempIcon.getImage();
 		this.airUnclicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/air_grey1.png"));
+				"/resources/images/buttonimages/air_grey1.png"));
 		tempImage = tempIcon.getImage();
 		this.airInsuffMana = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/air_grey.png"));
+				"/resources/images/buttonimages/air_grey.png"));
 		tempImage = tempIcon.getImage();
 		this.airNotAvailable = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
@@ -245,25 +244,25 @@ public class ControlPanel extends JFrame {
 		 * Light button image initialization
 		 */
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/light_clicked.png"));
+				"/resources/images/buttonimages/light_clicked.png"));
 		tempImage = tempIcon.getImage();
 		this.lightClicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/light_unclicked.png"));
+				"/resources/images/buttonimages/light_unclicked.png"));
 		tempImage = tempIcon.getImage();
 		this.lightUnclicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/light_grey1.png"));
+				"/resources/images/buttonimages/light_grey1.png"));
 		tempImage = tempIcon.getImage();
 		this.lightInsuffMana = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/light_grey.png"));
+				"/resources/images/buttonimages/light_grey.png"));
 		tempImage = tempIcon.getImage();
 		this.lightNotAvailable = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
@@ -272,25 +271,25 @@ public class ControlPanel extends JFrame {
 		 * Earth button image initialization
 		 */
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/earth_clicked.png"));
+				"/resources/images/buttonimages/earth_clicked.png"));
 		tempImage = tempIcon.getImage();
 		this.earthClicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/earth_unclicked.png"));
+				"/resources/images/buttonimages/earth_unclicked.png"));
 		tempImage = tempIcon.getImage();
 		this.earthUnclicked = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/earth_grey1.png"));
+				"/resources/images/buttonimages/earth_grey1.png"));
 		tempImage = tempIcon.getImage();
 		this.earthInsuffMana = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
 
 		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/towers/earth_grey.png"));
+				"/resources/images/buttonimages/earth_grey.png"));
 		tempImage = tempIcon.getImage();
 		this.earthNotAvailable = tempImage.getScaledInstance(100, 100,
 				Image.SCALE_SMOOTH);
@@ -942,42 +941,56 @@ public class ControlPanel extends JFrame {
 	 * 
 	 */
 	public void updateButtons() {
+		int currency = this.player.getCurrency();
+
+		updateFireButtons(currency);
+		updateWaterButtons(currency);
+		updateAirButtons(currency);
+		updateLightButtons(currency);
+		updateEarthButtons(currency);
+	}
+
+	private void updateFireButtons(int currency) {
 		// Check fire tower against player currency
-		if (this.isNotClicked[0]
-				&& this.player.getCurrency() >= Tower_Fire.cost) {
+		if (this.isNotClicked[0] && currency >= Tower_Fire.cost) {
 			this.fireButton.setIcon(new ImageIcon(this.fireUnclicked));
-		} else if (this.player.getCurrency() < Tower_Fire.cost) {
+		} else if (currency < Tower_Fire.cost) {
 			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
 		}
+	}
 
+	private void updateWaterButtons(int currency) {
 		// Check water tower against player currency
-		if (this.isNotClicked[1]
-				&& this.player.getCurrency() >= Tower_Water.cost) {
+		if (this.isNotClicked[1] && currency >= Tower_Water.cost) {
 			this.waterButton.setIcon(new ImageIcon(this.waterUnclicked));
-		} else if (this.player.getCurrency() < Tower_Water.cost) {
+		} else if (currency < Tower_Water.cost) {
 			this.waterButton.setIcon(new ImageIcon(this.waterInsuffMana));
 		}
+	}
 
+	private void updateAirButtons(int currency) {
 		// Check air tower against player currency
-		if (this.isNotClicked[2] && this.player.getCurrency() >= Tower_Air.cost) {
+		if (this.isNotClicked[2] && currency >= Tower_Air.cost) {
 			this.airButton.setIcon(new ImageIcon(this.airUnclicked));
-		} else if (this.player.getCurrency() < Tower_Air.cost) {
+		} else if (currency < Tower_Air.cost) {
 			this.airButton.setIcon(new ImageIcon(this.airInsuffMana));
 		}
+	}
 
+	private void updateLightButtons(int currency) {
 		// Check light tower against player currency
-		if (this.isNotClicked[3]
-				&& this.player.getCurrency() >= Tower_Light.cost) {
+		if (this.isNotClicked[3] && currency >= Tower_Light.cost) {
 			this.lightButton.setIcon(new ImageIcon(this.lightUnclicked));
-		} else if (this.player.getCurrency() < Tower_Light.cost) {
+		} else if (currency < Tower_Light.cost) {
 			this.lightButton.setIcon(new ImageIcon(this.lightInsuffMana));
 		}
+	}
 
+	private void updateEarthButtons(int currency) {
 		// Check earth tower against player currency
-		if (this.isNotClicked[4]
-				&& this.player.getCurrency() >= Tower_Earth.cost) {
+		if (this.isNotClicked[4] && currency >= Tower_Earth.cost) {
 			this.earthButton.setIcon(new ImageIcon(this.earthUnclicked));
-		} else if (this.player.getCurrency() < Tower_Earth.cost) {
+		} else if (currency < Tower_Earth.cost) {
 			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
 		}
 	}
