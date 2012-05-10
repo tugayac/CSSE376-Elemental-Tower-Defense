@@ -27,19 +27,27 @@ public class ControlPanel extends JFrame {
 
 	private Player player;
 	private Map map;
-	private ArrayList<Tower> towers;
-	private ArrayList<Enemy> activeEnemies;
+	// private ArrayList<Tower> towers;
+	// private ArrayList<Enemy> activeEnemies;
 	private Locale currentLocale;
 	private ResourceBundle strings;
 	private Frame frame;
-	private boolean isClicked = false;
+	private boolean[] isNotClicked = { true, true, true, true, true };
 
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 * 
+	 * @param f
+	 * @param map
+	 * @param player
+	 * @param cl
+	 */
 	public ControlPanel(Frame f, Map map, Player player, Locale cl) {
 		this.frame = f;
 		this.player = player;
 		this.map = map;
-		this.towers = map.getTowers();
-		this.activeEnemies = map.getEnemies();
+		// this.towers = map.getTowers();
+		// this.activeEnemies = map.getEnemies();
 
 		initLocalization(cl);
 
@@ -533,11 +541,11 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireUnclicked));
 					ControlPanel.this.frame.setElement(Frame.element.FIRE);
-					
 				} else {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[0] = true;
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -548,6 +556,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[0] = false;
 			}
 
 			public void mouseExited(MouseEvent e) {
@@ -583,6 +592,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[1] = true;
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -593,6 +603,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[1] = false;
 			}
 
 			public void mouseExited(MouseEvent e) {
@@ -628,6 +639,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[2] = true;
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -638,6 +650,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[2] = false;
 			}
 
 			public void mouseExited(MouseEvent e) {
@@ -673,6 +686,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[3] = true;
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -683,6 +697,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[3] = false;
 			}
 
 			public void mouseExited(MouseEvent e) {
@@ -718,6 +733,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[4] = true;
 			}
 
 			public void mousePressed(MouseEvent e) {
@@ -728,6 +744,7 @@ public class ControlPanel extends JFrame {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthInsuffMana));
 				}
+				ControlPanel.this.isNotClicked[4] = false;
 			}
 
 			public void mouseExited(MouseEvent e) {
@@ -910,22 +927,6 @@ public class ControlPanel extends JFrame {
 	 * 
 	 */
 	public void updatePlayerInfo() {
-		if (this.player.getCurrency() < Tower_Fire.cost) {
-			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
-		}
-		if (this.player.getCurrency() < Tower_Air.cost) {
-			this.airButton.setIcon(new ImageIcon(this.airInsuffMana));
-		}
-		if (this.player.getCurrency() < Tower_Water.cost) {
-			this.waterButton.setIcon(new ImageIcon(this.waterInsuffMana));
-		}
-		if (this.player.getCurrency() < Tower_Light.cost) {
-			this.lightButton.setIcon(new ImageIcon(this.lightInsuffMana));
-		}
-		if (this.player.getCurrency() < Tower_Earth.cost) {
-			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
-		}
-
 		this.playerScoreValueLabel.setText(Integer.toString(this.player
 				.getScore()));
 		this.playerManaValueLabel.setText(Integer.toString(this.player
@@ -942,38 +943,41 @@ public class ControlPanel extends JFrame {
 	 */
 	public void updateButtons() {
 		// Check fire tower against player currency
-		if (this.player.getCurrency() >= Tower_Fire.cost) {
-			this.fireButton.setIcon(new ImageIcon(this.fireClicked));
+		if (this.isNotClicked[0]
+				&& this.player.getCurrency() >= Tower_Fire.cost) {
+			this.fireButton.setIcon(new ImageIcon(this.fireUnclicked));
 		} else if (this.player.getCurrency() < Tower_Fire.cost) {
 			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
 		}
 
 		// Check water tower against player currency
-		if (this.player.getCurrency() >= Tower_Water.cost) {
-			this.waterButton.setIcon(new ImageIcon(this.waterClicked));
-		} else {
+		if (this.isNotClicked[1]
+				&& this.player.getCurrency() >= Tower_Water.cost) {
+			this.waterButton.setIcon(new ImageIcon(this.waterUnclicked));
+		} else if (this.player.getCurrency() < Tower_Water.cost) {
 			this.waterButton.setIcon(new ImageIcon(this.waterInsuffMana));
-
 		}
 
 		// Check air tower against player currency
-		if (this.player.getCurrency() >= Tower_Air.cost) {
-			this.airButton.setIcon(new ImageIcon(this.airClicked));
-		} else {
+		if (this.isNotClicked[2] && this.player.getCurrency() >= Tower_Air.cost) {
+			this.airButton.setIcon(new ImageIcon(this.airUnclicked));
+		} else if (this.player.getCurrency() < Tower_Air.cost) {
 			this.airButton.setIcon(new ImageIcon(this.airInsuffMana));
 		}
 
 		// Check light tower against player currency
-		if (this.player.getCurrency() >= Tower_Light.cost) {
-			this.lightButton.setIcon(new ImageIcon(this.lightClicked));
-		} else {
+		if (this.isNotClicked[3]
+				&& this.player.getCurrency() >= Tower_Light.cost) {
+			this.lightButton.setIcon(new ImageIcon(this.lightUnclicked));
+		} else if (this.player.getCurrency() < Tower_Light.cost) {
 			this.lightButton.setIcon(new ImageIcon(this.lightInsuffMana));
 		}
 
 		// Check earth tower against player currency
-		if (this.player.getCurrency() >= Tower_Earth.cost) {
-			this.earthButton.setIcon(new ImageIcon(this.earthClicked));
-		} else {
+		if (this.isNotClicked[4]
+				&& this.player.getCurrency() >= Tower_Earth.cost) {
+			this.earthButton.setIcon(new ImageIcon(this.earthUnclicked));
+		} else if (this.player.getCurrency() < Tower_Earth.cost) {
 			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
 		}
 	}
