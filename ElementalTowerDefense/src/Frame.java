@@ -6,9 +6,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.Locale;
 import java.util.Random;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -36,6 +39,8 @@ public class Frame extends JFrame implements Runnable {
 		AIR
 	}
 
+	public static AudioPlayer ap;
+
 	private int fps;
 	private Thread thr;
 	private int frameSkips;
@@ -56,14 +61,21 @@ public class Frame extends JFrame implements Runnable {
 	 * 
 	 * @param fps
 	 *            FPS to run the paint loop
+	 * @throws InterruptedException
+	 * @throws LineUnavailableException
+	 * @throws UnsupportedAudioFileException
+	 * @throws IOException
 	 */
-	public Frame(int fps) {
+	public Frame(int fps, String[] locale) {
+		ap = new AudioPlayer();
+		ap.playClip("music", true);
+
 		this.map = new Map();
 		this.player = new Player();
 		this.player.incCurrency(2000);
 		this.map.setPlayer(this.player);
-		this.controlPanel = new ControlPanel(this, this.map, this.player, new Locale(
-				"en", "US"));
+		this.controlPanel = new ControlPanel(this, this.map, this.player,
+				new Locale(locale[0], locale[1]));
 		this.rectSize = 30;
 		this.requestedFPS = fps;
 		this.thr = new Thread(this);
@@ -75,29 +87,35 @@ public class Frame extends JFrame implements Runnable {
 		this.g = this.buffImg.createGraphics();
 		this.g.setClip(0, 0, 21 * this.rectSize, 15 * this.rectSize);
 
-		this.addMouseListener(new MouseAdapter(){
+		this.addMouseListener(new MouseAdapter() {
 			@Override
-			public void mousePressed(MouseEvent e){
-				if(Frame.this.ele != null){
-					int x = (e.getX()-(800 - 21 * Frame.this.rectSize) / 2)/Frame.this.rectSize;
-					int y = (e.getY()-(600 - 15 * Frame.this.rectSize) / 2)/Frame.this.rectSize;
-					Frame.this.map.addTower(new Point2D.Double(x,y), Frame.this.ele);
-					
+			public void mousePressed(MouseEvent e) {
+				if (Frame.this.ele != null) {
+					int x = (e.getX() - (800 - 21 * Frame.this.rectSize) / 2)
+							/ Frame.this.rectSize;
+					int y = (e.getY() - (600 - 15 * Frame.this.rectSize) / 2)
+							/ Frame.this.rectSize;
+					Frame.this.map.addTower(new Point2D.Double(x, y),
+							Frame.this.ele);
+
 					Frame.this.player.decCurrency(1000);
 					Frame.this.ele = null;
 				}
 			}
 		});
-		
+
 		this.setVisible(true);
 
-		
-		
 		this.thr.start();
 
 	}
-	
-	public void setElement(element e){
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param e
+	 */
+	public void setElement(element e) {
 		this.ele = e;
 	}
 
@@ -112,7 +130,7 @@ public class Frame extends JFrame implements Runnable {
 
 	public void update() {
 		this.map.update();
-		this.controlPanel.updatePlayerInfo();
+		this.controlPanel.update();
 	}
 
 	@Override
@@ -175,23 +193,23 @@ public class Frame extends JFrame implements Runnable {
 		 */
 
 	}
-	
-	public Frame.element genEle(){
+
+	public Frame.element genEle() {
 		Random r = new Random();
 		int num = r.nextInt(5);
-		if (num == 0){
+		if (num == 0) {
 			return Frame.element.AIR;
 		}
-		if (num == 1){
+		if (num == 1) {
 			return Frame.element.EARTH;
 		}
-		if (num == 2){
+		if (num == 2) {
 			return Frame.element.FIRE;
 		}
-		if (num == 3){
+		if (num == 3) {
 			return Frame.element.WATER;
 		}
-		if (num == 4){
+		if (num == 4) {
 			return Frame.element.LIGHT;
 		}
 		return null;
@@ -204,9 +222,9 @@ public class Frame extends JFrame implements Runnable {
 
 		while (true) {
 			time = System.currentTimeMillis();
-			if (r.nextInt(100) == 0){
+			if (r.nextInt(100) == 0) {
 				this.map.generateEnemy(1, genEle());
-//				this.map.generateEnemy(1, Frame.element.AIR);
+				// this.map.generateEnemy(1, Frame.element.AIR);
 			}
 			this.update();
 			this.repaint();

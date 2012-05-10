@@ -1,3 +1,5 @@
+import javax.swing.JOptionPane;
+
 /**
  * TODO Put here a description of what this class does.
  * 
@@ -11,6 +13,18 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Frame f = new Frame(60);
+		String[] locales = { "English (United States - en_US)",
+				"Español (Spain - es_ES)", "Türkçe (Turkey - tr_TR)" };
+		String locale = (String) JOptionPane.showInputDialog(null,
+				"Choose your Language:", "Localization", JOptionPane.OK_OPTION,
+				null, locales, locales[0]);
+
+		if (locale == null) {
+			System.exit(0);
+		} else {
+			locale = locale.split(" - ")[1].replace(")", "");
+			String[] temp = locale.split("_");
+			new Frame(60, temp);
+		}
 	}
 }

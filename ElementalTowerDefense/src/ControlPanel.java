@@ -32,6 +32,7 @@ public class ControlPanel extends JFrame {
 	private Locale currentLocale;
 	private ResourceBundle strings;
 	private Frame frame;
+	private boolean isClicked = false;
 
 	public ControlPanel(Frame f, Map map, Player player, Locale cl) {
 		this.frame = f;
@@ -528,23 +529,22 @@ public class ControlPanel extends JFrame {
 		this.fireButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Fire.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Fire.cost) {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireUnclicked));
-					frame.setElement(Frame.element.FIRE);
-				}
-				else {
+					ControlPanel.this.frame.setElement(Frame.element.FIRE);
+					
+				} else {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireInsuffMana));
 				}
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() >=Tower_Fire.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Fire.cost) {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireClicked));
-				}
-				else {
+				} else {
 					ControlPanel.this.fireButton.setIcon(new ImageIcon(
 							ControlPanel.this.fireInsuffMana));
 				}
@@ -575,23 +575,21 @@ public class ControlPanel extends JFrame {
 		this.waterButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Water.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Water.cost) {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterUnclicked));
-					frame.setElement(Frame.element.WATER);
-				}
-				else {
+					ControlPanel.this.frame.setElement(Frame.element.WATER);
+				} else {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterInsuffMana));
 				}
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Fire.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Water.cost) {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterClicked));
-				}
-				else {
+				} else {
 					ControlPanel.this.waterButton.setIcon(new ImageIcon(
 							ControlPanel.this.waterInsuffMana));
 				}
@@ -622,23 +620,21 @@ public class ControlPanel extends JFrame {
 		this.airButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Air.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Air.cost) {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airUnclicked));
-					frame.setElement(Frame.element.AIR);
-				}
-				else {
+					ControlPanel.this.frame.setElement(Frame.element.AIR);
+				} else {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airInsuffMana));
 				}
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Air.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Air.cost) {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airClicked));
-				}
-				else {
+				} else {
 					ControlPanel.this.airButton.setIcon(new ImageIcon(
 							ControlPanel.this.airInsuffMana));
 				}
@@ -669,23 +665,21 @@ public class ControlPanel extends JFrame {
 		this.lightButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Light.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Light.cost) {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightUnclicked));
-					frame.setElement(Frame.element.LIGHT);
-				}
-				else {
+					ControlPanel.this.frame.setElement(Frame.element.LIGHT);
+				} else {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightInsuffMana));
 				}
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Light.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Light.cost) {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightClicked));
-				}
-				else {
+				} else {
 					ControlPanel.this.lightButton.setIcon(new ImageIcon(
 							ControlPanel.this.lightInsuffMana));
 				}
@@ -716,23 +710,21 @@ public class ControlPanel extends JFrame {
 		this.earthButton.addMouseListener(new MouseListener() {
 
 			public void mouseReleased(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Earth.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Earth.cost) {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthUnclicked));
-					frame.setElement(Frame.element.EARTH);
-				}
-				else {
+					ControlPanel.this.frame.setElement(Frame.element.EARTH);
+				} else {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthInsuffMana));
 				}
 			}
 
 			public void mousePressed(MouseEvent e) {
-				if (player.getCurrency() >= Tower_Earth.cost) {
+				if (ControlPanel.this.player.getCurrency() >= Tower_Earth.cost) {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthClicked));
-				}
-				else {
+				} else {
 					ControlPanel.this.earthButton.setIcon(new ImageIcon(
 							ControlPanel.this.earthInsuffMana));
 				}
@@ -904,6 +896,19 @@ public class ControlPanel extends JFrame {
 		this.bottomRightPanel.add(this.towerSellButton, c);
 	}
 
+	/**
+	 * Calls all the update methods in the ControlPanel class.
+	 * 
+	 */
+	public void update() {
+		updatePlayerInfo();
+		updateButtons();
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
 	public void updatePlayerInfo() {
 		if (this.player.getCurrency() < Tower_Fire.cost) {
 			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
@@ -920,7 +925,7 @@ public class ControlPanel extends JFrame {
 		if (this.player.getCurrency() < Tower_Earth.cost) {
 			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
 		}
-		
+
 		this.playerScoreValueLabel.setText(Integer.toString(this.player
 				.getScore()));
 		this.playerManaValueLabel.setText(Integer.toString(this.player
@@ -929,6 +934,48 @@ public class ControlPanel extends JFrame {
 				.getWaveNumber()));
 		this.playerHealthValueLabel.setText(Integer.toString(this.player
 				.getHealth()));
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
+	public void updateButtons() {
+		// Check fire tower against player currency
+		if (this.player.getCurrency() >= Tower_Fire.cost) {
+			this.fireButton.setIcon(new ImageIcon(this.fireClicked));
+		} else if (this.player.getCurrency() < Tower_Fire.cost) {
+			this.fireButton.setIcon(new ImageIcon(this.fireInsuffMana));
+		}
+
+		// Check water tower against player currency
+		if (this.player.getCurrency() >= Tower_Water.cost) {
+			this.waterButton.setIcon(new ImageIcon(this.waterClicked));
+		} else {
+			this.waterButton.setIcon(new ImageIcon(this.waterInsuffMana));
+
+		}
+
+		// Check air tower against player currency
+		if (this.player.getCurrency() >= Tower_Air.cost) {
+			this.airButton.setIcon(new ImageIcon(this.airClicked));
+		} else {
+			this.airButton.setIcon(new ImageIcon(this.airInsuffMana));
+		}
+
+		// Check light tower against player currency
+		if (this.player.getCurrency() >= Tower_Light.cost) {
+			this.lightButton.setIcon(new ImageIcon(this.lightClicked));
+		} else {
+			this.lightButton.setIcon(new ImageIcon(this.lightInsuffMana));
+		}
+
+		// Check earth tower against player currency
+		if (this.player.getCurrency() >= Tower_Earth.cost) {
+			this.earthButton.setIcon(new ImageIcon(this.earthClicked));
+		} else {
+			this.earthButton.setIcon(new ImageIcon(this.earthInsuffMana));
+		}
 	}
 
 	/**
@@ -1049,12 +1096,10 @@ public class ControlPanel extends JFrame {
 
 	// End of declerations
 
-	/*public static void main(String[] args) {
-		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-			public void run() {
-				new ControlPanel(new Map(), new Player(),
-						new Locale("en", "US"));
-			}
-		});
-	}*/
+	/*
+	 * public static void main(String[] args) {
+	 * javax.swing.SwingUtilities.invokeLater(new Runnable() { public void run()
+	 * { new ControlPanel(new Map(), new Player(), new Locale("en", "US")); }
+	 * }); }
+	 */
 }

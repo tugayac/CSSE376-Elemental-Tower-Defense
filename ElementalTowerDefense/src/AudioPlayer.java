@@ -1,12 +1,9 @@
 import java.io.IOException;
-import java.net.URL;
+import java.util.HashMap;
 
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-import javax.sound.sampled.LineEvent;
-import javax.sound.sampled.LineEvent.Type;
-import javax.sound.sampled.LineListener;
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
@@ -15,52 +12,93 @@ import javax.sound.sampled.UnsupportedAudioFileException;
  * 
  * @author tugayac. Created May 1, 2012.
  */
-public class AudioPlayer implements LineListener {
+public class AudioPlayer {
 
 	private boolean done = false;
+	private HashMap<String, AudioInputStream> sounds;
 
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 * 
+	 */
 	public AudioPlayer() {
+		this.sounds = new HashMap<String, AudioInputStream>();
 
+		loadSounds();
 	}
 
-	public synchronized void update(LineEvent event) {
-		Type eventType = event.getType();
-		if (eventType == Type.STOP || eventType == Type.CLOSE) {
-			this.done = true;
-			notifyAll();
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
+	private void loadSounds() {
+		try {
+			this.sounds.put("music", AudioSystem
+					.getAudioInputStream(AudioPlayer.class
+							.getResource("/resources/sounds/pra.wav")));
+		} catch (UnsupportedAudioFileException exception) {
+			exception.printStackTrace();
+		} catch (IOException exception) {
+			exception.printStackTrace();
 		}
 	}
 
-	public synchronized void waitUntilDone() throws InterruptedException {
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @throws InterruptedException
+	 */
+	private synchronized void waitUntilDone() throws InterruptedException {
 		while (!this.done) {
 			wait();
 		}
 	}
 
-	private static void playClip(URL clipFile) throws IOException,
-			UnsupportedAudioFileException, LineUnavailableException,
-			InterruptedException {
-		AudioPlayer player = new AudioPlayer();
-		AudioInputStream audioInputStream = AudioSystem
-				.getAudioInputStream(clipFile);
-		try {
-			Clip clip = AudioSystem.getClip();
-			clip.addLineListener(player);
-			clip.open(audioInputStream);
-			try {
-				clip.start();
-				player.waitUntilDone();
-			} finally {
-				clip.close();
-			}
-		} finally {
-			audioInputStream.close();
-		}
-	}
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param name
+	 * @param loop
+	 */
+	public void playClip(final String name, final boolean loop) {
+		Thread thread = new Thread() {
 
-	public static void main(String[] args) throws IOException,
-			UnsupportedAudioFileException, LineUnavailableException,
-			InterruptedException {
-		playClip(AudioPlayer.class.getResource("/resources/sounds/ding.wav"));
+			@Override
+			public void run() {
+				AudioPlayer player = new AudioPlayer();
+
+				AudioInputStream audioInputStream = AudioPlayer.this.sounds
+						.get(name);
+				try {
+					Clip clip = AudioSystem.getClip();
+					clip.open(audioInputStream);
+					try {
+						clip.start();
+						if (loop) {
+							clip.loop(Clip.LOOP_CONTINUOUSLY);
+						} else {
+							// Do Nothing
+						}
+						player.waitUntilDone();
+					} catch (InterruptedException exception) {
+						exception.printStackTrace();
+					} finally {
+						clip.close();
+					}
+				} catch (LineUnavailableException exception) {
+					exception.printStackTrace();
+				} catch (IOException exception) {
+					exception.printStackTrace();
+				} finally {
+					try {
+						audioInputStream.close();
+					} catch (IOException exception) {
+						exception.printStackTrace();
+					}
+				}
+			}
+		};
+
+		thread.start();
 	}
 }
