@@ -23,7 +23,7 @@ public class Map {
 	 * 
 	 */
 
-	public Map(){
+	public Map() {
 		this.bullets = new ArrayList<Bullet>();
 		this.waveNumber = 0;
 		this.path = new ArrayList<Point2D.Double>();
@@ -31,28 +31,25 @@ public class Map {
 		this.towers = new ArrayList<Tower>();
 		this.activeEnemies = new ArrayList<Enemy>();
 	}
-	
-	
 
 	/**
 	 * Returns the value of the field called 'player'.
+	 * 
 	 * @return Returns the player.
 	 */
 	public Player getPlayer() {
 		return this.player;
 	}
 
-
-
 	/**
 	 * Sets the field called 'player' to the given value.
-	 * @param player The player to set.
+	 * 
+	 * @param player
+	 *            The player to set.
 	 */
 	public void setPlayer(Player player) {
 		this.player = player;
 	}
-
-
 
 	/**
 	 * generates a random path which the enemies will walk on, it will not cross
@@ -62,26 +59,29 @@ public class Map {
 	 */
 	public ArrayList<Point2D.Double> generatePath() {
 		Random r = new Random();
-		Point2D.Double loc = new Point2D.Double(1,0);
+		Point2D.Double loc = new Point2D.Double(1, 0);
 		this.path.clear();
 		this.path.add(new Point2D.Double(1, 0));
-		while(loc.x < 20){
-			switch(r.nextInt(3)){
-				case 0: this.path.add(new Point2D.Double(1,0));
-						loc.x+=1;
-						break;
-				case 1: if(this.path.get(this.path.size()-1).y != -1)
-							if(loc.y < 7){
-								this.path.add(new Point2D.Double(0,1));
-								loc.y+=1;
-							}
-						break;
-				case 2: if(this.path.get(this.path.size()-1).y != 1)
-							if(loc.y > -7){
-								this.path.add(new Point2D.Double(0,-1));
-								loc.y-=1;
-							}
-						break;
+		while (loc.x < 20) {
+			switch (r.nextInt(3)) {
+			case 0:
+				this.path.add(new Point2D.Double(1, 0));
+				loc.x += 1;
+				break;
+			case 1:
+				if (this.path.get(this.path.size() - 1).y != -1)
+					if (loc.y < 7) {
+						this.path.add(new Point2D.Double(0, 1));
+						loc.y += 1;
+					}
+				break;
+			case 2:
+				if (this.path.get(this.path.size() - 1).y != 1)
+					if (loc.y > -7) {
+						this.path.add(new Point2D.Double(0, -1));
+						loc.y -= 1;
+					}
+				break;
 			}
 
 		}
@@ -89,21 +89,20 @@ public class Map {
 		return new ArrayList<Point2D.Double>(this.path);
 	}
 
-
-	
 	/**
 	 * Returns the value of the field called 'path'.
+	 * 
 	 * @return Returns the path.
 	 */
 	public ArrayList<Point2D.Double> getPath() {
 		return this.path;
 	}
 
-	public void addBullet(Bullet b){
+	public void addBullet(Bullet b) {
 		this.bullets.add(b);
 	}
 
-/**
+	/**
 	 * Adds a tower to the field if another tower does not occupy that locaiton
 	 * 
 	 * @param t
@@ -117,9 +116,9 @@ public class Map {
 		this.towers.add(t);
 		return 0;
 	}
-	
-	public int addTower(Point2D.Double d, Frame.element e){
-		switch(e){
+
+	public int addTower(Point2D.Double d, Frame.element e) {
+		switch (e) {
 		case FIRE:
 			return this.addTower(new Tower_Fire(d));
 		case WATER:
@@ -146,19 +145,19 @@ public class Map {
 	public void generateEnemy(int i, Frame.element elem) {
 		switch (elem) {
 		case FIRE:
-			this.activeEnemies.add(new Enemy_Fire(new Point2D.Double(-1,7)));
+			this.activeEnemies.add(new Enemy_Fire(new Point2D.Double(-1, 7)));
 			break;
 		case WATER:
-			this.activeEnemies.add(new Enemy_Water(new Point2D.Double(-1,7)));
+			this.activeEnemies.add(new Enemy_Water(new Point2D.Double(-1, 7)));
 			break;
 		case LIGHT:
-			this.activeEnemies.add(new Enemy_Light(new Point2D.Double(-1,7)));
+			this.activeEnemies.add(new Enemy_Light(new Point2D.Double(-1, 7)));
 			break;
 		case EARTH:
-			this.activeEnemies.add(new Enemy_Earth(new Point2D.Double(-1,7)));
+			this.activeEnemies.add(new Enemy_Earth(new Point2D.Double(-1, 7)));
 			break;
 		case AIR:
-			this.activeEnemies.add(new Enemy_Air(new Point2D.Double(-1,7)));
+			this.activeEnemies.add(new Enemy_Air(new Point2D.Double(-1, 7)));
 			break;
 		default:
 			break;
@@ -182,88 +181,85 @@ public class Map {
 	public ArrayList<Enemy> getEnemies() {
 		return this.activeEnemies;
 	}
-	
-	public void update(){
-		for(Bullet b : this.bullets){
+
+	public void update() {
+		for (Bullet b : this.bullets) {
 			b.move();
 		}
 		ArrayList<Enemy> remove = new ArrayList<Enemy>();
-		for(Enemy e : this.activeEnemies){
+		for (Enemy e : this.activeEnemies) {
 			e.move(this.path);
-			if(e.getName().equals("FINISHED"))
+			if (e.getName().equals("FINISHED"))
 				remove.add(e);
 		}
 		this.activeEnemies.removeAll(remove);
-		
-		
+
 		remove = null;
 		Random r = new Random();
 	}
-	
-	public synchronized void draw(Graphics2D g, int width){
-		
+
+	public synchronized void draw(Graphics2D g, int width) {
+
 		ArrayList<Enemy> died = new ArrayList<Enemy>();
-		
-		for(Enemy e : this.activeEnemies){
+
+		for (Enemy e : this.activeEnemies) {
 			e.draw(g, width);
-			if(e.getHP() <= 0)
+			if (e.getHP() <= 0)
 				died.add(e);
 		}
-		
-		for(Enemy e : died){
+
+		for (Enemy e : died) {
 			this.killEnemy(e, this.player);
 		}
-		
+
 		Random r = new Random();
-		
-		for(Tower t : this.towers){
-			t.draw(g,width);
+
+		for (Tower t : this.towers) {
+			t.draw(g, width);
 			int i = r.nextInt(200);
-			if(i == 0){
+			if (i == 0) {
 				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path));
 			}
 		}
-		
+
 		ArrayList<Bullet> toBeRemoved = new ArrayList<Bullet>();
-		
-		for(Bullet b : this.bullets){
-			if(b.getVector().equals(new Point2D.Double(0,0)))
+
+		for (Bullet b : this.bullets) {
+			if (b.getVector().equals(new Point2D.Double(0, 0)))
 				toBeRemoved.add(b);
 			else
 				b.draw(g, width);
-			
+
 		}
-		
+
 		this.bullets.removeAll(toBeRemoved);
-		
-		
+
 	}
-	
-	private Enemy chooseEnemy(){
-		for(Enemy e : this.activeEnemies){
-			if(!e.targeted())
+
+	private Enemy chooseEnemy() {
+		for (Enemy e : this.activeEnemies) {
+			if (!e.targeted())
 				return e;
 		}
 		return null;
 	}
-	
+
 	public int getWaveNumber() {
 		return this.waveNumber;
 	}
 
 	public void addEnemy(Enemy enemy) {
-		
 		activeEnemies.add(enemy);
-		
+
 	}
 
 	public void killEnemy(Enemy enemy, Player player) {
-			
-		if (activeEnemies.contains(enemy)){
+		if (activeEnemies.contains(enemy)) {
+			Frame.ap.playClip("die", false, 0.0f);
 			player.incCurrency(enemy.getWorth());
 			activeEnemies.remove(enemy);
 		}
-		
+
 	}
 
 }

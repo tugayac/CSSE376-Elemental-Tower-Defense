@@ -29,6 +29,7 @@ abstract class Tower {
 	}
 
 	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path) {
+		Frame.ap.playClip("fire", false, 0.0f);
 		return new Bullet(this.location, e, path);
 	}
 
@@ -71,25 +72,25 @@ abstract class Tower {
 		// TODO Auto-generated method stub
 		return this.level;
 	}
-	
-	public void draw(Graphics2D g, int width){
-		g.fillOval((int) this.location.x*width, (int) this.location.y*width, width, width);
+
+	public void draw(Graphics2D g, int width) {
+		g.fillOval((int) this.location.x * width,
+				(int) this.location.y * width, width, width);
 	}
 
 	public boolean upgrade(Player player) {
 		// TODO Auto-generated method stub
-		if (player == null){
+		if (player == null) {
 			this.level++;
 			return true;
 		}
-		
-		if (player.getCurrency() >= this.cost){
+
+		if (player.getCurrency() >= this.cost) {
 			player.decCurrency(this.cost);
 			this.level++;
 			return true;
 		}
 		return false;
-		
 
 	}
 

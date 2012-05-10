@@ -7,6 +7,8 @@ import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.net.URL;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Random;
 
@@ -39,6 +41,7 @@ public class Frame extends JFrame implements Runnable {
 		AIR
 	}
 
+	public static HashMap<String, URL> sounds;
 	public static AudioPlayer ap;
 
 	private int fps;
@@ -61,14 +64,17 @@ public class Frame extends JFrame implements Runnable {
 	 * 
 	 * @param fps
 	 *            FPS to run the paint loop
+	 * @param locale
 	 * @throws InterruptedException
 	 * @throws LineUnavailableException
 	 * @throws UnsupportedAudioFileException
 	 * @throws IOException
 	 */
 	public Frame(int fps, String[] locale) {
+		sounds = new HashMap<String, URL>();
+		loadSounds();
 		ap = new AudioPlayer();
-		ap.playClip("music", true);
+		ap.playClip("music", true, -25.0f);
 
 		this.map = new Map();
 		this.player = new Player();
@@ -108,6 +114,15 @@ public class Frame extends JFrame implements Runnable {
 
 		this.thr.start();
 
+	}
+
+	private void loadSounds() {
+		sounds.put("music",
+				AudioPlayer.class.getResource("/resources/sounds/pra.wav"));
+		sounds.put("die", AudioPlayer.class
+				.getResource("/resources/sounds/explosion.wav"));
+		sounds.put("fire", AudioPlayer.class
+				.getResource("/resources/sounds/single_fire.wav"));
 	}
 
 	/**

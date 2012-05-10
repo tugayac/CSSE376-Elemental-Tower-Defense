@@ -98,7 +98,7 @@ public abstract class Enemy {
 
 	public void move(ArrayList<Point2D.Double> path) {
 		if (this.location.x < 0) {
-			this.location.x += speed * 0.01;
+			this.location.x += this.speed * 0.01;
 			return;
 		}
 
@@ -108,22 +108,22 @@ public abstract class Enemy {
 			loc.x += dir.x;
 			loc.y += dir.y;
 			if (loc.x > this.location.x) {
-				this.location.x += speed * 0.01;
+				this.location.x += this.speed * 0.01;
 				return;
 			}
 			if (loc.x + 1 > this.location.x) {
 				if (loc.y > this.location.y && dir.y > 0) {
-					this.location.y += speed * 0.01;
+					this.location.y += this.speed * 0.01;
 					return;
 				}
 				if (loc.y < this.location.y && dir.y < 0) {
-					this.location.y -= speed * 0.01;
+					this.location.y -= this.speed * 0.01;
 					return;
 				}
 			}
 
 		}
-		this.location.x += speed * 0.01;
+		this.location.x += this.speed * 0.01;
 
 		if (this.location.x >= 21)
 			this.name = "FINISHED";
@@ -243,7 +243,7 @@ public abstract class Enemy {
 	}
 
 	public int getWorth() {
-		return worth;
+		return this.worth;
 	}
 
 }
