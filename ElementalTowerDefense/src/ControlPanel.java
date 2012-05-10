@@ -136,7 +136,7 @@ public class ControlPanel extends JFrame {
 		this.playerHealthValueLabel.setText(Integer.toString(this.player
 				.getHealth()));
 
-		Stopwatch s = new Stopwatch(this.playerTimeValueLabel);
+		Stopwatch s = new Stopwatch(this.playerTimeValueLabel, this.strings);
 		s.start();
 
 		/*

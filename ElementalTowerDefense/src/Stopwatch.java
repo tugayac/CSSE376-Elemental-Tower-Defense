@@ -1,5 +1,6 @@
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.Timer;
@@ -15,8 +16,10 @@ public class Stopwatch {
 	private long watchStart;
 	private Timer chronometer;
 
-	public Stopwatch(JLabel updateLabel) {
+	public Stopwatch(JLabel updateLabel, ResourceBundle strings) {
 		this.updateLabel = updateLabel;
+		final String[] labels = { strings.getString("timeHours"),
+				strings.getString("timeMins"), strings.getString("timeSecs") };
 
 		this.chronometer = new Timer(1000, new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -26,8 +29,9 @@ public class Stopwatch {
 				int min = (seconds / 60) - (days * 1440) - (hours * 60);
 				int sec = seconds % 60;
 				System.out.flush();
-				Stopwatch.this.updateLabel.setText(new String("" + hours
-						+ " hours " + min + " min " + sec + " sec"));
+				Stopwatch.this.updateLabel.setText(new String("" + hours + " "
+						+ labels[0] + " " + min + " " + labels[1] + " " + sec
+						+ " " + labels[2] + " "));
 			}
 		});
 	}
