@@ -1,5 +1,4 @@
 import java.awt.geom.Point2D;
-import java.util.Random;
 
 /**
  * TODO Put here a description of what this class does.
@@ -9,7 +8,8 @@ import java.util.Random;
 public class EnemyWater extends Enemy {
 
 	public EnemyWater(Point2D.Double location) {
-		super(Enemy.enemy_ids++, "Magikarp", 2.0f, 1, 100, location, Frame.element.WATER);
+		super(Enemy.enemy_ids++, "Magikarp", 2.0f, 1, 100, location,
+				Frame.element.WATER, 60);
 	}
 
 	@Override

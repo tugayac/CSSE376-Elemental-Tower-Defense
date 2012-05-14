@@ -6,14 +6,13 @@
 public class Player {
 
 	private int score;
-	private int mana;
 	private int health;
 	private int currency;
 
-	public Player() {
+	public Player(int mana, int health) {
 		this.score = 0;
-		this.mana = 0;
-		this.health = 0;
+		this.health = health;
+		this.currency = mana;
 	}
 
 	/**
@@ -61,59 +60,30 @@ public class Player {
 		this.score += score;
 	}
 
-	// ----------------------------
-	
-//	public void setMana(int mana) {
-//		if (mana < 0) {
-//			this.mana = 0;
-//		} else {
-//			this.mana = mana;
-//		}
-//	}
-//
-//	public int getMana() {
-//		return this.mana;
-//	}
-
-//	public void decMana(int mana) {
-//		int temp = this.mana - mana;
-//		if (temp < 0) {
-//			this.mana = 0;
-//		} else {
-//			this.mana = temp;
-//		}
-//	}
-
-//	public void incMana(int mana) {
-//		this.mana += mana;
-//	}
-	
-	
 	public void setCurrency(int amount) {
-		if (amount <= 0){
+		if (amount <= 0) {
 			this.currency = 0;
-		}
-		else{
+		} else {
 			this.currency = amount;
 		}
 	}
 
 	public boolean decCurrency(int amount) {
-		if (amount <= currency){
-			currency -= amount;
+		if (amount <= this.currency) {
+			this.currency -= amount;
 			return true;
 		}
 		return false;
 	}
 
 	public int getCurrency() {
-		return currency;
+		return this.currency;
 	}
 
 	public void incCurrency(int amount) {
-		currency += amount;
+		this.currency += amount;
 	}
-	
+
 	// -----------------------------
 
 	/**

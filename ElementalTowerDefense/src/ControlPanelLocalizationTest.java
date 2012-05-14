@@ -20,7 +20,7 @@ public class ControlPanelLocalizationTest {
 	public void setUp() throws Exception {
 		String[] temp = { "en", "US" };
 		this.cp = new ControlPanel(new Frame(60, temp), new Map(),
-				new Player(), new Locale("en", "US"));
+				new Player(0, 0), new Locale("en", "US"));
 	}
 
 	@After

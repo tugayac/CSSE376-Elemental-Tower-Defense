@@ -26,8 +26,6 @@ public class ControlPanel extends JFrame {
 
 	private Player player;
 	private Map map;
-	// private ArrayList<Tower> towers;
-	// private ArrayList<Enemy> activeEnemies;
 	private Locale currentLocale;
 	private ResourceBundle strings;
 	private Frame frame;
@@ -45,14 +43,13 @@ public class ControlPanel extends JFrame {
 		this.frame = f;
 		this.player = player;
 		this.map = map;
-		// this.towers = map.getTowers();
-		// this.activeEnemies = map.getEnemies();
 
 		initLocalization(cl);
 
 		initComponents();
 
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setResizable(false);
 		this.setVisible(true);
 	}
 
@@ -302,7 +299,7 @@ public class ControlPanel extends JFrame {
 		c.insets = new Insets(5, 10, 10, 10);
 
 		this.playerInfoLabel = new JLabel(this.strings.getString("playerInfo"));
-		this.playerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.playerInfoLabel.setFont(new Font("Tahoma", 0, 18));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 4;
 		c.gridx = 0;
@@ -380,7 +377,7 @@ public class ControlPanel extends JFrame {
 		c.insets = new Insets(5, 10, 10, 10);
 
 		this.waveInfoLabel = new JLabel(this.strings.getString("waveInfo"));
-		this.waveInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.waveInfoLabel.setFont(new Font("Tahoma", 0, 18));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 4;
 		c.gridx = 0;
@@ -457,7 +454,7 @@ public class ControlPanel extends JFrame {
 
 		this.selectedEnemyLabel = new JLabel(
 				this.strings.getString("selEnemyInfo"));
-		this.selectedEnemyLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.selectedEnemyLabel.setFont(new Font("Tahoma", 0, 18));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 0;
@@ -514,7 +511,7 @@ public class ControlPanel extends JFrame {
 
 		this.availableTowersLabel = new JLabel(
 				this.strings.getString("availTowers"));
-		this.availableTowersLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.availableTowersLabel.setFont(new Font("Tahoma", 0, 18));
 		c.fill = GridBagConstraints.RELATIVE;
 		// For heading
 		c.gridwidth = 10;
@@ -851,7 +848,7 @@ public class ControlPanel extends JFrame {
 		c.insets = new Insets(5, 10, 10, 10);
 
 		this.towerInfoLabel = new JLabel(this.strings.getString("towerInfo"));
-		this.towerInfoLabel.setFont(new Font("Tahoma", 0, 18)); // NOI18N
+		this.towerInfoLabel.setFont(new Font("Tahoma", 0, 18));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 0;
@@ -1112,11 +1109,4 @@ public class ControlPanel extends JFrame {
 	private Image earthInsuffMana;
 
 	// End of declerations
-
-	/*
-	 * public static void main(String[] args) {
-	 * javax.swing.SwingUtilities.invokeLater(new Runnable() { public void run()
-	 * { new ControlPanel(new Map(), new Player(), new Locale("en", "US")); }
-	 * }); }
-	 */
 }

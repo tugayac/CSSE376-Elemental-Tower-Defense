@@ -77,8 +77,7 @@ public class Frame extends JFrame implements Runnable {
 		ap.playClip("music", true, -4.0f);
 
 		this.map = new Map();
-		this.player = new Player();
-		this.player.incCurrency(2000);
+		this.player = new Player(2000, 50);
 		this.map.setPlayer(this.player);
 		this.controlPanel = new ControlPanel(this, this.map, this.player,
 				new Locale(locale[0], locale[1]));
@@ -110,10 +109,10 @@ public class Frame extends JFrame implements Runnable {
 			}
 		});
 
+		this.setResizable(false);
 		this.setVisible(true);
 
 		this.thr.start();
-
 	}
 
 	private void loadSounds() {
@@ -143,6 +142,10 @@ public class Frame extends JFrame implements Runnable {
 		return this.controlPanel;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
 	public void update() {
 		this.map.update();
 		this.controlPanel.update();
@@ -170,7 +173,7 @@ public class Frame extends JFrame implements Runnable {
 
 			this.g.fillRect(xLoc, yLoc, this.rectSize, this.rectSize);
 			this.g.setColor(Color.BLACK);
-			int index = this.map.getPath().indexOf(dir);
+			// int index = this.map.getPath().indexOf(dir);
 			this.g.drawRect(xLoc, yLoc, this.rectSize, this.rectSize);
 			this.g.setColor(Color.GREEN);
 			if (dir.x == 1) {
@@ -209,6 +212,11 @@ public class Frame extends JFrame implements Runnable {
 
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
 	public Frame.element genEle() {
 		Random r = new Random();
 		int num = r.nextInt(5);
@@ -236,10 +244,11 @@ public class Frame extends JFrame implements Runnable {
 		Random r = new Random(System.currentTimeMillis());
 
 		while (true) {
+			// TODO: Enemy is generated here. Change so that enemies are
+			// generated from a list of waves.
 			time = System.currentTimeMillis();
 			if (r.nextInt(100) == 0) {
 				this.map.generateEnemy(1, genEle());
-				// this.map.generateEnemy(1, Frame.element.AIR);
 			}
 			this.update();
 			this.repaint();

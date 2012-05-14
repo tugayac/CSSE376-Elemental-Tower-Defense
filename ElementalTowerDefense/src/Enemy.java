@@ -5,6 +5,11 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created May 14, 2012.
+ */
 public abstract class Enemy {
 
 	protected static int enemy_ids = 0;
@@ -15,6 +20,7 @@ public abstract class Enemy {
 	protected int armor;
 	protected int hp;
 	protected int worth;
+	protected int scoreValue;
 	protected Point2D.Double location;
 	protected Frame.element elem;
 
@@ -28,60 +34,19 @@ public abstract class Enemy {
 
 	static boolean loaded = false;
 
-	public void target() {
-		this.targeted = true;
-	}
-
-	public boolean targeted() {
-		return this.targeted;
-	}
-
-	public void initImages() {
-		// System.out.println("I should only be called once");
-		Image tempImage;
-		ImageIcon tempIcon;
-
-		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/enemies/Enemy_Earth.png"));
-		tempImage = tempIcon.getImage();
-		this.earthImage = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
-
-		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/enemies/Enemy_Air.png"));
-		tempImage = tempIcon.getImage();
-		this.airImage = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
-
-		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/enemies/Enemy_Water.png"));
-		tempImage = tempIcon.getImage();
-		this.waterImage = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
-
-		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/enemies/Enemy_Fire.png"));
-		tempImage = tempIcon.getImage();
-		this.fireImage = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
-
-		tempIcon = new ImageIcon(getClass().getResource(
-				"/resources/images/enemies/Enemy_Light.png"));
-		tempImage = tempIcon.getImage();
-		this.lightImage = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
-
-		loaded = true;
-	}
-
-	// tempIcon = new ImageIcon(getClass().getResource(
-	// "/resources/images/towers/earth_clicked.png"));
-	// tempImage = tempIcon.getImage();
-	// this.earthClicked = tempImage.getScaledInstance(100, 100,
-	// Image.SCALE_SMOOTH);
-
+	/**
+	 * TODO Put here a description of what this constructor does.
+	 * 
+	 * @param id
+	 * @param name
+	 * @param speed
+	 * @param armor
+	 * @param hp
+	 * @param location
+	 * @param elem
+	 */
 	public Enemy(int id, String name, float speed, int armor, int hp,
-			Point2D.Double location, Frame.element elem) {
+			Point2D.Double location, Frame.element elem, int scoreValue) {
 		this.id = id;
 		this.name = name;
 		this.speed = speed;
@@ -89,13 +54,77 @@ public abstract class Enemy {
 		this.hp = hp;
 		this.location = location;
 		this.elem = elem;
-		this.worth = hp * 2;
+		this.worth = hp / 2;
+		this.scoreValue = scoreValue;
 
 		if (!loaded) {
 			initImages();
 		}
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
+	public void target() {
+		this.targeted = true;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
+	public boolean targeted() {
+		return this.targeted;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
+	public void initImages() {
+		Image tempImage;
+		ImageIcon tempIcon;
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/enemies/Enemy_Earth.png"));
+		tempImage = tempIcon.getImage();
+		Enemy.earthImage = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/enemies/Enemy_Air.png"));
+		tempImage = tempIcon.getImage();
+		Enemy.airImage = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/enemies/Enemy_Water.png"));
+		tempImage = tempIcon.getImage();
+		Enemy.waterImage = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/enemies/Enemy_Fire.png"));
+		tempImage = tempIcon.getImage();
+		Enemy.fireImage = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		tempIcon = new ImageIcon(getClass().getResource(
+				"/resources/images/enemies/Enemy_Light.png"));
+		tempImage = tempIcon.getImage();
+		Enemy.lightImage = tempImage.getScaledInstance(100, 100,
+				Image.SCALE_SMOOTH);
+
+		loaded = true;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param path
+	 */
 	public void move(ArrayList<Point2D.Double> path) {
 		if (this.location.x < 0) {
 			this.location.x += this.speed * 0.01;
@@ -208,42 +237,48 @@ public abstract class Enemy {
 	 */
 	public abstract void damage(int i);
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param g
+	 * @param width
+	 */
 	public void draw(Graphics2D g, int width) {
-
 		if (this.elem == Frame.element.AIR) {
-			g.drawImage(this.airImage, (int) (this.location.x * width),
+			g.drawImage(Enemy.airImage, (int) (this.location.x * width),
 					(int) (this.location.y * width), width, width, null);
-
-			// g.setColor(Color.WHITE);
 		} else if (this.elem == Frame.element.EARTH) {
-			g.drawImage(this.earthImage, (int) (this.location.x * width),
+			g.drawImage(Enemy.earthImage, (int) (this.location.x * width),
 					(int) (this.location.y * width), width, width, null);
-
-			// g.setColor(Color.DARK_GRAY);
 		} else if (this.elem == Frame.element.WATER) {
-			g.drawImage(this.waterImage, (int) (this.location.x * width),
+			g.drawImage(Enemy.waterImage, (int) (this.location.x * width),
 					(int) (this.location.y * width), width, width, null);
-
-			// g.setColor(Color.BLUE);
 		} else if (this.elem == Frame.element.FIRE) {
-			g.drawImage(this.fireImage, (int) (this.location.x * width),
+			g.drawImage(Enemy.fireImage, (int) (this.location.x * width),
 					(int) (this.location.y * width), width, width, null);
-
-			// g.setColor(Color.RED);
 		} else if (this.elem == Frame.element.LIGHT) {
-			g.drawImage(this.lightImage, (int) (this.location.x * width),
+			g.drawImage(Enemy.lightImage, (int) (this.location.x * width),
 					(int) (this.location.y * width), width, width, null);
-
-			// g.setColor(Color.YELLOW);
 		}
-
-		// g.fillOval((int) (this.location.x * width),
-		// (int) (this.location.y * width), width, width);
-
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
 	public int getWorth() {
 		return this.worth;
+	}
+
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 * 
+	 */
+	public int getScoreValue() {
+		return this.scoreValue;
 	}
 
 }

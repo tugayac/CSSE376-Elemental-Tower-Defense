@@ -8,7 +8,8 @@ import java.awt.geom.Point2D;
 public class EnemyEarth extends Enemy {
 
 	public EnemyEarth(Point2D.Double location) {
-		super(Enemy.enemy_ids++, "Geodude", 0.8f, 5, 400, location, Frame.element.EARTH);
+		super(Enemy.enemy_ids++, "Geodude", 0.8f, 5, 400, location,
+				Frame.element.EARTH, 80);
 	}
 
 	@Override

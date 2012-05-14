@@ -8,7 +8,8 @@ import java.awt.geom.Point2D;
 public class EnemyAir extends Enemy {
 
 	public EnemyAir(Point2D.Double location) {
-		super(Enemy.enemy_ids++, "Tornadus", 2.3f, 3, 500, location, Frame.element.AIR);
+		super(Enemy.enemy_ids++, "Tornadus", 2.3f, 3, 500, location,
+				Frame.element.AIR, 100);
 	}
 
 	@Override

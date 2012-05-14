@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Random;
 
+import javax.swing.JOptionPane;
+
 /**
  * A class designed to hold the map, it holds and generates the path as well as
  * holding the towers and enemies
@@ -25,7 +27,7 @@ public class Map {
 
 	public Map() {
 		this.bullets = new ArrayList<Bullet>();
-		this.waveNumber = 0;
+		this.waveNumber = 1;
 		this.path = new ArrayList<Point2D.Double>();
 		generatePath();
 		this.towers = new ArrayList<Tower>();
@@ -98,6 +100,11 @@ public class Map {
 		return this.path;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param b
+	 */
 	public void addBullet(Bullet b) {
 		this.bullets.add(b);
 	}
@@ -117,6 +124,13 @@ public class Map {
 		return 0;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param d
+	 * @param e
+	 * @return
+	 */
 	public int addTower(Point2D.Double d, Frame.element e) {
 		switch (e) {
 		case FIRE:
@@ -182,22 +196,42 @@ public class Map {
 		return this.activeEnemies;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 */
 	public void update() {
+		if (this.player.getHealth() <= 0) {
+			String message = "You are dead! Game Over!\n" + "Your score: "
+					+ this.player.getScore();
+			JOptionPane.showMessageDialog(null, message, "Game Over!",
+					JOptionPane.INFORMATION_MESSAGE);
+			System.exit(0);
+		}
+
 		for (Bullet b : this.bullets) {
 			b.move();
 		}
+
 		ArrayList<Enemy> remove = new ArrayList<Enemy>();
 		for (Enemy e : this.activeEnemies) {
 			e.move(this.path);
-			if (e.getName().equals("FINISHED"))
+			if (e.getName().equals("FINISHED")) {
+				this.player.decHealth(1);
 				remove.add(e);
+			}
 		}
 		this.activeEnemies.removeAll(remove);
 
 		remove = null;
-		Random r = new Random();
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param g
+	 * @param width
+	 */
 	public synchronized void draw(Graphics2D g, int width) {
 
 		ArrayList<Enemy> died = new ArrayList<Enemy>();
@@ -244,20 +278,37 @@ public class Map {
 		return null;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @return
+	 */
 	public int getWaveNumber() {
 		return this.waveNumber;
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param enemy
+	 */
 	public void addEnemy(Enemy enemy) {
-		activeEnemies.add(enemy);
+		this.activeEnemies.add(enemy);
 
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param enemy
+	 * @param player
+	 */
 	public void killEnemy(Enemy enemy, Player player) {
-		if (activeEnemies.contains(enemy)) {
+		if (this.activeEnemies.contains(enemy)) {
 			Frame.ap.playClip("die", false, 0.0f);
 			player.incCurrency(enemy.getWorth());
-			activeEnemies.remove(enemy);
+			player.incScore(enemy.getScoreValue());
+			this.activeEnemies.remove(enemy);
 		}
 
 	}

@@ -15,7 +15,7 @@ public class PlayerTest {
 
 	@Before
 	public void setUp() {
-		this.player = new Player();
+		this.player = new Player(0, 0);
 	}
 
 	@After
