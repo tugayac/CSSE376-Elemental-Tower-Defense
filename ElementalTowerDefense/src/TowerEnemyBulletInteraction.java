@@ -28,7 +28,7 @@ public class TowerEnemyBulletInteraction {
 	 */
 	@Before
 	public void setUp(){
-		this.tower = new Tower_Fire(new Point2D.Double(1,1));
+		this.tower = new TowerFire(new Point2D.Double(1,1));
 		this.map = new Map();
 		this.map.addTower(this.tower);
 		this.map.generateEnemy(1, Frame.element.WATER);

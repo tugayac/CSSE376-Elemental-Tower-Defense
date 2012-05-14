@@ -11,11 +11,11 @@ public class TowerTest {
 	
 	@Before
 	public void setUp(){
-		FireTower = new Tower_Fire(new Point2D.Double(1, 1));
-		WaterTower = new Tower_Water(new Point2D.Double(2, 2));
-		LightTower = new Tower_Light(new Point2D.Double(3, 3));
-		EarthTower = new Tower_Earth(new Point2D.Double(4, 4));
-		AirTower = new Tower_Air(new Point2D.Double(5, 5));
+		FireTower = new TowerFire(new Point2D.Double(1, 1));
+		WaterTower = new TowerWater(new Point2D.Double(2, 2));
+		LightTower = new TowerLight(new Point2D.Double(3, 3));
+		EarthTower = new TowerEarth(new Point2D.Double(4, 4));
+		AirTower = new TowerAir(new Point2D.Double(5, 5));
 	}
 	
 	@After

@@ -120,15 +120,15 @@ public class Map {
 	public int addTower(Point2D.Double d, Frame.element e) {
 		switch (e) {
 		case FIRE:
-			return this.addTower(new Tower_Fire(d));
+			return this.addTower(new TowerFire(d));
 		case WATER:
-			return this.addTower(new Tower_Water(d));
+			return this.addTower(new TowerWater(d));
 		case LIGHT:
-			return this.addTower(new Tower_Light(d));
+			return this.addTower(new TowerLight(d));
 		case EARTH:
-			return this.addTower(new Tower_Earth(d));
+			return this.addTower(new TowerEarth(d));
 		case AIR:
-			return this.addTower(new Tower_Air(d));
+			return this.addTower(new TowerAir(d));
 		default:
 			return -1;
 		}
@@ -145,19 +145,19 @@ public class Map {
 	public void generateEnemy(int i, Frame.element elem) {
 		switch (elem) {
 		case FIRE:
-			this.activeEnemies.add(new Enemy_Fire(new Point2D.Double(-1, 7)));
+			this.activeEnemies.add(new EnemyFire(new Point2D.Double(-1, 7)));
 			break;
 		case WATER:
-			this.activeEnemies.add(new Enemy_Water(new Point2D.Double(-1, 7)));
+			this.activeEnemies.add(new EnemyWater(new Point2D.Double(-1, 7)));
 			break;
 		case LIGHT:
-			this.activeEnemies.add(new Enemy_Light(new Point2D.Double(-1, 7)));
+			this.activeEnemies.add(new EnemyLight(new Point2D.Double(-1, 7)));
 			break;
 		case EARTH:
-			this.activeEnemies.add(new Enemy_Earth(new Point2D.Double(-1, 7)));
+			this.activeEnemies.add(new EnemyEarth(new Point2D.Double(-1, 7)));
 			break;
 		case AIR:
-			this.activeEnemies.add(new Enemy_Air(new Point2D.Double(-1, 7)));
+			this.activeEnemies.add(new EnemyAir(new Point2D.Double(-1, 7)));
 			break;
 		default:
 			break;

@@ -59,7 +59,7 @@ public class CurrencyTest {
 		
 		
 		Enemy enemy_fire;
-		enemy_fire = new Enemy_Fire(new Point2D.Double(0, 0));
+		enemy_fire = new EnemyFire(new Point2D.Double(0, 0));
 		
 //		System.out.println(enemy_fire.getWorth());
 		
@@ -83,7 +83,7 @@ public class CurrencyTest {
 	@Test
 	public void testCurrencyDecrementWhenPlayerUpgradesATower() {
 		Tower tower_fire;
-		tower_fire = new Tower_Fire(new Point2D.Double(0, 0));
+		tower_fire = new TowerFire(new Point2D.Double(0, 0));
 
 		
 		int oldCurrency = 1000;
