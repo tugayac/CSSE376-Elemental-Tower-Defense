@@ -8,7 +8,7 @@ import java.awt.geom.Point2D;
 public class EnemyLight extends Enemy {
 
 	public EnemyLight(Point2D.Double location, int health, int armor) {
-		super(Enemy.enemy_ids++, "Sunbird", 1.5f, 2, 100, location,
+		super(Enemy.enemy_ids++, "Sunbird", 1.5f, armor, health, location,
 				Frame.element.LIGHT, 50);
 	}
 
