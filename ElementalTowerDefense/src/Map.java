@@ -22,6 +22,7 @@ public class Map {
 	private ArrayList<Enemy> activeEnemies;
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Frame.element[]> enemyWaves;
+	private Frame.element[] currEnemies;
 
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
@@ -193,7 +194,7 @@ public class Map {
 		// Returns a number between 0 and 9
 		int rand = r.nextInt(10);
 
-		Frame.element[] currEnemies = this.enemyWaves.get(rand);
+		this.currEnemies = this.enemyWaves.get(rand);
 		ArrayList<Enemy> toBeCreated = new ArrayList<Enemy>();
 
 		int healthFunc = (int) ((Math.pow(this.waveNumber, 3) - Math.pow(
@@ -202,10 +203,10 @@ public class Map {
 				.log(2));
 
 		int enemyCount = 10;
-		int length = currEnemies.length;
+		int length = this.currEnemies.length;
 		for (int i = 0; i < length; i++) {
 			for (int j = 0; j < (enemyCount / length); j++) {
-				switch (currEnemies[i]) {
+				switch (this.currEnemies[i]) {
 				case FIRE:
 					toBeCreated.add(new EnemyFire(new Point2D.Double(-1, 7),
 							healthFunc + 120, armorFunc + 3));
@@ -233,6 +234,10 @@ public class Map {
 		}
 
 		return toBeCreated;
+	}
+
+	public Frame.element[] getCurrEnemies() {
+		return this.currEnemies;
 	}
 
 	/**

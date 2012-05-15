@@ -214,32 +214,6 @@ public class Frame extends JFrame implements Runnable {
 
 	}
 
-	// /**
-	// * TODO Put here a description of what this method does.
-	// *
-	// * @return
-	// */
-	// public Frame.element genEle() {
-	// Random r = new Random();
-	// int num = r.nextInt(5);
-	// if (num == 0) {
-	// return Frame.element.AIR;
-	// }
-	// if (num == 1) {
-	// return Frame.element.EARTH;
-	// }
-	// if (num == 2) {
-	// return Frame.element.FIRE;
-	// }
-	// if (num == 3) {
-	// return Frame.element.WATER;
-	// }
-	// if (num == 4) {
-	// return Frame.element.LIGHT;
-	// }
-	// return null;
-	// }
-
 	public void run() {
 		long time;
 		long timeDiff;
@@ -272,16 +246,10 @@ public class Frame extends JFrame implements Runnable {
 					generating = false;
 					index = 0;
 				} else {
-					System.out.println("Added enemy");
 					this.map.addEnemy(this.enemiesToCreate.remove(index--));
 				}
 			}
 
-			// System.out.println("getSec = " + s.getSeconds());
-			// System.out.println("oldSec = " + oldSec);
-			// System.out.println("resetWaveSec = " + resetWaveSec);
-			// System.out.println("diff = "
-			// + Math.abs(s.getSeconds() - resetWaveSec));
 			if (stopGen
 					&& (s.getSeconds() - oldSec == 2 || s.getSeconds() == 59)) {
 				stopGen = false;

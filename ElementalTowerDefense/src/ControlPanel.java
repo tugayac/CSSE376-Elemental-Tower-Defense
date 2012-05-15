@@ -113,27 +113,9 @@ public class ControlPanel extends JFrame {
 		/*
 		 * Player Information
 		 */
-		this.playerScoreValueLabel.setText(Integer.toString(this.player
-				.getScore()));
-		this.playerManaValueLabel.setText(Integer.toString(this.player
-				.getCurrency()));
-		this.playerWaveValueLabel.setText(Integer.toString(this.map
-				.getWaveNumber()));
-		this.playerHealthValueLabel.setText(Integer.toString(this.player
-				.getHealth()));
 
 		Stopwatch s = new Stopwatch(this.playerTimeValueLabel, this.strings);
 		s.start();
-
-		/*
-		 * Wave Information
-		 */
-		// Nothing to do
-
-		/*
-		 * Selected Enemy Information
-		 */
-		// Nothing to do
 
 		/*
 		 * Available Tower Cost Information
@@ -304,7 +286,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topLeftPanel.add(this.playerScoreLabel, c);
 
-		this.playerScoreValueLabel = new JLabel("scoreValue");
+		this.playerScoreValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -316,7 +298,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topLeftPanel.add(this.playerManaLabel, c);
 
-		this.playerManaValueLabel = new JLabel("manaValue");
+		this.playerManaValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 2;
@@ -328,7 +310,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 3;
 		this.topLeftPanel.add(this.playerWaveLabel, c);
 
-		this.playerWaveValueLabel = new JLabel("waveValue");
+		this.playerWaveValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 3;
@@ -341,7 +323,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 4;
 		this.topLeftPanel.add(this.playerHealthLabel, c);
 
-		this.playerHealthValueLabel = new JLabel("healthValue");
+		this.playerHealthValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 4;
@@ -353,7 +335,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 5;
 		this.topLeftPanel.add(this.playerTimeLabel, c);
 
-		this.playerTimeValueLabel = new JLabel("timeValue");
+		this.playerTimeValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 5;
@@ -374,30 +356,30 @@ public class ControlPanel extends JFrame {
 		c.gridy = 0;
 		this.topCenterPanel.add(this.waveInfoLabel, c);
 
-		this.waveHealthLabel = new JLabel(this.strings.getString("waveHealth"));
+		this.waveNameLabel = new JLabel(this.strings.getString("waveName"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 1;
 		c.gridx = 0;
 		c.gridy = 1;
-		this.topCenterPanel.add(this.waveHealthLabel, c);
+		this.topCenterPanel.add(this.waveNameLabel, c);
 
-		this.waveHealthValueLabel = new JLabel("healthValue");
+		this.waveNameValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 1;
-		this.topCenterPanel.add(this.waveHealthValueLabel, c);
+		this.topCenterPanel.add(this.waveNameValueLabel, c);
 
-		this.waveNameLabel = new JLabel(this.strings.getString("waveName"));
+		this.waveHealthLabel = new JLabel(this.strings.getString("waveHealth"));
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 2;
-		this.topCenterPanel.add(this.waveNameLabel, c);
+		this.topCenterPanel.add(this.waveHealthLabel, c);
 
-		this.waveNameValueLabel = new JLabel("nameValue");
+		this.waveHealthValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 2;
-		this.topCenterPanel.add(this.waveNameValueLabel, c);
+		this.topCenterPanel.add(this.waveHealthValueLabel, c);
 
 		this.waveArmorLabel = new JLabel(this.strings.getString("waveArmor"));
 		c.fill = GridBagConstraints.RELATIVE;
@@ -405,7 +387,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 3;
 		this.topCenterPanel.add(this.waveArmorLabel, c);
 
-		this.waveArmorValueLabel = new JLabel("armorValue");
+		this.waveArmorValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 3;
@@ -417,7 +399,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 4;
 		this.topCenterPanel.add(this.waveSpeedLabel, c);
 
-		this.waveSpeedValueLabel = new JLabel("speedValue");
+		this.waveSpeedValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 4;
@@ -784,7 +766,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 1;
 		this.topRightPanel.add(this.towerLevelLabel, c);
 
-		this.towerLevelValueLabel = new JLabel("levelValue");
+		this.towerLevelValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 1;
@@ -797,7 +779,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 2;
 		this.topRightPanel.add(this.towerDamageLabel, c);
 
-		this.towerDamageValueLabel = new JLabel("damageValue");
+		this.towerDamageValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 2;
@@ -809,7 +791,7 @@ public class ControlPanel extends JFrame {
 		c.gridy = 3;
 		this.topRightPanel.add(this.towerSpeedLabel, c);
 
-		this.towerSpeedValueLabel = new JLabel("speedValue");
+		this.towerSpeedValueLabel = new JLabel();
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 1;
 		c.gridy = 3;
@@ -836,6 +818,7 @@ public class ControlPanel extends JFrame {
 	 */
 	public void update() {
 		updatePlayerInfo();
+		updateWaveInfo();
 		updateButtons();
 	}
 
@@ -843,7 +826,7 @@ public class ControlPanel extends JFrame {
 	 * TODO Put here a description of what this method does.
 	 * 
 	 */
-	public void updatePlayerInfo() {
+	private void updatePlayerInfo() {
 		this.playerScoreValueLabel.setText(Integer.toString(this.player
 				.getScore()));
 		this.playerManaValueLabel.setText(Integer.toString(this.player
@@ -854,11 +837,24 @@ public class ControlPanel extends JFrame {
 				.getHealth()));
 	}
 
+	private void updateWaveInfo() {
+		Frame.element[] currEnemies = this.map.getCurrEnemies();
+		String text = "";
+		for (int i = 0; i < currEnemies.length; i++) {
+			if (i + 1 != currEnemies.length) {
+				text += currEnemies[i] + ", ";
+			} else {
+				text += currEnemies[i];
+			}
+		}
+		this.waveNameValueLabel.setText(text);
+	}
+
 	/**
 	 * TODO Put here a description of what this method does.
 	 * 
 	 */
-	public void updateButtons() {
+	private void updateButtons() {
 		int currency = this.player.getCurrency();
 
 		updateFireButtons(currency);
