@@ -7,7 +7,7 @@ import java.awt.geom.Point2D;
  */
 public class EnemyWater extends Enemy {
 
-	public EnemyWater(Point2D.Double location) {
+	public EnemyWater(Point2D.Double location, int health, int armor) {
 		super(Enemy.enemy_ids++, "Magikarp", 2.0f, 1, 100, location,
 				Frame.element.WATER, 60);
 	}

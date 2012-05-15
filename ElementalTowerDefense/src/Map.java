@@ -1,7 +1,9 @@
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -19,6 +21,7 @@ public class Map {
 	private ArrayList<Tower> towers;
 	private ArrayList<Enemy> activeEnemies;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<Frame.element[]> enemyWaves;
 
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
@@ -27,11 +30,38 @@ public class Map {
 
 	public Map() {
 		this.bullets = new ArrayList<Bullet>();
-		this.waveNumber = 1;
+		this.waveNumber = 0;
 		this.path = new ArrayList<Point2D.Double>();
+
 		generatePath();
+
 		this.towers = new ArrayList<Tower>();
 		this.activeEnemies = new ArrayList<Enemy>();
+
+		generateWaves();
+	}
+
+	private void generateWaves() {
+		this.enemyWaves = new ArrayList<Frame.element[]>(10);
+
+		this.enemyWaves.add(addEnemies(Frame.element.FIRE));
+		this.enemyWaves.add(addEnemies(Frame.element.WATER));
+		this.enemyWaves.add(addEnemies(Frame.element.AIR));
+		this.enemyWaves.add(addEnemies(Frame.element.LIGHT));
+		this.enemyWaves.add(addEnemies(Frame.element.EARTH));
+		this.enemyWaves
+				.add(addEnemies(Frame.element.FIRE, Frame.element.LIGHT));
+		this.enemyWaves.add(addEnemies(Frame.element.WATER, Frame.element.AIR));
+		this.enemyWaves
+				.add(addEnemies(Frame.element.EARTH, Frame.element.WATER));
+		this.enemyWaves.add(addEnemies(Frame.element.LIGHT, Frame.element.FIRE,
+				Frame.element.EARTH));
+		this.enemyWaves.add(addEnemies(Frame.element.FIRE, Frame.element.WATER,
+				Frame.element.AIR, Frame.element.LIGHT, Frame.element.EARTH));
+	}
+
+	private Frame.element[] addEnemies(Frame.element... elements) {
+		return elements;
 	}
 
 	/**
@@ -155,27 +185,54 @@ public class Map {
 	 *            wave number
 	 * @param elem
 	 *            element
+	 * @return
 	 */
-	public void generateEnemy(int i, Frame.element elem) {
-		switch (elem) {
-		case FIRE:
-			this.activeEnemies.add(new EnemyFire(new Point2D.Double(-1, 7)));
-			break;
-		case WATER:
-			this.activeEnemies.add(new EnemyWater(new Point2D.Double(-1, 7)));
-			break;
-		case LIGHT:
-			this.activeEnemies.add(new EnemyLight(new Point2D.Double(-1, 7)));
-			break;
-		case EARTH:
-			this.activeEnemies.add(new EnemyEarth(new Point2D.Double(-1, 7)));
-			break;
-		case AIR:
-			this.activeEnemies.add(new EnemyAir(new Point2D.Double(-1, 7)));
-			break;
-		default:
-			break;
+	public ArrayList<Enemy> generateEnemyList() {
+		Random r = new Random();
+
+		// Returns a number between 0 and 9
+		int rand = r.nextInt(10);
+
+		Frame.element[] currEnemies = this.enemyWaves.get(rand);
+		ArrayList<Enemy> toBeCreated = new ArrayList<Enemy>();
+
+		int healthFunc = (int) ((Math.pow(this.waveNumber, 3) - Math.pow(
+				this.waveNumber, 2)));
+		int armorFunc = (int) (Math.log(Math.pow(this.waveNumber, 10)) / Math
+				.log(2));
+
+		int enemyCount = 10;
+		int length = currEnemies.length;
+		for (int i = 0; i < length; i++) {
+			for (int j = 0; j < (enemyCount / length); j++) {
+				switch (currEnemies[i]) {
+				case FIRE:
+					toBeCreated.add(new EnemyFire(new Point2D.Double(-1, 7),
+							healthFunc + 120, armorFunc + 3));
+					break;
+				case WATER:
+					toBeCreated.add(new EnemyWater(new Point2D.Double(-1, 7),
+							healthFunc + 150, armorFunc + 4));
+					break;
+				case LIGHT:
+					toBeCreated.add(new EnemyLight(new Point2D.Double(-1, 7),
+							healthFunc + 100, armorFunc + 2));
+					break;
+				case EARTH:
+					toBeCreated.add(new EnemyEarth(new Point2D.Double(-1, 7),
+							healthFunc + 80, armorFunc + 1));
+					break;
+				case AIR:
+					toBeCreated.add(new EnemyAir(new Point2D.Double(-1, 7),
+							healthFunc + 200, armorFunc + 5));
+					break;
+				default:
+					break;
+				}
+			}
 		}
+
+		return toBeCreated;
 	}
 
 	/**
@@ -200,7 +257,8 @@ public class Map {
 	 * TODO Put here a description of what this method does.
 	 * 
 	 */
-	public void update() {
+	public synchronized void update() {
+		// End game if player's health reaches 0.
 		if (this.player.getHealth() <= 0) {
 			String message = "You are dead! Game Over!\n" + "Your score: "
 					+ this.player.getScore();
@@ -287,6 +345,10 @@ public class Map {
 		return this.waveNumber;
 	}
 
+	public void incWave() {
+		this.waveNumber++;
+	}
+
 	/**
 	 * TODO Put here a description of what this method does.
 	 * 
@@ -305,12 +367,10 @@ public class Map {
 	 */
 	public void killEnemy(Enemy enemy, Player player) {
 		if (this.activeEnemies.contains(enemy)) {
-			Frame.ap.playClip("die", false, 0.0f);
+			// Frame.ap.playClip("die", false, 0.0f);
 			player.incCurrency(enemy.getWorth());
 			player.incScore(enemy.getScoreValue());
 			this.activeEnemies.remove(enemy);
 		}
-
 	}
-
 }

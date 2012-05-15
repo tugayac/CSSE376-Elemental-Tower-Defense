@@ -8,9 +8,9 @@ import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
-import java.util.Random;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -57,6 +57,7 @@ public class Frame extends JFrame implements Runnable {
 	private ControlPanel controlPanel;
 	private int rectSize;
 	private element ele = null;
+	private ArrayList<Enemy> enemiesToCreate;
 
 	/**
 	 * creates the frame, setting it to be the size of the screen and setting
@@ -74,9 +75,10 @@ public class Frame extends JFrame implements Runnable {
 		sounds = new HashMap<String, URL>();
 		loadSounds();
 		ap = new AudioPlayer();
-		ap.playClip("music", true, -4.0f);
+		// ap.playClip("music", true, -4.0f);
 
 		this.map = new Map();
+		this.enemiesToCreate = new ArrayList<Enemy>(10);
 		this.player = new Player(2000, 50);
 		this.map.setPlayer(this.player);
 		this.controlPanel = new ControlPanel(this, this.map, this.player,
@@ -146,7 +148,7 @@ public class Frame extends JFrame implements Runnable {
 	 * TODO Put here a description of what this method does.
 	 * 
 	 */
-	public void update() {
+	public synchronized void update() {
 		this.map.update();
 		this.controlPanel.update();
 	}
@@ -212,44 +214,79 @@ public class Frame extends JFrame implements Runnable {
 
 	}
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
-	public Frame.element genEle() {
-		Random r = new Random();
-		int num = r.nextInt(5);
-		if (num == 0) {
-			return Frame.element.AIR;
-		}
-		if (num == 1) {
-			return Frame.element.EARTH;
-		}
-		if (num == 2) {
-			return Frame.element.FIRE;
-		}
-		if (num == 3) {
-			return Frame.element.WATER;
-		}
-		if (num == 4) {
-			return Frame.element.LIGHT;
-		}
-		return null;
-	}
+	// /**
+	// * TODO Put here a description of what this method does.
+	// *
+	// * @return
+	// */
+	// public Frame.element genEle() {
+	// Random r = new Random();
+	// int num = r.nextInt(5);
+	// if (num == 0) {
+	// return Frame.element.AIR;
+	// }
+	// if (num == 1) {
+	// return Frame.element.EARTH;
+	// }
+	// if (num == 2) {
+	// return Frame.element.FIRE;
+	// }
+	// if (num == 3) {
+	// return Frame.element.WATER;
+	// }
+	// if (num == 4) {
+	// return Frame.element.LIGHT;
+	// }
+	// return null;
+	// }
 
 	public void run() {
 		long time;
 		long timeDiff;
-		Random r = new Random(System.currentTimeMillis());
+		Stopwatch s = new Stopwatch();
+		s.start();
+
+		int index = 0;
+		int oldSec = 0, resetWaveSec = 5;
+
+		boolean stopGen = false, generating = false;
 
 		while (true) {
-			// TODO: Enemy is generated here. Change so that enemies are
-			// generated from a list of waves.
 			time = System.currentTimeMillis();
-			if (r.nextInt(100) == 0) {
-				this.map.generateEnemy(1, genEle());
+
+			if (!generating && (Math.abs(s.getSeconds() - resetWaveSec) == 5)) {
+				generating = true;
+				this.map.incWave();
+
+				this.enemiesToCreate = this.map.generateEnemyList();
+				index = this.enemiesToCreate.size() - 1;
 			}
+
+			if (!stopGen && s.getSeconds() % 2 == 0) {
+				stopGen = true;
+				oldSec = s.getSeconds();
+				if (this.enemiesToCreate.isEmpty()) {
+					if (generating) {
+						resetWaveSec = oldSec;
+					}
+					generating = false;
+					index = 0;
+				} else {
+					System.out.println("Added enemy");
+					this.map.addEnemy(this.enemiesToCreate.remove(index--));
+				}
+			}
+
+			// System.out.println("getSec = " + s.getSeconds());
+			// System.out.println("oldSec = " + oldSec);
+			// System.out.println("resetWaveSec = " + resetWaveSec);
+			// System.out.println("diff = "
+			// + Math.abs(s.getSeconds() - resetWaveSec));
+			if (stopGen
+					&& (s.getSeconds() - oldSec == 2 || s.getSeconds() == 59)) {
+				stopGen = false;
+			}
+
 			this.update();
 			this.repaint();
 			timeDiff = System.currentTimeMillis() - time;

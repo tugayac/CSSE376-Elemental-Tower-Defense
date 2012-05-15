@@ -44,7 +44,7 @@ abstract class Tower {
 	}
 
 	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path) {
-		Frame.ap.playClip("fire", false, 0.0f);
+		// Frame.ap.playClip("fire", false, 0.0f);
 		return new Bullet(this.location, e, path);
 	}
 
