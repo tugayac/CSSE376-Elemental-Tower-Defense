@@ -41,6 +41,9 @@ public class Frame extends JFrame implements Runnable {
 		AIR
 	}
 
+	private static final long WAVE_WAIT = 5000;
+	private static final long SPAWN_WAIT = 2000;
+
 	public static HashMap<String, URL> sounds;
 	public static AudioPlayer ap;
 
@@ -58,6 +61,8 @@ public class Frame extends JFrame implements Runnable {
 	private int rectSize;
 	private element ele = null;
 	private ArrayList<Enemy> enemiesToCreate;
+	// private int seconds = 0;
+	private long seconds = 0;
 
 	/**
 	 * creates the frame, setting it to be the size of the screen and setting
@@ -251,14 +256,21 @@ public class Frame extends JFrame implements Runnable {
 		s.start();
 
 		int index = 0;
-		int oldSec = 0, resetWaveSec = 5;
+		// int oldSec = 0, resetWaveSec = 5;
+		long oldSec = System.currentTimeMillis();
+		long resetWaveSec = System.currentTimeMillis() - WAVE_WAIT;
 
 		boolean stopGen = false, generating = false;
 
 		while (true) {
 			time = System.currentTimeMillis();
 
-			if (!generating && (Math.abs(s.getSeconds() - resetWaveSec) == 5)) {
+			this.seconds = System.currentTimeMillis();
+			if (!generating && (this.seconds - resetWaveSec >= WAVE_WAIT)) {
+				System.out.println("Reached first if statement");
+				System.out.println(this.seconds - resetWaveSec);
+				// System.out.println("Generating at : " + s.getSeconds());
+				// System.out.println(resetWaveSec);
 				generating = true;
 				this.map.incWave();
 
@@ -266,24 +278,67 @@ public class Frame extends JFrame implements Runnable {
 				index = this.enemiesToCreate.size() - 1;
 			}
 
-			if (!stopGen && s.getSeconds() % 2 == 0) {
+			// this.seconds = s.getSeconds();
+			// System.out.println(this.seconds);
+			// if (!generating && (Math.abs(this.seconds - resetWaveSec) == 5))
+			// {
+			// System.out.println("Reached first if statement");
+			// // System.out.println("Generating at : " + s.getSeconds());
+			// // System.out.println(resetWaveSec);
+			// generating = true;
+			// this.map.incWave();
+			//
+			// this.enemiesToCreate = this.map.generateEnemyList();
+			// index = this.enemiesToCreate.size() - 1;
+			// }
+
+			if (!stopGen && (this.seconds - oldSec >= SPAWN_WAIT)) {
+				System.out.println("Reached second if statement");
+				System.out.println(this.seconds - oldSec);
 				stopGen = true;
-				oldSec = s.getSeconds();
+				oldSec = this.seconds;
 				if (this.enemiesToCreate.isEmpty()) {
+					System.out.println("No more enemies!");
 					if (generating) {
-						resetWaveSec = oldSec;
+						resetWaveSec = oldSec + WAVE_WAIT;
 					}
 					generating = false;
 					index = 0;
 				} else {
+					System.out.println("Adding enemy");
 					this.map.addEnemy(this.enemiesToCreate.remove(index--));
 				}
 			}
 
-			if (stopGen
-					&& (s.getSeconds() - oldSec == 2 || s.getSeconds() == 59)) {
+			// if (!stopGen && this.seconds % 2 == 0) {
+			// System.out.println("Reached second if statement");
+			// stopGen = true;
+			// oldSec = this.seconds;
+			// if (this.enemiesToCreate.isEmpty()) {
+			// System.out.println("No more enemies!");
+			// if (generating) {
+			// resetWaveSec = oldSec;
+			// }
+			// generating = false;
+			// index = 0;
+			// } else {
+			// System.out.println("Adding enemy");
+			// this.map.addEnemy(this.enemiesToCreate.remove(index--));
+			// }
+			// }
+
+			if (stopGen && (this.seconds - oldSec >= SPAWN_WAIT)) {
+				System.out.println("Reached third if statement");
+				System.out.println(this.seconds - oldSec);
 				stopGen = false;
 			}
+
+			// if (stopGen && (this.seconds - oldSec == 2 || this.seconds ==
+			// 59)) {
+			// System.out.println("Reached third if statement");
+			// System.out.println(s.getSeconds() - oldSec);
+			// stopGen = false;
+			// }
 
 			this.update();
 			this.repaint();

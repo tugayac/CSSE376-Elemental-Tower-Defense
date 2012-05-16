@@ -8,7 +8,7 @@ public class TowerFire extends Tower {
 	static final int cost = 1000;
 
 	public TowerFire(Point2D.Double loc, int damage) {
-		super(Tower.tower_ids++, "Fire Tower", 1.2f, loc, Frame.element.FIRE,
+		super(Tower.tower_ids++, "Fire Tower", 2500, loc, Frame.element.FIRE,
 				true, cost, 1, damage);
 		setImage(new ImageIcon(getClass().getResource(
 				"/resources/images/towers/tower_fire.png")));

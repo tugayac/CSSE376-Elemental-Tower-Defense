@@ -19,7 +19,7 @@ public class Stopwatch {
 
 	public Stopwatch() {
 		this.chronometer = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public synchronized void actionPerformed(ActionEvent e) {
 				int seconds = (int) (System.currentTimeMillis() - Stopwatch.this.watchStart) / 1000;
 				int days = seconds / 86400;
 				int hours = (seconds / 3600) - (days * 24);
@@ -29,7 +29,7 @@ public class Stopwatch {
 		});
 	}
 
-	public int getSeconds() {
+	public synchronized int getSeconds() {
 		return this.sec;
 	}
 
@@ -39,7 +39,7 @@ public class Stopwatch {
 				strings.getString("timeMins"), strings.getString("timeSecs") };
 
 		this.chronometer = new Timer(1000, new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+			public synchronized void actionPerformed(ActionEvent e) {
 				int seconds = (int) (System.currentTimeMillis() - Stopwatch.this.watchStart) / 1000;
 				int days = seconds / 86400;
 				int hours = (seconds / 3600) - (days * 24);
@@ -52,12 +52,12 @@ public class Stopwatch {
 		});
 	}
 
-	public void start() {
+	public synchronized void start() {
 		this.watchStart = System.currentTimeMillis();
 		this.chronometer.start();
 	}
 
-	public void stop() {
+	public synchronized void stop() {
 		this.chronometer.stop();
 	}
 }

@@ -21,7 +21,7 @@ public abstract class Enemy {
 	protected Point2D.Double location;
 	protected Frame.element elem;
 
-	private boolean targeted = false;
+	// private boolean targeted = false;
 
 	static protected Image earthImage;
 	static protected Image airImage;
@@ -51,7 +51,7 @@ public abstract class Enemy {
 		this.hp = hp;
 		this.location = location;
 		this.elem = elem;
-		this.worth = hp / 2;
+		this.worth = hp;
 		this.scoreValue = scoreValue;
 
 		if (!loaded) {
@@ -59,22 +59,22 @@ public abstract class Enemy {
 		}
 	}
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 */
-	public void target() {
-		this.targeted = true;
-	}
+	// /**
+	// * TODO Put here a description of what this method does.
+	// *
+	// */
+	// public void target() {
+	// this.targeted = true;
+	// }
 
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
-	public boolean targeted() {
-		return this.targeted;
-	}
+	// /**
+	// * TODO Put here a description of what this method does.
+	// *
+	// * @return
+	// */
+	// public boolean targeted() {
+	// return this.targeted;
+	// }
 
 	/**
 	 * TODO Put here a description of what this method does.

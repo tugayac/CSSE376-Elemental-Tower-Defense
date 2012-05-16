@@ -23,6 +23,7 @@ public class Map {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Frame.element[]> enemyWaves;
 	private Frame.element[] currEnemies;
+	private long oldSec = System.currentTimeMillis();
 
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
@@ -298,6 +299,7 @@ public class Map {
 	 * 
 	 * @param g
 	 * @param width
+	 * @param seconds
 	 */
 	public synchronized void draw(Graphics2D g, int width) {
 
@@ -313,15 +315,23 @@ public class Map {
 			this.killEnemy(e, this.player);
 		}
 
-		Random r = new Random();
+		// Random r = new Random();
 
 		for (Tower t : this.towers) {
 			t.draw(g, width);
-			int i = r.nextInt(200);
-			if (i == 0) {
+
+			int secDiff = (int) (System.currentTimeMillis() - this.oldSec);
+			if (secDiff >= t.getSpeed()) {
 				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path,
 						t.getDamage()));
+				this.oldSec = System.currentTimeMillis();
 			}
+
+			// int i = r.nextInt(200);
+			// if (i == 0) {
+			// this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path,
+			// t.getDamage()));
+			// }
 		}
 
 		ArrayList<Bullet> toBeRemoved = new ArrayList<Bullet>();
@@ -340,8 +350,8 @@ public class Map {
 
 	private Enemy chooseEnemy() {
 		for (Enemy e : this.activeEnemies) {
-			if (!e.targeted())
-				return e;
+			// if (!e.targeted())
+			return e;
 		}
 		return null;
 	}

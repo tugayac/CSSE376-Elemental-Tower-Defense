@@ -18,13 +18,13 @@ abstract class Tower {
 	protected Point2D.Double location;
 	protected String name;
 	protected boolean available;
-	protected float speed;
+	protected int speed;
 	protected int damage;
 	protected int cost;
 	protected int level;
 	protected Image image;
 
-	public Tower(int id, String name, float speed, Point2D.Double loc,
+	public Tower(int id, String name, int speed, Point2D.Double loc,
 			Frame.element el, boolean avail, int cost, int level, int damage) {
 		this.id = id;
 		this.element = el;

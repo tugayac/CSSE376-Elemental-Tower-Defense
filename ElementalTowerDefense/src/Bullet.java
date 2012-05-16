@@ -31,7 +31,7 @@ public class Bullet {
 		this.vector = new Point2D.Double();
 		if (this.enemy == null)
 			return;
-		this.enemy.target();
+		// this.enemy.target();
 		this.calcVector(path);
 	}
 
