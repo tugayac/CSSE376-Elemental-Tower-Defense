@@ -22,8 +22,9 @@ public class Bullet {
 	 * @param e
 	 * @param path
 	 */
-	public Bullet(Point2D.Double loc, Enemy e, ArrayList<Point2D.Double> path) {
-		this.power = 100000;
+	public Bullet(Point2D.Double loc, Enemy e, ArrayList<Point2D.Double> path,
+			int damage) {
+		this.power = damage;
 		this.enemy = e;
 
 		this.loc = new Point2D.Double(loc.x + 0.5, loc.y + 0.5);
@@ -39,7 +40,7 @@ public class Bullet {
 		this.loc.x += this.vector.x / 100;
 		this.loc.y += this.vector.y / 100;
 
-		if (numMoved == 100) {
+		if (this.numMoved == 100) {
 			this.loc = new Point2D.Double(-100, -100);
 			this.vector = new Point2D.Double(0, 0);
 			this.enemy.damage(this.power);

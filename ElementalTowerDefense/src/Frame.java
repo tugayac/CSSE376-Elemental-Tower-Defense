@@ -102,10 +102,40 @@ public class Frame extends JFrame implements Runnable {
 							/ Frame.this.rectSize;
 					int y = (e.getY() - (600 - 15 * Frame.this.rectSize) / 2)
 							/ Frame.this.rectSize;
-					Frame.this.map.addTower(new Point2D.Double(x, y),
-							Frame.this.ele);
 
-					Frame.this.player.decCurrency(1000);
+					int waveNum = Frame.this.map.getWaveNumber();
+					int damageFunc = (int) (Math.pow(waveNum, 2) - waveNum);
+
+					switch (Frame.this.ele) {
+					case FIRE:
+						Frame.this.map.addTower(new Point2D.Double(x, y),
+								Frame.element.FIRE, damageFunc + 100);
+						Frame.this.player.decCurrency(TowerFire.cost);
+						break;
+					case WATER:
+						Frame.this.map.addTower(new Point2D.Double(x, y),
+								Frame.element.WATER, damageFunc + 60);
+						Frame.this.player.decCurrency(TowerWater.cost);
+						break;
+					case AIR:
+						Frame.this.map.addTower(new Point2D.Double(x, y),
+								Frame.element.AIR, damageFunc + 50);
+						Frame.this.player.decCurrency(TowerAir.cost);
+						break;
+					case LIGHT:
+						Frame.this.map.addTower(new Point2D.Double(x, y),
+								Frame.element.LIGHT, damageFunc + 90);
+						Frame.this.player.decCurrency(TowerLight.cost);
+						break;
+					case EARTH:
+						Frame.this.map.addTower(new Point2D.Double(x, y),
+								Frame.element.EARTH, damageFunc + 80);
+						Frame.this.player.decCurrency(TowerEarth.cost);
+						break;
+					default:
+						break;
+					}
+
 					Frame.this.ele = null;
 				}
 			}

@@ -160,20 +160,21 @@ public class Map {
 	 * 
 	 * @param d
 	 * @param e
+	 * @param damage
 	 * @return
 	 */
-	public int addTower(Point2D.Double d, Frame.element e) {
+	public int addTower(Point2D.Double d, Frame.element e, int damage) {
 		switch (e) {
 		case FIRE:
-			return this.addTower(new TowerFire(d));
+			return this.addTower(new TowerFire(d, damage));
 		case WATER:
-			return this.addTower(new TowerWater(d));
+			return this.addTower(new TowerWater(d, damage));
 		case LIGHT:
-			return this.addTower(new TowerLight(d));
+			return this.addTower(new TowerLight(d, damage));
 		case EARTH:
-			return this.addTower(new TowerEarth(d));
+			return this.addTower(new TowerEarth(d, damage));
 		case AIR:
-			return this.addTower(new TowerAir(d));
+			return this.addTower(new TowerAir(d, damage));
 		default:
 			return -1;
 		}
@@ -318,7 +319,8 @@ public class Map {
 			t.draw(g, width);
 			int i = r.nextInt(200);
 			if (i == 0) {
-				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path));
+				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path,
+						t.getDamage()));
 			}
 		}
 

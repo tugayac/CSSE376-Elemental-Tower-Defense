@@ -82,7 +82,7 @@ public class CurrencyTest {
 	@Test
 	public void testCurrencyDecrementWhenPlayerUpgradesATower() {
 		Tower tower_fire;
-		tower_fire = new TowerFire(new Point2D.Double(0, 0));
+		tower_fire = new TowerFire(new Point2D.Double(0, 0), 100);
 
 		int oldCurrency = 1000;
 		this.player.setCurrency(oldCurrency);

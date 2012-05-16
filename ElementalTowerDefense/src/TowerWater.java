@@ -5,11 +5,11 @@ import javax.swing.ImageIcon;
 
 public class TowerWater extends Tower {
 
-	static final int cost = 1000;
+	static final int cost = 600;
 
-	public TowerWater(Point2D.Double loc) {
+	public TowerWater(Point2D.Double loc, int damage) {
 		super(Tower.tower_ids++, "Water Tower", 1.2f, loc, Frame.element.WATER,
-				true, cost, 1, 100);
+				true, cost, 1, damage);
 		setImage(new ImageIcon(getClass().getResource(
 				"/resources/images/towers/tower_water.png")));
 	}

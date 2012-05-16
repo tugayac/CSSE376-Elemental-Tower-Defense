@@ -25,7 +25,7 @@ public class TowerEnemyBulletInteraction {
 	 */
 	@Before
 	public void setUp() {
-		this.tower = new TowerFire(new Point2D.Double(1, 1));
+		this.tower = new TowerFire(new Point2D.Double(1, 1), 100);
 		this.map = new Map();
 		this.map.addTower(this.tower);
 		this.map.generateEnemyList();
@@ -51,7 +51,7 @@ public class TowerEnemyBulletInteraction {
 	@Test
 	public void testThatTowerShootsBulletTowardsEnemy() {
 		Bullet b = this.tower.fireBulletTowards(this.enemy,
-				new ArrayList<Point2D.Double>());
+				new ArrayList<Point2D.Double>(), 100);
 
 		assertEquals(b.getVector(),
 				normalize(new Point2D.Double(-1 - 1, 7 - 1)));
@@ -67,7 +67,7 @@ public class TowerEnemyBulletInteraction {
 	public void testThatEnemyTakesDamage() {
 		int health = this.enemy.getHP();
 		Bullet b = this.tower.fireBulletTowards(this.enemy,
-				new ArrayList<Point2D.Double>());
+				new ArrayList<Point2D.Double>(), 100);
 		this.map.addBullet(b);
 		for (int i = 0; i < 100; i++)
 			b.move();
@@ -81,7 +81,7 @@ public class TowerEnemyBulletInteraction {
 	@Test
 	public void testThatBulletIsRemovedAfterHitsEnemy() {
 		Bullet b = this.tower.fireBulletTowards(this.enemy,
-				new ArrayList<Point2D.Double>());
+				new ArrayList<Point2D.Double>(), 100);
 		this.map.addBullet(b);
 		for (int i = 0; i < 100; i++)
 			b.move();

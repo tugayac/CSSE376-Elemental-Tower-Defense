@@ -38,9 +38,10 @@ abstract class Tower {
 		this.image = null;
 	}
 
-	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path) {
+	public Bullet fireBulletTowards(Enemy e, ArrayList<Point2D.Double> path,
+			int damage) {
 		// Frame.ap.playClip("fire", false, 0.0f);
-		return new Bullet(this.location, e, path);
+		return new Bullet(this.location, e, path, damage);
 	}
 
 	public Frame.element getElement() {
@@ -73,6 +74,10 @@ abstract class Tower {
 
 	public int getLevel() {
 		return this.level;
+	}
+
+	public int getDamage() {
+		return this.damage;
 	}
 
 	/**

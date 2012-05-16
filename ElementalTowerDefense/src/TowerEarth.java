@@ -5,11 +5,11 @@ import javax.swing.ImageIcon;
 
 public class TowerEarth extends Tower {
 
-	static final int cost = 1000;
+	static final int cost = 800;
 
-	public TowerEarth(Point2D.Double loc) {
+	public TowerEarth(Point2D.Double loc, int damage) {
 		super(Tower.tower_ids++, "Earth Tower", 1.2f, loc, Frame.element.EARTH,
-				true, cost, 1, 100);
+				true, cost, 1, damage);
 		setImage(new ImageIcon(getClass().getResource(
 				"/resources/images/towers/tower_earth.png")));
 	}

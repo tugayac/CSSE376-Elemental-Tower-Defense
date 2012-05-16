@@ -5,11 +5,11 @@ import javax.swing.ImageIcon;
 
 public class TowerAir extends Tower {
 
-	static final int cost = 1000;
+	static final int cost = 500;
 
-	public TowerAir(Point2D.Double loc) {
+	public TowerAir(Point2D.Double loc, int damage) {
 		super(Tower.tower_ids++, "Air Tower", 1.2f, loc, Frame.element.AIR,
-				true, cost, 1, 100);
+				true, cost, 1, damage);
 		setImage(new ImageIcon(getClass().getResource(
 				"/resources/images/towers/tower_air.png")));
 	}
