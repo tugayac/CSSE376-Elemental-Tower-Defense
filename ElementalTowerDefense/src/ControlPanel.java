@@ -152,8 +152,7 @@ public class ControlPanel extends JFrame {
 		tempIcon = new ImageIcon(getClass().getResource(
 				"/resources/images/buttonimages/fire_grey.png"));
 		tempImage = tempIcon.getImage();
-		this.fireNotAvailable = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
+		tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		/*
 		 * Water button image initialization
@@ -179,8 +178,7 @@ public class ControlPanel extends JFrame {
 		tempIcon = new ImageIcon(getClass().getResource(
 				"/resources/images/buttonimages/water_grey.png"));
 		tempImage = tempIcon.getImage();
-		this.waterNotAvailable = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
+		tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		/*
 		 * Air button image initialization
@@ -206,8 +204,7 @@ public class ControlPanel extends JFrame {
 		tempIcon = new ImageIcon(getClass().getResource(
 				"/resources/images/buttonimages/air_grey.png"));
 		tempImage = tempIcon.getImage();
-		this.airNotAvailable = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
+		tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		/*
 		 * Light button image initialization
@@ -233,8 +230,7 @@ public class ControlPanel extends JFrame {
 		tempIcon = new ImageIcon(getClass().getResource(
 				"/resources/images/buttonimages/light_grey.png"));
 		tempImage = tempIcon.getImage();
-		this.lightNotAvailable = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
+		tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 
 		/*
 		 * Earth button image initialization
@@ -260,8 +256,7 @@ public class ControlPanel extends JFrame {
 		tempIcon = new ImageIcon(getClass().getResource(
 				"/resources/images/buttonimages/earth_grey.png"));
 		tempImage = tempIcon.getImage();
-		this.earthNotAvailable = tempImage.getScaledInstance(100, 100,
-				Image.SCALE_SMOOTH);
+		tempImage.getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 	}
 
 	private void initTopLeftPanel() {
@@ -992,27 +987,22 @@ public class ControlPanel extends JFrame {
 	// Fire
 	private Image fireClicked;
 	private Image fireUnclicked;
-	private Image fireNotAvailable;
 	private Image fireInsuffMana;
 	// Water
 	private Image waterClicked;
 	private Image waterUnclicked;
-	private Image waterNotAvailable;
 	private Image waterInsuffMana;
 	// Air
 	private Image airClicked;
 	private Image airUnclicked;
-	private Image airNotAvailable;
 	private Image airInsuffMana;
 	// Light
 	private Image lightClicked;
 	private Image lightUnclicked;
-	private Image lightNotAvailable;
 	private Image lightInsuffMana;
 	// Earth
 	private Image earthClicked;
 	private Image earthUnclicked;
-	private Image earthNotAvailable;
 	private Image earthInsuffMana;
 
 	// End of declerations

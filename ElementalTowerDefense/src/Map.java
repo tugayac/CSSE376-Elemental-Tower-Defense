@@ -1,9 +1,6 @@
 import java.awt.Graphics2D;
 import java.awt.geom.Point2D;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
 import java.util.Random;
 
 import javax.swing.JOptionPane;
@@ -23,13 +20,11 @@ public class Map {
 	private ArrayList<Bullet> bullets;
 	private ArrayList<Frame.element[]> enemyWaves;
 	private Frame.element[] currEnemies;
-	private long oldSec = System.currentTimeMillis();
 
 	/**
 	 * Creates a generic map, initializing all fields to empty lists
 	 * 
 	 */
-
 	public Map() {
 		this.bullets = new ArrayList<Bullet>();
 		this.waveNumber = 0;
@@ -301,7 +296,7 @@ public class Map {
 	 * @param width
 	 * @param seconds
 	 */
-	public synchronized void draw(Graphics2D g, int width) {
+	public synchronized void draw(Graphics2D g, int width, long seconds) {
 
 		ArrayList<Enemy> died = new ArrayList<Enemy>();
 
@@ -320,18 +315,11 @@ public class Map {
 		for (Tower t : this.towers) {
 			t.draw(g, width);
 
-			int secDiff = (int) (System.currentTimeMillis() - this.oldSec);
-			if (secDiff >= t.getSpeed()) {
+			if ((seconds - t.getInitSecs()) >= t.getSpeed()) {
 				this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path,
 						t.getDamage()));
-				this.oldSec = System.currentTimeMillis();
+				t.setInitSecs(System.currentTimeMillis());
 			}
-
-			// int i = r.nextInt(200);
-			// if (i == 0) {
-			// this.bullets.add(t.fireBulletTowards(chooseEnemy(), this.path,
-			// t.getDamage()));
-			// }
 		}
 
 		ArrayList<Bullet> toBeRemoved = new ArrayList<Bullet>();
@@ -350,7 +338,6 @@ public class Map {
 
 	private Enemy chooseEnemy() {
 		for (Enemy e : this.activeEnemies) {
-			// if (!e.targeted())
 			return e;
 		}
 		return null;

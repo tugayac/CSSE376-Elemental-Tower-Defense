@@ -13,7 +13,7 @@ public class Main {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		
+
 		String[] locales = { "English (United States - en_US)",
 				"Español (Spain - es_ES)", "Türkçe (Turkey - tr_TR)" };
 		String locale = (String) JOptionPane.showInputDialog(null,
@@ -25,9 +25,9 @@ public class Main {
 		} else {
 			locale = locale.split(" - ")[1].replace(")", "");
 			String[] temp = locale.split("_");
-			
+
 			new Splash(temp).setVisible(true);
-//			new Frame(60, temp);
+			// new Frame(60, temp);
 		}
 	}
 }

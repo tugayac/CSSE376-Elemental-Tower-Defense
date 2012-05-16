@@ -6,14 +6,11 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
-import javax.sound.sampled.LineUnavailableException;
-import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.JFrame;
 import javax.swing.WindowConstants;
 
@@ -63,11 +60,11 @@ public class Frame extends JFrame implements Runnable {
 	private ArrayList<Enemy> enemiesToCreate;
 	private long seconds = 0;
 
-	int width = 800;
-	int height = 600;
-	Color pathColor = new Color(0, 150, 0);
-	Color backColor = new Color(85, 107, 47);
-	Color tileColor = new Color(30, 70, 30);
+	private int width = 800;
+	private int height = 600;
+	private Color pathColor = new Color(0, 150, 0);
+	private Color backColor = new Color(85, 107, 47);
+	private Color tileColor = new Color(30, 70, 30);
 
 	/**
 	 * creates the frame, setting it to be the size of the screen and setting
@@ -76,10 +73,6 @@ public class Frame extends JFrame implements Runnable {
 	 * @param fps
 	 *            FPS to run the paint loop
 	 * @param locale
-	 * @throws InterruptedException
-	 * @throws LineUnavailableException
-	 * @throws UnsupportedAudioFileException
-	 * @throws IOException
 	 */
 	public Frame(int fps, String[] locale) {
 		sounds = new HashMap<String, URL>();
@@ -236,7 +229,7 @@ public class Frame extends JFrame implements Runnable {
 		this.g.setColor(Color.BLACK);
 		this.g.drawString(new String("FPS: " + this.fps), 0, 15);
 
-		this.map.draw(this.g, this.rectSize);
+		this.map.draw(this.g, this.rectSize, this.seconds);
 
 		arg.setColor(Color.BLACK);
 		arg.drawImage(this.buffImg, (width - 21 * this.rectSize) / 2,
@@ -262,7 +255,6 @@ public class Frame extends JFrame implements Runnable {
 		s.start();
 
 		int index = 0;
-		// int oldSec = 0, resetWaveSec = 5;
 		long oldSec = System.currentTimeMillis();
 		long resetWaveSec = System.currentTimeMillis() - WAVE_WAIT;
 
@@ -273,10 +265,6 @@ public class Frame extends JFrame implements Runnable {
 
 			this.seconds = System.currentTimeMillis();
 			if (!generating && (this.seconds - resetWaveSec >= WAVE_WAIT)) {
-				System.out.println("Reached first if statement");
-				System.out.println(this.seconds - resetWaveSec);
-				// System.out.println("Generating at : " + s.getSeconds());
-				// System.out.println(resetWaveSec);
 				generating = true;
 				this.map.incWave();
 
@@ -284,67 +272,23 @@ public class Frame extends JFrame implements Runnable {
 				index = this.enemiesToCreate.size() - 1;
 			}
 
-			// this.seconds = s.getSeconds();
-			// System.out.println(this.seconds);
-			// if (!generating && (Math.abs(this.seconds - resetWaveSec) == 5))
-			// {
-			// System.out.println("Reached first if statement");
-			// // System.out.println("Generating at : " + s.getSeconds());
-			// // System.out.println(resetWaveSec);
-			// generating = true;
-			// this.map.incWave();
-			//
-			// this.enemiesToCreate = this.map.generateEnemyList();
-			// index = this.enemiesToCreate.size() - 1;
-			// }
-
 			if (!stopGen && (this.seconds - oldSec >= SPAWN_WAIT)) {
-				System.out.println("Reached second if statement");
-				System.out.println(this.seconds - oldSec);
 				stopGen = true;
 				oldSec = this.seconds;
 				if (this.enemiesToCreate.isEmpty()) {
-					System.out.println("No more enemies!");
 					if (generating) {
 						resetWaveSec = oldSec + WAVE_WAIT;
 					}
 					generating = false;
 					index = 0;
 				} else {
-					System.out.println("Adding enemy");
 					this.map.addEnemy(this.enemiesToCreate.remove(index--));
 				}
 			}
 
-			// if (!stopGen && this.seconds % 2 == 0) {
-			// System.out.println("Reached second if statement");
-			// stopGen = true;
-			// oldSec = this.seconds;
-			// if (this.enemiesToCreate.isEmpty()) {
-			// System.out.println("No more enemies!");
-			// if (generating) {
-			// resetWaveSec = oldSec;
-			// }
-			// generating = false;
-			// index = 0;
-			// } else {
-			// System.out.println("Adding enemy");
-			// this.map.addEnemy(this.enemiesToCreate.remove(index--));
-			// }
-			// }
-
 			if (stopGen && (this.seconds - oldSec >= SPAWN_WAIT)) {
-				System.out.println("Reached third if statement");
-				System.out.println(this.seconds - oldSec);
 				stopGen = false;
 			}
-
-			// if (stopGen && (this.seconds - oldSec == 2 || this.seconds ==
-			// 59)) {
-			// System.out.println("Reached third if statement");
-			// System.out.println(s.getSeconds() - oldSec);
-			// stopGen = false;
-			// }
 
 			this.update();
 			this.repaint();

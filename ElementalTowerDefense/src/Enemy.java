@@ -29,7 +29,7 @@ public abstract class Enemy {
 	static protected Image fireImage;
 	static protected Image lightImage;
 
-	static boolean loaded = false;
+	private static boolean loaded = false;
 
 	/**
 	 * TODO Put here a description of what this constructor does.
@@ -58,23 +58,6 @@ public abstract class Enemy {
 			initImages();
 		}
 	}
-
-	// /**
-	// * TODO Put here a description of what this method does.
-	// *
-	// */
-	// public void target() {
-	// this.targeted = true;
-	// }
-
-	// /**
-	// * TODO Put here a description of what this method does.
-	// *
-	// * @return
-	// */
-	// public boolean targeted() {
-	// return this.targeted;
-	// }
 
 	/**
 	 * TODO Put here a description of what this method does.

@@ -24,6 +24,8 @@ abstract class Tower {
 	protected int level;
 	protected Image image;
 
+	private long oldSec = System.currentTimeMillis();
+
 	public Tower(int id, String name, int speed, Point2D.Double loc,
 			Frame.element el, boolean avail, int cost, int level, int damage) {
 		this.id = id;
@@ -64,7 +66,7 @@ abstract class Tower {
 		return this.available;
 	}
 
-	public float getSpeed() {
+	public int getSpeed() {
 		return this.speed;
 	}
 
@@ -78,6 +80,14 @@ abstract class Tower {
 
 	public int getDamage() {
 		return this.damage;
+	}
+
+	public long getInitSecs() {
+		return this.oldSec;
+	}
+
+	public void setInitSecs(long seconds) {
+		this.oldSec = seconds;
 	}
 
 	/**
