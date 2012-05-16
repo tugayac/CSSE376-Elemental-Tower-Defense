@@ -61,8 +61,13 @@ public class Frame extends JFrame implements Runnable {
 	private int rectSize;
 	private element ele = null;
 	private ArrayList<Enemy> enemiesToCreate;
-	// private int seconds = 0;
 	private long seconds = 0;
+
+	int width = 800;
+	int height = 600;
+	Color pathColor = new Color(0, 150, 0);
+	Color backColor = new Color(85, 107, 47);
+	Color tileColor = new Color(30, 70, 30);
 
 	/**
 	 * creates the frame, setting it to be the size of the screen and setting
@@ -88,10 +93,11 @@ public class Frame extends JFrame implements Runnable {
 		this.map.setPlayer(this.player);
 		this.controlPanel = new ControlPanel(this, this.map, this.player,
 				new Locale(locale[0], locale[1]));
-		this.rectSize = 30;
+		this.rectSize = 35;
 		this.requestedFPS = fps;
 		this.thr = new Thread(this);
-		this.setSize(new Dimension(800, 600));
+		this.setSize(new Dimension(width, height));
+		this.setBackground(backColor);
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
 		this.buffImg = new BufferedImage(21 * this.rectSize,
@@ -192,9 +198,9 @@ public class Frame extends JFrame implements Runnable {
 	public void paint(Graphics arg) {
 
 		this.g.setClip(0, 0, 21 * this.rectSize, 15 * this.rectSize);
-		this.g.setColor(Color.LIGHT_GRAY);
+		this.g.setColor(tileColor);
 		this.g.fillRect(0, 0, 21 * this.rectSize, 15 * this.rectSize);
-		this.g.setColor(Color.GREEN);
+		this.g.setColor(pathColor);
 		Point2D.Double d = new Point2D.Double(0, 7);
 		this.g.fillRect((int) d.x * this.rectSize, (int) d.y * this.rectSize,
 				this.rectSize, this.rectSize);
@@ -204,7 +210,7 @@ public class Frame extends JFrame implements Runnable {
 		for (Point2D.Double dir : this.map.getPath()) {
 			d.x += dir.x;
 			d.y += dir.y;
-			this.g.setColor(Color.GREEN);
+			this.g.setColor(pathColor);
 			int xLoc = (int) d.x * this.rectSize;
 			int yLoc = (int) d.y * this.rectSize;
 
@@ -212,7 +218,7 @@ public class Frame extends JFrame implements Runnable {
 			this.g.setColor(Color.BLACK);
 			// int index = this.map.getPath().indexOf(dir);
 			this.g.drawRect(xLoc, yLoc, this.rectSize, this.rectSize);
-			this.g.setColor(Color.GREEN);
+			this.g.setColor(pathColor);
 			if (dir.x == 1) {
 				this.g.drawLine(xLoc, yLoc + 1, xLoc, yLoc + this.rectSize - 1);
 			} else if (dir.y == 1) {
@@ -233,8 +239,8 @@ public class Frame extends JFrame implements Runnable {
 		this.map.draw(this.g, this.rectSize);
 
 		arg.setColor(Color.BLACK);
-		arg.drawImage(this.buffImg, (800 - 21 * this.rectSize) / 2,
-				(600 - 15 * this.rectSize) / 2, this.rectSize * 21,
+		arg.drawImage(this.buffImg, (width - 21 * this.rectSize) / 2,
+				(height - 15 * this.rectSize) / 2, this.rectSize * 21,
 				this.rectSize * 15, null);
 		/*
 		 * for (int i = 0; i < 100; i++) { this.g.drawLine(0, i *
