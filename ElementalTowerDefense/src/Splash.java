@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
  *
  * @author moyessa
  */
-public class Splash extends javax.swing.JFrame implements Runnable {
+public class Splash extends javax.swing.JFrame{
 
     /** Creates new form Splash 
      * @param temp */
@@ -26,6 +26,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     public Splash(String[] temp) {
     	localeString = temp;
     	this.setResizable(false);
+    	
         initComponents();
     }
 
@@ -112,7 +113,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(288, 288, 288)
+                .addGap(280, 280, 280)
                 .addComponent(startButton)
                 .addGap(18, 18, 18)
                 .addComponent(loadButton)
@@ -137,6 +138,7 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:
     	JOptionPane.showMessageDialog(null, "Load: Not yet implemented.");
+
     }
 
     private void exitButtonActionPerformed(java.awt.event.ActionEvent evt) {
@@ -156,9 +158,4 @@ public class Splash extends javax.swing.JFrame implements Runnable {
     private javax.swing.JLabel splash;
     // End of variables declaration
 
-	public void run() {
-		// TODO Auto-generated method stub
-		
-		
-	}
 }
