@@ -6,9 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
 
 import javax.swing.JFrame;
@@ -41,7 +39,6 @@ public class Frame extends JFrame implements Runnable {
 	private static final long WAVE_WAIT = 5000;
 	private static final long SPAWN_WAIT = 2000;
 
-	public static HashMap<String, URL> sounds;
 	public static AudioPlayer ap;
 
 	private int fps;
@@ -49,7 +46,6 @@ public class Frame extends JFrame implements Runnable {
 	private int frameSkips;
 	private int sleepSkips;
 	private int requestedFPS;
-	private int timeOverhead;
 	private Map map;
 	private BufferedImage buffImg;
 	private Graphics2D g;
@@ -75,10 +71,8 @@ public class Frame extends JFrame implements Runnable {
 	 * @param locale
 	 */
 	public Frame(int fps, String[] locale) {
-		sounds = new HashMap<String, URL>();
-		loadSounds();
 		ap = new AudioPlayer();
-		// ap.playClip("music", true, -4.0f);
+		ap.playClipName("background", true, -4.0f);
 
 		this.map = new Map();
 		this.enemiesToCreate = new ArrayList<Enemy>(10);
@@ -139,6 +133,7 @@ public class Frame extends JFrame implements Runnable {
 					default:
 						break;
 					}
+					ap.playClipName("place", false, -4.0f);
 
 					Frame.this.ele = null;
 				}
@@ -149,15 +144,6 @@ public class Frame extends JFrame implements Runnable {
 		this.setVisible(true);
 
 		this.thr.start();
-	}
-
-	private void loadSounds() {
-		sounds.put("music",
-				AudioPlayer.class.getResource("/resources/sounds/pra.wav"));
-		sounds.put("die", AudioPlayer.class
-				.getResource("/resources/sounds/explosion.wav"));
-		sounds.put("fire", AudioPlayer.class
-				.getResource("/resources/sounds/single_fire.wav"));
 	}
 
 	/**

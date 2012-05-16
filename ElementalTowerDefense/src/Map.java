@@ -325,10 +325,12 @@ public class Map {
 		ArrayList<Bullet> toBeRemoved = new ArrayList<Bullet>();
 
 		for (Bullet b : this.bullets) {
-			if (b.getVector().equals(new Point2D.Double(0, 0)))
+			if (b.getVector().equals(new Point2D.Double(0, 0))) {
+				Frame.ap.playClipName("hit", false, -4.0f);
 				toBeRemoved.add(b);
-			else
+			} else {
 				b.draw(g, width);
+			}
 
 		}
 
@@ -374,7 +376,7 @@ public class Map {
 	 */
 	public void killEnemy(Enemy enemy, Player player) {
 		if (this.activeEnemies.contains(enemy)) {
-			// Frame.ap.playClip("die", false, 0.0f);
+			Frame.ap.playClipName("death", false, 0.0f);
 			player.incCurrency(enemy.getWorth());
 			player.incScore(enemy.getScoreValue());
 			this.activeEnemies.remove(enemy);
