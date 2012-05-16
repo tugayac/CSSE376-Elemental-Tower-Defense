@@ -8,8 +8,8 @@ import java.awt.geom.Point2D;
 public class EnemyWater extends Enemy {
 
 	public EnemyWater(Point2D.Double location, int health, int armor) {
-		super(Enemy.enemy_ids++, "Magikarp", 2.0f, armor, health, location,
-				Frame.element.WATER, 60);
+		super("Magikarp", 2.0f, armor, health, location, Frame.element.WATER,
+				60);
 	}
 
 	@Override

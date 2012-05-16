@@ -12,9 +12,6 @@ import javax.swing.ImageIcon;
  */
 public abstract class Enemy {
 
-	protected static int enemy_ids = 0;
-
-	protected int id;
 	protected String name;
 	protected float speed;
 	protected int armor;
@@ -44,10 +41,10 @@ public abstract class Enemy {
 	 * @param hp
 	 * @param location
 	 * @param elem
+	 * @param scoreValue
 	 */
-	public Enemy(int id, String name, float speed, int armor, int hp,
+	public Enemy(String name, float speed, int armor, int hp,
 			Point2D.Double location, Frame.element elem, int scoreValue) {
-		this.id = id;
 		this.name = name;
 		this.speed = speed;
 		this.armor = armor;
@@ -183,15 +180,6 @@ public abstract class Enemy {
 	 */
 	public Frame.element getElement() {
 		return this.elem;
-	}
-
-	/**
-	 * TODO Put here a description of what this method does.
-	 * 
-	 * @return
-	 */
-	public int getID() {
-		return this.id;
 	}
 
 	/**

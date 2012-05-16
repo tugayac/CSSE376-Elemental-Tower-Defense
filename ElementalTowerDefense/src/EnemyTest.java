@@ -71,16 +71,6 @@ public class EnemyTest {
 	}
 
 	@Test
-	public void testIDIsIncremented() {
-		int id = this.FireEnemy.getID();
-		assertEquals(id, this.FireEnemy.getID());
-		assertEquals(id + 1, this.WaterEnemy.getID());
-		assertEquals(id + 2, this.LightEnemy.getID());
-		assertEquals(id + 3, this.EarthEnemy.getID());
-		assertEquals(id + 4, this.AirEnemy.getID());
-	}
-
-	@Test
 	public void testNameisCorrect() {
 		assertEquals("Firebat", this.FireEnemy.getName());
 		assertEquals("Magikarp", this.WaterEnemy.getName());

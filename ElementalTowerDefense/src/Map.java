@@ -197,10 +197,13 @@ public class Map {
 		this.currEnemies = this.enemyWaves.get(rand);
 		ArrayList<Enemy> toBeCreated = new ArrayList<Enemy>();
 
+		// System.out.println("Wave  = " + this.waveNumber);
 		int healthFunc = (int) ((Math.pow(this.waveNumber, 3) - Math.pow(
 				this.waveNumber, 2)));
 		int armorFunc = (int) (Math.log(Math.pow(this.waveNumber, 10)) / Math
 				.log(2));
+		// System.out.println("Health = " + (healthFunc + 100));
+		// System.out.println("Armor = " + (armorFunc + 3));
 
 		int enemyCount = 10;
 		int length = this.currEnemies.length;

@@ -5,39 +5,34 @@ import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 
+/**
+ * TODO Put here a description of what this class does.
+ * 
+ * @author tugayac. Created May 15, 2012.
+ */
 abstract class Tower {
 
 	protected static int tower_ids = 0;
 	protected int id;
-	protected Object element;
+	protected Frame.element element;
 	protected Point2D.Double location;
 	protected String name;
 	protected boolean available;
 	protected float speed;
+	protected int damage;
 	protected int cost;
 	protected int level;
 	protected Image image;
 
-	/**
-	 * TODO Put here a description of what this constructor does.
-	 * 
-	 * @param id
-	 * @param name
-	 * @param speed
-	 * @param loc
-	 * @param el
-	 * @param avail
-	 * @param cost
-	 * @param level
-	 */
 	public Tower(int id, String name, float speed, Point2D.Double loc,
-			Frame.element el, boolean avail, int cost, int level) {
+			Frame.element el, boolean avail, int cost, int level, int damage) {
 		this.id = id;
 		this.element = el;
 		this.location = loc;
 		this.name = name;
 		this.available = avail;
 		this.speed = speed;
+		this.damage = damage;
 		this.cost = cost;
 		this.level = level;
 		this.image = null;
@@ -48,7 +43,7 @@ abstract class Tower {
 		return new Bullet(this.location, e, path);
 	}
 
-	public Object getElement() {
+	public Frame.element getElement() {
 		return this.element;
 	}
 
@@ -90,10 +85,14 @@ abstract class Tower {
 	public void draw(Graphics2D g, int width) {
 		g.drawImage(this.image, (int) this.location.x * width,
 				(int) this.location.y * width, width, width, null);
-		// g.fillOval((int) this.location.x * width,
-		// (int) this.location.y * width, width, width);
 	}
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 * 
+	 * @param player
+	 * @return
+	 */
 	public boolean upgrade(Player player) {
 		if (player == null) {
 			this.level++;
@@ -112,13 +111,4 @@ abstract class Tower {
 	protected void setImage(ImageIcon image) {
 		this.image = image.getImage();
 	}
-	// public static Tower createTower(Frame.element el, Double loc) {
-	// // TODO Auto-generated method stub
-	//
-	// return new Tower(el, loc);
-	// // return new Tower(){
-	// //
-	// // };
-	// }
-
 }

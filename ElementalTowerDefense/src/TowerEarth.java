@@ -8,14 +8,13 @@ public class TowerEarth extends Tower {
 	static final int cost = 1000;
 
 	public TowerEarth(Point2D.Double loc) {
-		super(Tower.tower_ids++, "EARTH TOWER", 1.2f, loc, Frame.element.EARTH,
-				true, cost, 1);
+		super(Tower.tower_ids++, "Earth Tower", 1.2f, loc, Frame.element.EARTH,
+				true, cost, 1, 100);
 		setImage(new ImageIcon(getClass().getResource(
 				"/resources/images/towers/tower_earth.png")));
 	}
 
 	public void draw(Graphics2D g, int width) {
-		// g.setColor(Color.GREEN);
 		super.draw(g, width);
 	}
 }
