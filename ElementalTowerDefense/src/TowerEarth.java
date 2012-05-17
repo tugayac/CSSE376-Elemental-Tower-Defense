@@ -21,7 +21,7 @@ public class TowerEarth extends Tower {
 		boolean generic = super.upgrade(p);
 		
 		if(generic){
-			this.speed /= .8;
+			this.speed /= .87;
 			this.damage = (int) (700 * (1/(1+Math.exp(-(.7 * this.level) + 3)))) - 40 + this.baseDamage;
 		}
 		
