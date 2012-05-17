@@ -1,3 +1,6 @@
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -22,9 +25,16 @@ public class Splash extends javax.swing.JFrame{
      * @param temp */
 	
 	String[] localeString;
+	Locale locale;
+	ResourceBundle strings;
 	
     public Splash(String[] temp) {
     	localeString = temp;
+    	locale = new Locale(localeString[0], localeString[1]);
+    	
+    	this.strings = ResourceBundle.getBundle(
+				"resources.localization.localization", this.locale);
+    	
     	this.setResizable(false);
     	
         initComponents();
@@ -53,28 +63,28 @@ public class Splash extends javax.swing.JFrame{
         
         splash.setIcon(tempIcon);
 
-        startButton.setText("Start Game");
+        startButton.setText(this.strings.getString("splashStart"));
         startButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 startButtonActionPerformed(evt);
             }
         });
 
-        loadButton.setText("Load Game");
+        loadButton.setText(this.strings.getString("splashLoad"));
         loadButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 loadButtonActionPerformed(evt);
             }
         });
 
-        exitButton.setText("Exit Game");
+        exitButton.setText(this.strings.getString("splashExit"));
         exitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exitButtonActionPerformed(evt);
             }
         });
 
-        aboutButton.setText("About Us");
+        aboutButton.setText(this.strings.getString("splashAbout"));
         aboutButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 aboutButtonActionPerformed(evt);
@@ -146,7 +156,12 @@ public class Splash extends javax.swing.JFrame{
     }
 
     private void aboutButtonActionPerformed(java.awt.event.ActionEvent evt) {
-    	JOptionPane.showMessageDialog(null, "About Us: Not yet implemented.");
+        ImageIcon icon = new ImageIcon(getClass().getResource(
+		"/resources/images/aboutUs.png"));
+    	
+    	JOptionPane.showMessageDialog(null, null, "About", JOptionPane.INFORMATION_MESSAGE, icon);
+    	
+    	//JOptionPane.showMessageDialog(null, "About Us: Not yet implemented.");
     }
 
     // Variables declaration - do not modify
