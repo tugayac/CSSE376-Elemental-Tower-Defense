@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Point2D;
@@ -23,6 +24,7 @@ abstract class Tower {
 	protected int cost;
 	protected int level;
 	protected Image image;
+	public boolean selected;
 
 	private long oldSec = System.currentTimeMillis();
 
@@ -98,6 +100,11 @@ abstract class Tower {
 	 * @param image
 	 */
 	public void draw(Graphics2D g, int width) {
+		if(this.selected){
+			g.setColor(Color.YELLOW);
+			g.fillRect((int) this.location.x * width,
+				(int) this.location.y * width, width, width);
+		}
 		g.drawImage(this.image, (int) this.location.x * width,
 				(int) this.location.y * width, width, width, null);
 	}

@@ -69,6 +69,8 @@ public class Frame extends JFrame implements Runnable {
 	private long seconds = 0;
 	private Tower selectedTower;
 
+	
+
 	private int width = 800;
 	private int height = 600;
 	private Color pathColor = new Color(0, 150, 0);
@@ -118,32 +120,39 @@ public class Frame extends JFrame implements Runnable {
 
 					int waveNum = Frame.this.map.getWaveNumber();
 					int damageFunc = (int) (Math.pow(waveNum, 2) - waveNum);
-
+					
+					int placed = 1;
+					
 					switch (Frame.this.ele) {
 					case FIRE:
-						Frame.this.map.addTower(new Point2D.Double(x, y),
+						placed = Frame.this.map.addTower(new Point2D.Double(x, y),
 								Frame.element.FIRE, damageFunc + 100);
-						Frame.this.player.decCurrency(TowerFire.cost);
+						if(placed == 0)
+							Frame.this.player.decCurrency(TowerFire.cost);
 						break;
 					case WATER:
-						Frame.this.map.addTower(new Point2D.Double(x, y),
+						placed = Frame.this.map.addTower(new Point2D.Double(x, y),
 								Frame.element.WATER, damageFunc + 60);
-						Frame.this.player.decCurrency(TowerWater.cost);
+						if(placed == 0)
+							Frame.this.player.decCurrency(TowerWater.cost);
 						break;
 					case AIR:
-						Frame.this.map.addTower(new Point2D.Double(x, y),
+						placed = Frame.this.map.addTower(new Point2D.Double(x, y),
 								Frame.element.AIR, damageFunc + 50);
-						Frame.this.player.decCurrency(TowerAir.cost);
+						if(placed == 0)
+							Frame.this.player.decCurrency(TowerAir.cost);
 						break;
 					case LIGHT:
-						Frame.this.map.addTower(new Point2D.Double(x, y),
+						placed = Frame.this.map.addTower(new Point2D.Double(x, y),
 								Frame.element.LIGHT, damageFunc + 90);
-						Frame.this.player.decCurrency(TowerLight.cost);
+						if(placed == 0)
+							Frame.this.player.decCurrency(TowerLight.cost);
 						break;
 					case EARTH:
-						Frame.this.map.addTower(new Point2D.Double(x, y),
+						placed = Frame.this.map.addTower(new Point2D.Double(x, y),
 								Frame.element.EARTH, damageFunc + 80);
-						Frame.this.player.decCurrency(TowerEarth.cost);
+						if(placed == 0)
+							Frame.this.player.decCurrency(TowerEarth.cost);
 						break;
 					default:
 						break;
@@ -367,5 +376,26 @@ public class Frame extends JFrame implements Runnable {
 	public int getSleepSkips() {
 		return this.sleepSkips;
 	}
+	
+	/**
+	 * Returns the value of the field called 'selectedTower'.
+	 * @return Returns the selectedTower.
+	 */
+	public Tower getSelectedTower() {
+		return this.selectedTower;
+	}
 
+	/**
+	 * Sets the field called 'selectedTower' to the given value.
+	 * @param selectedTower The selectedTower to set.
+	 */
+	public void setSelectedTower(Tower selectedTower) {
+		if(this.selectedTower != null)
+			this.selectedTower.selected = false;
+		this.selectedTower = selectedTower;
+		if(this.selectedTower != null)
+			this.selectedTower.selected = true;
+	}
+
+	
 }

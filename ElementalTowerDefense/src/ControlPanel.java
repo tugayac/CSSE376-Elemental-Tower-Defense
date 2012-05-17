@@ -4,6 +4,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -795,6 +797,16 @@ public class ControlPanel extends JFrame {
 
 		this.towerUpgradeButton = new JButton(
 				this.strings.getString("towerUpgrade"));
+		this.towerUpgradeButton.addActionListener(new ActionListener(){
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(ControlPanel.this.frame.getSelectedTower() != null){
+					ControlPanel.this.frame.getSelectedTower().upgrade(ControlPanel.this.player);
+				}
+			}
+			
+		});
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridwidth = 2;
 		c.gridx = 0;
@@ -802,6 +814,18 @@ public class ControlPanel extends JFrame {
 		this.topRightPanel.add(this.towerUpgradeButton, c);
 
 		this.towerSellButton = new JButton(this.strings.getString("towerSell"));
+		this.towerSellButton.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				if(ControlPanel.this.frame.getSelectedTower() != null){
+					int level = ControlPanel.this.frame.getSelectedTower().getLevel();
+					int cost = ControlPanel.this.frame.getSelectedTower().getCost()/2;
+					ControlPanel.this.player.incCurrency(level * cost);
+					ControlPanel.this.map.removeTower(ControlPanel.this.frame.getSelectedTower());
+					ControlPanel.this.frame.setSelectedTower(null);
+				}
+			}
+		});
 		c.fill = GridBagConstraints.RELATIVE;
 		c.gridx = 0;
 		c.gridy = 5;
@@ -816,8 +840,23 @@ public class ControlPanel extends JFrame {
 		updatePlayerInfo();
 		updateWaveInfo();
 		updateButtons();
+		updateEnemyInfo();
 	}
 
+	private void updateEnemyInfo(){
+		Tower t = this.frame.getSelectedTower();
+		if(t == null){
+			this.towerLevelValueLabel.setText("");
+			this.towerDamageValueLabel.setText("");
+			this.towerSpeedValueLabel.setText("");
+		}
+		else{
+			this.towerLevelValueLabel.setText(""+t.getLevel());
+			this.towerDamageValueLabel.setText(""+t.getDamage());
+			this.towerSpeedValueLabel.setText(""+t.getSpeed());
+		}
+	}
+	
 	/**
 	 * TODO Put here a description of what this method does.
 	 * 

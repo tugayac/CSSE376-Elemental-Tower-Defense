@@ -160,6 +160,10 @@ public class Map {
 		this.towers.add(t);
 		return 0;
 	}
+	
+	public void removeTower(Tower t){
+		this.towers.remove(t);
+	}
 
 	/**
 	 * TODO Put here a description of what this method does.
