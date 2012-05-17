@@ -147,6 +147,16 @@ public class Map {
 		for (Tower tow : this.towers)
 			if (tow.getLocation().equals(t.getLocation()))
 				return -1;
+		Point2D.Double path = new Point2D.Double(0,7);
+		
+		for(Point2D.Double d : this.getPath()){
+			if(path.getX() == t.getLocation().getX() && path.getY() == t.getLocation().getY())
+				return -1;
+			path.x+=d.x;
+			path.y+=d.y;
+		}
+		if(path.getX() == t.getLocation().getX() && path.getY() == t.getLocation().getY())
+			return -1;
 		this.towers.add(t);
 		return 0;
 	}
