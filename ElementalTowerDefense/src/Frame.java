@@ -25,16 +25,28 @@ public class Frame extends JFrame implements Runnable {
 	 */
 	static enum element {
 		/** The elemnt Fire */
-		FIRE,
+		FIRE ("FIRE"),
 		/** The elemnt Water */
-		WATER,
+		WATER ("WATER"),
 		/** The elemnt Light */
-		LIGHT,
+		LIGHT ("DARK"),
 		/** The elemnt Earth */
-		EARTH,
+		EARTH ("EARTH"),
 		/** The elemnt Air */
-		AIR
+		AIR ("AIR");
+		
+		private final String name;
+		
+		public String toString() {
+			return name;
+		}
+		
+		private element(String name){
+			this.name = name;
+		}
 	}
+	
+	
 
 	private static final long WAVE_WAIT = 5000;
 	private static final long SPAWN_WAIT = 2000;
