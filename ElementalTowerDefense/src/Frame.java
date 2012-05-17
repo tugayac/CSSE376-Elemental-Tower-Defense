@@ -159,7 +159,7 @@ public class Frame extends JFrame implements Runnable {
 							return;
 						}
 					}
-					Frame.selectedTower = null;
+					Frame.this.selectedTower = null;
 				}
 			}
 		});
