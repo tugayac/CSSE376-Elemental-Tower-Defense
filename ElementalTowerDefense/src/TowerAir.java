@@ -21,7 +21,7 @@ public class TowerAir extends Tower {
 		boolean generic = super.upgrade(p);
 		
 		if(generic){
-			this.speed -= 120;
+			this.speed /= 10.0;
 			this.damage = (int) (400 * (1/(1+Math.exp(-(.5 * this.level) + 3)))) + this.baseDamage;
 		}
 		
