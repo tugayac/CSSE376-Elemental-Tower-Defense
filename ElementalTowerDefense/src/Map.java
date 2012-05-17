@@ -215,7 +215,7 @@ public class Map {
 				.log(2));
 		// System.out.println("Health = " + (healthFunc + 100));
 		// System.out.println("Armor = " + (armorFunc + 3));
-
+		
 		int enemyCount = 10;
 		int length = this.currEnemies.length;
 		for (int i = 0; i < length; i++) {
@@ -235,11 +235,11 @@ public class Map {
 					break;
 				case EARTH:
 					toBeCreated.add(new EnemyEarth(new Point2D.Double(-1, 7),
-							healthFunc + 80, armorFunc + 1));
+							healthFunc + 80, armorFunc + 5));
 					break;
 				case AIR:
 					toBeCreated.add(new EnemyAir(new Point2D.Double(-1, 7),
-							healthFunc + 200, armorFunc + 5));
+							healthFunc + 200, armorFunc + 1));
 					break;
 				default:
 					break;

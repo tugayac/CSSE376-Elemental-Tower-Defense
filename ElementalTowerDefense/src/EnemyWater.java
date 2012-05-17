@@ -14,7 +14,10 @@ public class EnemyWater extends Enemy {
 
 	@Override
 	public void damage(int i) {
-		this.hp -= i - (2 * this.armor) - ((int) this.speed);
+		
+		int damage = i - (2 * this.armor) - ((int) this.speed);
+		if(damage < 1) damage = 1;
+		this.hp -= damage;
 		if (this.hp < 0) {
 			this.hp = 0;
 		}

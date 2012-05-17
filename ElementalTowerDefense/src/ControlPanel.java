@@ -799,7 +799,6 @@ public class ControlPanel extends JFrame {
 				this.strings.getString("towerUpgrade"));
 		this.towerUpgradeButton.addActionListener(new ActionListener(){
 
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(ControlPanel.this.frame.getSelectedTower() != null){
 					ControlPanel.this.frame.getSelectedTower().upgrade(ControlPanel.this.player);
@@ -815,7 +814,6 @@ public class ControlPanel extends JFrame {
 
 		this.towerSellButton = new JButton(this.strings.getString("towerSell"));
 		this.towerSellButton.addActionListener(new ActionListener(){
-			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(ControlPanel.this.frame.getSelectedTower() != null){
 					int level = ControlPanel.this.frame.getSelectedTower().getLevel();
