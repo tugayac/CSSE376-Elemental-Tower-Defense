@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.geom.Point2D;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
@@ -11,7 +12,7 @@ import javax.swing.ImageIcon;
  * 
  * @author tugayac. Created May 15, 2012.
  */
-abstract class Tower {
+abstract class Tower implements Serializable {
 
 	protected static int tower_ids = 0;
 	protected int id;
@@ -23,7 +24,7 @@ abstract class Tower {
 	protected int damage;
 	protected int cost;
 	protected int level;
-	protected Image image;
+	protected ImageIcon image;
 	public boolean selected;
 
 	private long oldSec = System.currentTimeMillis();
@@ -105,7 +106,7 @@ abstract class Tower {
 			g.fillRect((int) this.location.x * width,
 				(int) this.location.y * width, width, width);
 		}
-		g.drawImage(this.image, (int) this.location.x * width,
+		g.drawImage(this.image.getImage(), (int) this.location.x * width,
 				(int) this.location.y * width, width, width, null);
 	}
 
@@ -131,6 +132,6 @@ abstract class Tower {
 	}
 
 	protected void setImage(ImageIcon image) {
-		this.image = image.getImage();
+		this.image = new ImageIcon(image.getImage());
 	}
 }

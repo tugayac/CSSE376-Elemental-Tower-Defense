@@ -4,12 +4,20 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Locale;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.WindowConstants;
 
 /**
@@ -20,6 +28,63 @@ import javax.swing.WindowConstants;
  */
 public class Frame extends JFrame implements Runnable {
 
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public void save(){
+		try{
+			File f = new File("GameState.dat");
+			ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(f));
+			out.writeInt(this.map.getTowers().size());
+			for(Tower t : this.map.getTowers())
+				out.writeObject(t);
+			out.writeInt(this.map.getWaveNumber());
+			out.writeInt(this.map.getPath().size());
+			for(Point2D.Double d : this.map.getPath())
+				out.writeObject(d);
+			out.writeObject(this.player);
+			out.flush();
+			out.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+	}
+	
+	/**
+	 * TODO Put here a description of what this method does.
+	 *
+	 */
+	public void load(){
+		
+		
+		try{
+			File f = new File("GameState.dat");
+			if(!f.exists()){
+				JOptionPane.showMessageDialog(null, "No game state is saved");
+				return;
+			}
+			ObjectInputStream in = new ObjectInputStream(new FileInputStream(f));
+			int numTowers = in.readInt();
+			for(int i = 0; i < numTowers; i++)
+				this.map.addTower((Tower) in.readObject());
+			this.map.setWaveNumber(in.readInt());
+			int numPath = in.readInt();
+			this.map.getPath().clear();
+			for(int i = 0; i < numPath; i++)
+				this.map.getPath().add((Point2D.Double)in.readObject());
+			this.player = (Player)in.readObject();
+			this.map.setPlayer(this.player);
+			this.controlPanel.setPlayer(this.player);
+			in.close();
+		}
+		catch(Exception e){
+			e.printStackTrace();
+		}
+		
+	}
+	
 	/**
 	 * The elements for use throughout the game
 	 */
@@ -86,7 +151,7 @@ public class Frame extends JFrame implements Runnable {
 	 * @param locale
 	 */
 	public Frame(int fps, String[] locale) {
-		ap = new AudioPlayer();
+		ap = new AudioPlayer();				
 		ap.playClipName("background", true, -4.0f);
 
 		this.map = new Map();
@@ -100,7 +165,17 @@ public class Frame extends JFrame implements Runnable {
 		this.thr = new Thread(this);
 		this.setSize(new Dimension(width, height));
 		this.setBackground(backColor);
-		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
+		
+		this.addWindowListener(new WindowAdapter(){
+
+			@Override
+			public void windowClosing(WindowEvent arg0) {
+				Frame.this.save();
+				System.exit(0);
+			}
+			
+		});
 
 		this.buffImg = new BufferedImage(21 * this.rectSize,
 				15 * this.rectSize, BufferedImage.TYPE_4BYTE_ABGR);

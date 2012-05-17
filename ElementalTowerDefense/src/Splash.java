@@ -146,8 +146,8 @@ public class Splash extends javax.swing.JFrame{
     }
 
     private void loadButtonActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:
-    	JOptionPane.showMessageDialog(null, "Load: Not yet implemented.");
+        this.setVisible(false);
+        new Frame(60, localeString).load();
 
     }
 
