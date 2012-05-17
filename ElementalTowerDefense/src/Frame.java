@@ -67,6 +67,7 @@ public class Frame extends JFrame implements Runnable {
 	private element ele = null;
 	private ArrayList<Enemy> enemiesToCreate;
 	private long seconds = 0;
+	private Tower selectedTower;
 
 	private int width = 800;
 	private int height = 600;
@@ -107,11 +108,13 @@ public class Frame extends JFrame implements Runnable {
 		this.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mousePressed(MouseEvent e) {
+				int x = (e.getX() - (800 - 21 * Frame.this.rectSize) / 2)
+					/ Frame.this.rectSize;
+				int y = (e.getY() - (600 - 15 * Frame.this.rectSize) / 2)
+					/ Frame.this.rectSize;
+				
 				if (Frame.this.ele != null) {
-					int x = (e.getX() - (800 - 21 * Frame.this.rectSize) / 2)
-							/ Frame.this.rectSize;
-					int y = (e.getY() - (600 - 15 * Frame.this.rectSize) / 2)
-							/ Frame.this.rectSize;
+					
 
 					int waveNum = Frame.this.map.getWaveNumber();
 					int damageFunc = (int) (Math.pow(waveNum, 2) - waveNum);
@@ -148,6 +151,15 @@ public class Frame extends JFrame implements Runnable {
 					ap.playClipName("place", false, -4.0f);
 
 					Frame.this.ele = null;
+				}
+				else{
+					for (Tower t : Frame.this.map.getTowers()){
+						if(t.getLocation().equals(new Point2D.Double(x,y))){
+							Frame.this.selectedTower = t;
+							return;
+						}
+					}
+					Frame.this.selectedTower = null;
 				}
 			}
 		});
