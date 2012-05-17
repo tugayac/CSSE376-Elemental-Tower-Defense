@@ -55,6 +55,18 @@ public class ControlPanel extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 	}
+	
+	
+
+	/**
+	 * Sets the field called 'player' to the given value.
+	 * @param player The player to set.
+	 */
+	public void setPlayer(Player player) {
+		this.player = player;
+	}
+
+
 
 	private void initLocalization(Locale cl) {
 		this.currentLocale = cl;

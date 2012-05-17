@@ -38,6 +38,18 @@ public class Map {
 		generateWaves();
 	}
 
+	
+	
+	/**
+	 * Sets the field called 'waveNumber' to the given value.
+	 * @param waveNumber The waveNumber to set.
+	 */
+	public void setWaveNumber(int waveNumber) {
+		this.waveNumber = waveNumber;
+	}
+
+
+
 	private void generateWaves() {
 		this.enemyWaves = new ArrayList<Frame.element[]>(10);
 

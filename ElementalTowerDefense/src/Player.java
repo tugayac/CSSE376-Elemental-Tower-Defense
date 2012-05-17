@@ -1,9 +1,13 @@
+import java.io.Serializable;
+
 /**
  * TODO Put here a description of what this class does.
  * 
  * @author tugayac. Created Apr 22, 2012.
  */
-public class Player {
+public class Player implements Serializable {
+	
+	
 
 	private int score;
 	private int health;
