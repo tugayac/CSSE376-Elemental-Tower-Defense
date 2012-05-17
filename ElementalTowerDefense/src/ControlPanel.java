@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
@@ -843,6 +844,41 @@ public class ControlPanel extends JFrame {
 			}
 		}
 		this.waveNameValueLabel.setText(text);
+		
+	
+		
+		if(this.map.getEnemies().size() > 0)
+			displayAverages(this.map.getEnemies());
+	}
+	
+	private void displayAverages(ArrayList<Enemy> enemies){
+		double size = enemies.size();
+		int sumArmor = 0;
+		int sumHealth = 0;
+		int sumSpeed = 0;
+		double avgArmor = 0;
+		double avgHealth = 0;
+		double avgSpeed = 0;
+		
+		int counter = 0;
+		
+		
+		for (Enemy e: enemies){
+			sumArmor += this.map.getEnemies().get(counter).getArmor();
+			sumHealth += this.map.getEnemies().get(counter).getHP();
+			sumSpeed += this.map.getEnemies().get(counter).getSpeed();
+			
+			avgArmor = sumArmor/size;
+			avgHealth = sumHealth/size;
+			avgSpeed = sumSpeed/size;
+			
+			counter++;
+		}
+
+		this.waveArmorValueLabel.setText(String.format("%.2f", avgArmor));
+		this.waveHealthValueLabel.setText(String.format("%.2f",  avgHealth));
+		this.waveSpeedValueLabel.setText(String.format("%.2f", avgSpeed));
+		
 	}
 
 	/**
